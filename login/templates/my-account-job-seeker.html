@@ -2,152 +2,155 @@
 
 
 {% block content %}
-<!-- Titlebar
-================================================== -->
-<div id="titlebar" class="single">
-	<div class="container">
+    <!-- Titlebar
+    ================================================== -->
+    <div id="titlebar" class="single">
+        <div class="container">
 
-		<div class="sixteen columns">
-			<h2>حساب کاربری کارجو</h2>
-			<nav id="breadcrumbs">
-				<ul>
-					<li>شما اینجا هستید:</li>
-					<li><a href="{% url 'index' %}">خانه</a></li>
-					<li class="pi">حساب کاربری کارجو</li>
-				</ul>
-			</nav>
-		</div>
+            <div class="sixteen columns">
+                <h2>حساب کاربری کارجو</h2>
+                <nav id="breadcrumbs">
+                    <ul>
+                        <li>شما اینجا هستید:</li>
+                        <li><a href="{% url 'index' %}">خانه</a></li>
+                        <li class="pi">حساب کاربری کارجو</li>
+                    </ul>
+                </nav>
+            </div>
 
-	</div>
-</div>
+        </div>
+    </div>
 
 
-<!-- Content
-================================================== -->
+    <!-- Content
+    ================================================== -->
 
-<!-- Container -->
-<div class="container">
+    <!-- Container -->
+    <div class="container">
 
-	<div class="my-account">
+        <div class="my-account">
 
-		<ul class="tabs-nav">
-			<li class=""><a href="#tab1"><i class="fa fa-lock"></i> ورود</a></li>
-			<li><a href="#tab2"><i class="fa fa-user"></i> ثبت‌نام</a></li>
-		</ul>
+            <ul class="tabs-nav">
+                <li class=""><a href="#tab1"><i class="fa fa-lock"></i> ورود</a></li>
+                <li><a href="#tab2"><i class="fa fa-user"></i> ثبت‌نام</a></li>
+            </ul>
 
-		<div class="tabs-container">
-			<!-- Login -->
-			<div class="tab-content" id="tab1" style="display: none;">
+            <div class="tabs-container">
+                <!-- Login -->
+                <div class="tab-content" id="tab1" style="display: none;">
 
-				<h3 class="margin-bottom-10 margin-top-10">ورود</h3>
+                    <h3 class="margin-bottom-10 margin-top-10">ورود</h3>
 
-				<form method="post" class="login" action="{% url 'job-seeker-login' %}">
+                    <form method="post" class="login" action="{% url 'job-seeker-login' %}">
+                        {% csrf_token %}
 
-					
-					<p class="form-row form-row-wide">
-						<label for="username">ایمیل:</label>
-						<input dir= "ltr" type="email" class="input-text" name="username" id="username" value="" />
-					</p>
+                        <p class="form-row form-row-wide">
+                            <label for="username">ایمیل:</label>
+                            <input dir="ltr" type="email" class="input-text" name="username" id="username" value=""/>
+                        </p>
 
-					<p class="form-row form-row-wide">
-						<label for="password">گذرواژه:</label>
-						<input dir= "ltr" class="input-text" type="password" name="password" id="password" />
-					</p>
+                        <p class="form-row form-row-wide">
+                            <label for="password">گذرواژه:</label>
+                            <input dir="ltr" class="input-text" type="password" name="password" id="password"/>
+                        </p>
 
-					<p class="form-row">
-						<input type="submit" class="button" name="login" value="ورود" />
+                        <p class="form-row">
+                            <input type="submit" class="button" name="login" value="ورود"/>
 
-						<label for="rememberme" class="rememberme">
-						<input name="rememberme" type="checkbox" id="rememberme" value="forever" /> مرا به‌خاطر بسپار</label>
-					</p>
+                            <label for="rememberme" class="rememberme">
+                                <input name="rememberme" type="checkbox" id="rememberme" value="forever"/> مرا به‌خاطر
+                                بسپار</label>
+                        </p>
 
-					<p class="lost_password">
-						<a href="my-account-job-seeker-forget-pass.html" >فراموشی رمز عبور</a>
-					</p>
+                        <p class="lost_password">
+                            <a href="my-account-job-seeker-forget-pass.html">فراموشی رمز عبور</a>
+                        </p>
 
-					
-				</form>
-			</div>
 
-				<!-- Register -->
-				<div class="tab-content" id="tab2" style="display: none;">
+                    </form>
+                </div>
 
-					<h3 class="margin-bottom-10 margin-top-10">ثبت‌نام</h3>
+                <!-- Register -->
+                <div class="tab-content" id="tab2" style="display: none;">
 
-					<form method="post" class="register" action="{% url 'job-seeker-register' %}">
+                    <h3 class="margin-bottom-10 margin-top-10">ثبت‌نام</h3>
+
+                    <form method="post" class="register" action="{% url 'job-seeker-register' %}">
                         {% csrf_token %}
 
 
-                            <p class="form-row form-row-wide">
-                                <label for="reg_name">نام:</label>
-                                <input type="text" class="input-text" name="first_name" id="reg_name" value="" placeholder="نام" />
-                            </p>
+                        <p class="form-row form-row-wide">
+                            <label for="reg_name">نام:</label>
+                            <input type="text" class="input-text" name="first_name" id="reg_name" value=""
+                                   placeholder="نام"/>
+                        </p>
 
-                            <p class="form-row form-row-wide">
-                                <label for="reg_last_name">نام خانوادگی:</label>
-                                <input type="text" class="input-text" name="last_name" id="reg_last_name" value="" placeholder="نام خانوادگی" />
-                            </p>
-{##}
-{#                            <p class="form-row form-row-wide">#}
-{#                                <label for="reg_gender">جنسیت:</label>#}
-{#                                <select class="form-control" id="reg_gender">#}
-{#                                    <option>مرد</option>#}
-{#                                    <option>زن</option>#}
-{#                                </select>#}
-{#                            </p>#}
+                        <p class="form-row form-row-wide">
+                            <label for="reg_last_name">نام خانوادگی:</label>
+                            <input type="text" class="input-text" name="last_name" id="reg_last_name" value=""
+                                   placeholder="نام خانوادگی"/>
+                        </p>
+                        {##}
+                        {#                            <p class="form-row form-row-wide">#}
+                        {#                                <label for="reg_gender">جنسیت:</label>#}
+                        {#                                <select class="form-control" id="reg_gender">#}
+                        {#                                    <option>مرد</option>#}
+                        {#                                    <option>زن</option>#}
+                        {#                                </select>#}
+                        {#                            </p>#}
 
-{#                            <p class="form-row form-row-wide">#}
-{#                                <label for="reg_education">آخرین مقطع تحصیلی:</label>#}
-{#                                <select class="form-control" id="reg_education" >#}
-{#                                    <option>کارشناسی</option>#}
-{#                                    <option>کارشناسی ارشد</option>#}
-{#                                    <option>دکترا</option>#}
-{#                                </select>#}
-{#                            </p>#}
-{##}
-{#                            <p class="form-row form-row-wide">#}
-{#                                <label for="reg_entrance_year">سال ورود به دانشگاه:</label>#}
-{#                                <select id="reg_entrance_year" style="width:100%;" class="form-control selectWidth">#}
-{#                                    <option>1397</option>#}
-{#                                    <option>1396</option>#}
-{#                                    <option>1395</option>#}
-{#                                    <option>1394</option>#}
-{#                                    <option>1393</option>#}
-{#                                    <option>1392</option>#}
-{#                                    <option>1391</option>#}
-{#                                    <option>1390</option>#}
-{#                                    <option>1389</option>#}
-{#                                    <option>1388</option>#}
-{#                                </select>#}
-{#                            </p>#}
+                        {#                            <p class="form-row form-row-wide">#}
+                        {#                                <label for="reg_education">آخرین مقطع تحصیلی:</label>#}
+                        {#                                <select class="form-control" id="reg_education" >#}
+                        {#                                    <option>کارشناسی</option>#}
+                        {#                                    <option>کارشناسی ارشد</option>#}
+                        {#                                    <option>دکترا</option>#}
+                        {#                                </select>#}
+                        {#                            </p>#}
+                        {##}
+                        {#                            <p class="form-row form-row-wide">#}
+                        {#                                <label for="reg_entrance_year">سال ورود به دانشگاه:</label>#}
+                        {#                                <select id="reg_entrance_year" style="width:100%;" class="form-control selectWidth">#}
+                        {#                                    <option>1397</option>#}
+                        {#                                    <option>1396</option>#}
+                        {#                                    <option>1395</option>#}
+                        {#                                    <option>1394</option>#}
+                        {#                                    <option>1393</option>#}
+                        {#                                    <option>1392</option>#}
+                        {#                                    <option>1391</option>#}
+                        {#                                    <option>1390</option>#}
+                        {#                                    <option>1389</option>#}
+                        {#                                    <option>1388</option>#}
+                        {#                                </select>#}
+                        {#                            </p>#}
 
-                            <p class="form-row form-row-wide">
-                                <label for="reg_email">ایمیل با دامنه‌ی شریف:</label>
-                                <input dir= "ltr"  type="email" class="input-text" name="username" id="reg_email" value="" placeholder="[username]@[depeartment].sharif.edu" />
-                            </p>
-
-
-                            <p class="form-row form-row-wide">
-                                <label for="reg_password">گذرواژه:</label>
-                                <input dir= "ltr" type="password" class="input-text" name="password" id="reg_password"/>
-                            </p>
-
-                            <p class="form-row form-row-wide">
-                                <label for="reg_password2">تکرار گذرواژه:</label>
-                                <input dir= "ltr" type="password" class="input-text" name="password2" id="reg_password2" />
-                            </p>
+                        <p class="form-row form-row-wide">
+                            <label for="reg_email">ایمیل با دامنه‌ی شریف:</label>
+                            <input dir="ltr" type="email" class="input-text" name="username" id="reg_email" value=""
+                                   placeholder="[username]@[depeartment].sharif.edu"/>
+                        </p>
 
 
-									
-						<p class="form-row">
-							<input type="submit" class="button" name="register" value="ثبت‌نام" />
-						</p>
-						
-					</form>
-				</div>
-		</div>
-	</div>
-</div>
+                        <p class="form-row form-row-wide">
+                            <label for="reg_password">گذرواژه:</label>
+                            <input dir="ltr" type="password" class="input-text" name="password" id="reg_password"/>
+                        </p>
+
+                        <p class="form-row form-row-wide">
+                            <label for="reg_password2">تکرار گذرواژه:</label>
+                            <input dir="ltr" type="password" class="input-text" name="password2" id="reg_password2"/>
+                        </p>
+
+
+                        <p class="form-row">
+                            <input type="submit" class="button" name="register" value="ثبت‌نام"/>
+                        </p>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 {% endblock %}

@@ -8,155 +8,165 @@
 {% endblock %}
 
 {% block titlebar-text %}
-<h2><i class="fa fa-plus-circle"></i> افزودن آگهی</h2>
+    <h2><i class="fa fa-plus-circle"></i> افزودن آگهی</h2>
 {% endblock %}
 
 {% block content %}
 
 
-<!-- Content
-================================================== -->
-<div class="container">
-	
-	<!-- Submit Page -->
-	<div class="sixteen columns">
-		<div class="submit-page">
+    <!-- Content
+    ================================================== -->
+    <div class="container">
 
-			<!-- Notice -->
-			<!-- <div class="notification notice closeable margin-bottom-40">
-				<p><span>Have an account?</span> If you don’t have an account you can create one below by entering your email address. A password will be automatically emailed to you.</p>
-			</div> -->
+        <!-- Submit Page -->
+        <div class="sixteen columns">
+            <div class="submit-page">
 
-
-			<!-- Email -->
-			<div class="form">
-				<h5>ایمیل</h5>
-				<input class="search-field" dir ="ltr" type="text" placeholder="mail@example.com" value=""/>
-			</div>
-
-			<!-- Title -->
-			<div class="form">
-				<h5>عنوان کار</h5>
-				<input class="search-field" type="text" placeholder="" value=""/>
-			</div>
-
-			<!-- Location -->
-			<div class="form">
-				<h5>مکان <span>(اختیاری)</span></h5>
-				<input class="search-field" type="text" placeholder="مثال: تهران، خیابان آزادی، روبروی دانشگاه شریف" value=""/>
-				<!-- <p class="note">Leave this blank if the location is not important</p> -->
-			</div>
-
-			<!-- TODO: add location -->
-
-			<!-- Job Type -->
-			<div class="form">
-				<h5>نوع شغل</h5>
-				<select data-placeholder="تمام‌وقت" class="chosen-select-no-single">
-					<option value="1">تمام‌وقت</option>
-					<option value="2">نیمه‌وقت</option>
-					<option value="2">کارآموزی</option>
-					<option value="2">آزاد</option>
-				</select>
-			</div>
+                <!-- Notice -->
+                <!-- <div class="notification notice closeable margin-bottom-40">
+                    <p><span>Have an account?</span> If you don’t have an account you can create one below by entering your email address. A password will be automatically emailed to you.</p>
+                </div> -->
 
 
-			<!-- Choose Category -->
-			<div class="form">
-				<div class="select">
-					<h5>دسته‌بندی</h5>
-					<select data-placeholder="  انتخاب دسته‌بندی‌ " class="chosen-select" multiple>
-						<option value="1">توسعه‌دهنده‌ی وب</option>
-						<option value="2">توسعه‌دهنده‌ی اپلیکیشن موبایل</option>
-						<option value="3">طراحی اپلیکیشن</option>
-						<option value="4">مدیریت پروژه</option>
-						<option value="5">منشی‌گری</option>
-						<option value="6">مدیریت فروش</option>
-						<option value="7">بازاریابی</option>
-						<option value="8">مشاوره</option>
-					</select>
-				</div>
-			</div>
+                <!-- Email -->
+                {#			<div class="form">#}
+                {#				<h5>ایمیل</h5>#}
+                {#				<input class="search-field" dir ="ltr" type="text" placeholder="mail@example.com" value=""/>#}
+                {#			</div>#}
 
-			<!-- Tags -->
-			<div class="form">
-				<h5>تگ‌ها <span>(اختیاری)</span></h5>
-				<input class="search-field" type="text" placeholder="،مثال: مدیریت، آموزش Django" value=""/>
-				<p class="note">تگ‌ها را با علامت کاما جدا نمایید. مانند مهارت‌های مورد نیاز و یا تکنولوژی‌های لازم برای این کار.</p>
-			</div>
+                <form id="job_form" method="post" class="register" action={% url 'add-job' %}>
+                    {% csrf_token %}
 
 
-			<!-- Description -->
-			<div class="form">
-				<h5>توضیحات</h5>
-				<textarea class="WYSIWYG" name="summary" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
-			</div>
+                    <!-- Title -->
+                    <div class="form">
+                        <h5>عنوان کار</h5>
+                        <input class="search-field" name="title" type="text" placeholder="" value=""/>
+                    </div>
 
-			<!-- Application email/url -->
-			<!-- <div class="form">
-				<h5>ایمیل یا سابت کارفرما</h5>
-				<input type="text" placeholder="Enter an email address or website URL">
-			</div> -->
+                    <!-- Location -->
+                    <div class="form">
+                        <h5>مکان <span>(اختیاری)</span></h5>
+                        <input class="search-field" name="address" type="text"
+                               placeholder="مثال: تهران، خیابان آزادی، روبروی دانشگاه شریف" value=""/>
+                        <!-- <p class="note">Leave this blank if the location is not important</p> -->
+                    </div>
 
-			<!-- TClosing Date -->
-			<div class="form">
-				<h5>تاریخ اتمام <span>(اختیاری)</span></h5>
-				<input data-role="date" type="text" placeholder="yyyy-mm-dd">
-				<p class="note">ددلاین اقدام برای این شفل</p>
-			</div>
+                    <!-- TODO: add location -->
 
-<!-- 			
-			
-			<div class="divider"><h3>Company Details</h3></div>
-
-			
-			<div class="form">
-				<h5>Company Name</h5>
-				<input type="text" placeholder="Enter the name of the company">
-			</div>
-
-			
-			<div class="form">
-				<h5>Website <span>(optional)</span></h5>
-				<input type="text" placeholder="http://">
-			</div>
-
-			
-			<div class="form">
-				<h5>Tagline <span>(optional)</span></h5>
-				<input type="text" placeholder="Briefly describe your company">
-			</div>
-
-			
-			<div class="form">
-				<h5>Video <span>(optional)</span></h5>
-				<input type="text" placeholder="A link to a video about your company">
-			</div>
-
-			
-			<div class="form">
-				<h5>Twitter Username <span>(optional)</span></h5>
-				<input type="text" placeholder="@yourcompany">
-			</div>
-
-			
-			<div class="form">
-				<h5>Logo <span>(optional)</span></h5>
-				<label class="upload-btn">
-				    <input type="file" multiple />
-				    <i class="fa fa-upload"></i> Browse
-				</label>
-				<span class="fake-input">No file selected</span>
-			</div> -->
+                    <!-- Job Type -->
+                    <div class="form">
+                        <h5>نوع شغل</h5>
+                        <select name="type" data-placeholder="تمام‌وقت" class="chosen-select-no-single">
+                            <option value="1">تمام‌وقت</option>
+                            <option value="2">نیمه‌وقت</option>
+                            <option value="2">کارآموزی</option>
+                            <option value="2">آزاد</option>
+                        </select>
+                    </div>
 
 
-			<div class="divider margin-top-0"></div>
-			<a href="#" class="button big margin-top-5"> <i class="fa fa-arrow-circle-left"></i> نمایش </a>
+                    <!-- Choose Category -->
+                    <div class="form">
+                        <div class="select">
+                            <h5>دسته‌بندی</h5>
+                            <select name="category" data-placeholder="  انتخاب دسته‌بندی‌ " class="chosen-select"
+                                    multiple>
+                                <option value="1">توسعه‌دهنده‌ی وب</option>
+                                <option value="2">توسعه‌دهنده‌ی اپلیکیشن موبایل</option>
+                                <option value="3">طراحی اپلیکیشن</option>
+                                <option value="4">مدیریت پروژه</option>
+                                <option value="5">منشی‌گری</option>
+                                <option value="6">مدیریت فروش</option>
+                                <option value="7">بازاریابی</option>
+                                <option value="8">مشاوره</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="form">
+                        <h5>تگ‌ها <span>(اختیاری)</span></h5>
+                        <input class="search-field" type="text" placeholder="،مثال: مدیریت، آموزش Django" value=""/>
+                        <p class="note">تگ‌ها را با علامت کاما جدا نمایید. مانند مهارت‌های مورد نیاز و یا تکنولوژی‌های
+                            لازم برای این کار.</p>
+                    </div>
 
 
-		</div>
-	</div>
+                    <!-- Description -->
+                    <div class="form">
+                        <h5>توضیحات</h5>
+                        <textarea name="description" class="WYSIWYG" name="summary" cols="40" rows="3" id="summary"
+                                  spellcheck="true"></textarea>
+                    </div>
 
-</div>
+                    <!-- Application email/url -->
+                    <!-- <div class="form">
+                        <h5>ایمیل یا سابت کارفرما</h5>
+                        <input type="text" placeholder="Enter an email address or website URL">
+                    </div> -->
+
+                    <!-- TClosing Date -->
+                    <div class="form">
+                        <h5>تاریخ اتمام <span>(اختیاری)</span></h5>
+                        <input name="deadline" data-role="date" type="text" placeholder="yyyy-mm-dd">
+                        <p class="note">ددلاین اقدام برای این شفل</p>
+                    </div>
+
+                    <!--
+
+                                <div class="divider"><h3>Company Details</h3></div>
+
+
+                                <div class="form">
+                                    <h5>Company Name</h5>
+                                    <input type="text" placeholder="Enter the name of the company">
+                                </div>
+
+
+                                <div class="form">
+                                    <h5>Website <span>(optional)</span></h5>
+                                    <input type="text" placeholder="http://">
+                                </div>
+
+
+                                <div class="form">
+                                    <h5>Tagline <span>(optional)</span></h5>
+                                    <input type="text" placeholder="Briefly describe your company">
+                                </div>
+
+
+                                <div class="form">
+                                    <h5>Video <span>(optional)</span></h5>
+                                    <input type="text" placeholder="A link to a video about your company">
+                                </div>
+
+
+                                <div class="form">
+                                    <h5>Twitter Username <span>(optional)</span></h5>
+                                    <input type="text" placeholder="@yourcompany">
+                                </div>
+
+
+                                <div class="form">
+                                    <h5>Logo <span>(optional)</span></h5>
+                                    <label class="upload-btn">
+                                        <input type="file" multiple />
+                                        <i class="fa fa-upload"></i> Browse
+                                    </label>
+                                    <span class="fake-input">No file selected</span>
+                                </div> -->
+
+
+                    <div class="divider margin-top-0"></div>
+                    <a href="javascript:{}" class="button big margin-top-5"
+                       onclick="document.getElementById('job_form').submit(); return false;"> <i
+                            class="fa fa-arrow-circle-left"></i> افزودن </a>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
 
 {% endblock %}

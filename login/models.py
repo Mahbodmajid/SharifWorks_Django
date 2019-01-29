@@ -17,10 +17,10 @@ class JobSeekerProfile(models.Model):
     email = models.EmailField(name='email', primary_key=True)
     first_name = models.CharField(max_length=10)
     last_name = models.CharField(max_length=10)
-    tags = models.ManyToManyField(Tag, related_name='tags')
+    skills = models.ManyToManyField(Tag, related_name='tags')
     bio = models.TextField()
     joined_date = models.DateField(auto_now_add=True, null=True, blank=True)
-    link = models.URLField()
+    # homepage = models.URLField()
     cv = models.FileField(upload_to='files/cvs', null=True, blank=True)
 
     @receiver(post_save, sender=User)

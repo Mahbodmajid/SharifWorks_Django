@@ -17,7 +17,7 @@ class Skill(models.Model):
 class JobSeekerProfile(models.Model):
     class Meta:
         verbose_name = _('Job Seeker Profile')
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="job_seeker_profile")
     skills = models.ManyToManyField(Skill, related_name='tags')
     bio = models.TextField(blank=True)
     homepage = models.URLField(blank=True)
@@ -30,15 +30,14 @@ class JobSeekerProfile(models.Model):
 
     @receiver(post_save, sender=User)
     def update_user_profile(sender, instance, **kwargs):
-        if instance.is_jobseeker:
-            # TODO WTF?
-            instance.profile.save()
+        if sender.is_jobseeker:
+            instance.job_seeker_profile.save()
 
 
 class EmployerProfile(models.Model):
     class Meta:
         verbose_name = _('Employer Profile')
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="employer_profile")
     company_name = models.CharField(max_length=10)
     company_disc = models.TextField()
     company_type = models.BooleanField()  # False: public       True: private
@@ -53,8 +52,8 @@ class EmployerProfile(models.Model):
 
     @receiver(post_save, sender=User)
     def update_user_profile(sender, instance, **kwargs):
-        if instance.is_employer:
-            instance.profile.save()
+        if sender.is_employer:
+            instance.employer_profile.save()
 
 
 class Choices:

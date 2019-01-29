@@ -1,6 +1,7 @@
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from login.forms import RegisterForm, JobSeekerRegisterForm, EmployerRegisterForm, LoginForm, AdvertiseForm
+from login.models import JobSeekerProfile, EmployerProfile
 from django.contrib.auth import get_user_model
 User = get_user_model()
 # from login.models import Advertise
@@ -37,6 +38,7 @@ def job_seeker_register(request):
             user.set_password(user_form.cleaned_data['password'])
             user.is_jobseeker = True
             user.save()
+            job_seeker = JobSeekerProfile.objects.create(user=user)
             # user.jobseekerprofile.bio = profile_form.cleaned_data['bio']
             # user.jobseekerprofile.cv = profile_form.cleaned_data['cv']
             login(request, user)

@@ -30,10 +30,8 @@ def my_account_employer(request):
 def job_seeker_register(request):
     if request.method == 'POST':
         user_form = RegisterForm(request.POST)
-        print("bbbbb")
         # profile_form = JobSeekerRegisterForm(request.POST, request.FILES)
         if user_form.is_valid():
-            print("aaaaaaa")
             user = user_form.save(commit=False)
             user.set_password(user_form.cleaned_data['password'])
             user.is_jobseeker = True
@@ -59,9 +57,10 @@ def employer_register(request):
             user.set_password(user_form.cleaned_data['password'])
             user.is_employer = True
             user.save()
-            user.employerprofile.company_name = profile_form.cleaned_data['company_name']
-            user.employerprofile.company_type = profile_form.cleaned_data['company_type']
-            user.employerprofile.company_disc = profile_form.cleaned_data['company_disc']
+            employer = EmployerProfile.objects.create(user=user)
+            employer.company_name = profile_form.cleaned_data['company_name']
+            employer.company_type = profile_form.cleaned_data['company_type']
+            employer.company_disc = profile_form.cleaned_data['company_disc']
             login(request, user)
             print("Employer Signed In:")
             print("Username: ", user.username)

@@ -23,15 +23,15 @@ class JobSeekerProfile(models.Model):
     homepage = models.URLField(blank=True)
     cv = models.FileField(upload_to='files/cvs', blank=True)
 
-    @receiver(post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created and instance.is_jobseeker:
-            JobSeekerProfile.objects.create(user=instance)
-
-    @receiver(post_save, sender=User)
-    def update_user_profile(sender, instance, **kwargs):
-        if instance.is_jobseeker:
-            instance.job_seeker_profile.save()
+    # @receiver(post_save, sender=User)
+    # def create_user_profile(sender, instance, created, **kwargs):
+    #     if created and instance.is_jobseeker:
+    #         JobSeekerProfile.objects.create(user=instance)
+    #
+    # @receiver(post_save, sender=User)
+    # def update_user_profile(sender, instance, **kwargs):
+    #     if instance.is_jobseeker:
+    #         instance.job_seeker_profile.save()
 
 
 class EmployerProfile(models.Model):
@@ -45,15 +45,15 @@ class EmployerProfile(models.Model):
     address = models.CharField(max_length=100)
     # TODO: not finished yet
 
-    @receiver(post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created and instance.is_employer:
-            JobSeekerProfile.objects.create(user=instance)
-
-    @receiver(post_save, sender=User)
-    def update_user_profile(sender, instance, **kwargs):
-        if instance.is_employer:
-            instance.employer_profile.save()
+    # @receiver(post_save, sender=User)
+    # def create_user_profile(sender, instance, created, **kwargs):
+    #     if created and instance.is_employer:
+    #         JobSeekerProfile.objects.create(user=instance)
+    #
+    # @receiver(post_save, sender=User)
+    # def update_user_profile(sender, instance, **kwargs):
+    #     if instance.is_employer:
+    #         instance.employer_profile.save()
 
 
 class Choices:

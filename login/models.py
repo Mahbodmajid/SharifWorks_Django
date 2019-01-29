@@ -5,7 +5,7 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
 
-class Tag(models.Model):
+class Skill(models.Model):
     name = models.CharField(max_length=20)
 
 
@@ -13,11 +13,10 @@ class JobSeekerProfile(models.Model):
     class Meta:
         verbose_name = _('Profile')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # first_name = models.CharField(max_length=10, verbose_name='نام')
     email = models.EmailField(name='email', primary_key=True)
     first_name = models.CharField(max_length=10)
     last_name = models.CharField(max_length=10)
-    skills = models.ManyToManyField(Tag, related_name='tags')
+    skills = models.ManyToManyField(Skill, related_name='tags')
     bio = models.TextField()
     joined_date = models.DateField(auto_now_add=True, null=True, blank=True)
     # homepage = models.URLField()
@@ -36,8 +35,10 @@ class JobSeekerProfile(models.Model):
 class EmployerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.EmailField(name='email', primary_key=True)
-    first_name = models.CharField(max_length=10)
-    last_name = models.CharField(max_length=10)
+    company_name = models.CharField(max_length=10)
+    company_disc = models.TextField()
+    company_type = models.BooleanField()  # False: public       True: private
+    founded_date = models.DateField()
     address = models.CharField(max_length=100)
     # TODO: not finished yet
 

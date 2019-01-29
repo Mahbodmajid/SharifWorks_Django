@@ -1,8 +1,13 @@
-from django.contrib.auth.models import User, AbstractUser
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
+
+
+class User(AbstractUser):
+    is_jobseeker = models.BooleanField('jobseeker status', default=False)
+    is_employer = models.BooleanField('employer status', default=False)
 
 
 class Skill(models.Model):
@@ -20,12 +25,13 @@ class JobSeekerProfile(models.Model):
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
-        if created:
+        if created and sender.is_jobseeker:
             JobSeekerProfile.objects.create(user=instance)
 
     @receiver(post_save, sender=User)
     def update_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
+        if sender.is_jobseeker:
+            instance.profile.save()
 
 
 class EmployerProfile(models.Model):

@@ -45,4 +45,4 @@ class EmployerProfile(models.Model):
 class Advertise(models.Model):
     title = models.CharField(max_length=100)
     deadline = models.DateField(null=True)
-    cat = models.
+    # cat = models.

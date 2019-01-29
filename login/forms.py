@@ -9,7 +9,7 @@ class JobSeekerLoginForm(forms.ModelForm):
         model = JobSeekerProfile
         fields = ('email', 'password')
 
-    email = forms.EmailInput(label='ایمیل')
+    email = forms.EmailInput()
     password = forms.CharField(label="گذرواژه", widget=forms.PasswordInput)
 
 

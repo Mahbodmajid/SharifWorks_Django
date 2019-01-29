@@ -43,17 +43,29 @@
 				<h3 class="margin-bottom-10 margin-top-10">ورود</h3>
 
 				<form method="post" class="login" action="employer-home.html">
+                    {% csrf_token %}
+                    {% for field in login_form %}
 
-					
-					<p class="form-row form-row-wide">
-						<label for="username">ایمیل:</label>
-						<input dir= "ltr" type="email" class="input-text" name="username" id="username" value="" />
-					</p>
+                        {{ field }}
 
-					<p class="form-row form-row-wide">
-						<label for="password">گذرواژه:</label>
-						<input dir= "ltr" class="input-text" type="password" name="password" id="password" />
-					</p>
+                        {% if field.html_name == "username" %}
+                            <p class="form-row form-row-wide">
+                                <label for="username">ایمیل:</label>
+                                <input dir= "ltr" type="email" class="input-text" name="username" id="username" value="" />
+                            </p>
+                        {% endif %}
+
+                        {% if field.html_name == "password" %}
+                            <p class="form-row form-row-wide">
+                                <label for="password">گذرواژه:</label>
+                                <input dir= "ltr" class="input-text" type="password" name="password" id="password" />
+                            </p>
+                        {% endif %}
+
+                    {% endfor %}
+
+
+
 
 					<p class="form-row">
 						<input type="submit" class="button" name="login" value="ورود" />

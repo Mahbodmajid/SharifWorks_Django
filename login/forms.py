@@ -64,6 +64,6 @@ class AdvertiseForm(forms.ModelForm):
         model = Advertise
         fields = ('title', 'type', 'category', 'deadline', 'description', 'address')
 
-    type = forms.ModelChoiceField(choices=Choices.JOBTYPES)
-    category = forms.ModelChoiceField(choices=Choices.JOBCATS)
+    type = forms.ChoiceField(choices=Choices.JOBTYPES)
+    category = forms.ChoiceField(choices=Choices.JOBCATS)
 

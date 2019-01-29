@@ -1,7 +1,8 @@
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
-from login.forms import RegisterForm, JobSeekerRegisterForm, EmployerRegisterForm, LoginForm
+from login.forms import RegisterForm, JobSeekerRegisterForm, EmployerRegisterForm, LoginForm, AdvertiseForm
 from login.models import Advertise
+
 
 def index(request):
     return render(request, 'index.html')
@@ -80,6 +81,7 @@ def user_posts(request):
     posts = Advertise.objects.filter(employer=user)
     return render(request, 'index.html', posts)
 
+
 def job_seeker_home(request):
     return render(request, 'job-seeker-home.html')
 
@@ -97,7 +99,7 @@ def resume_page(request):
 
 
 def job_form(request):
-    return render(request, 'job-form.html')
+    return render(request, 'job-form.html', {'register_form': advertise_form})
 
 
 def logout(request):

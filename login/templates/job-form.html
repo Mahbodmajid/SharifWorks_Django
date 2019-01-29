@@ -29,21 +29,21 @@
 
 
 			<!-- Email -->
-			<div class="form">
-				<h5>ایمیل</h5>
-				<input class="search-field" dir ="ltr" type="text" placeholder="mail@example.com" value=""/>
-			</div>
+{#			<div class="form">#}
+{#				<h5>ایمیل</h5>#}
+{#				<input class="search-field" dir ="ltr" type="text" placeholder="mail@example.com" value=""/>#}
+{#			</div>#}
 
 			<!-- Title -->
 			<div class="form">
 				<h5>عنوان کار</h5>
-				<input class="search-field" type="text" placeholder="" value=""/>
+				<input class="search-field" name="title" type="text" placeholder="" value="" />
 			</div>
 
 			<!-- Location -->
 			<div class="form">
 				<h5>مکان <span>(اختیاری)</span></h5>
-				<input class="search-field" type="text" placeholder="مثال: تهران، خیابان آزادی، روبروی دانشگاه شریف" value=""/>
+				<input class="search-field" name="address" type="text" placeholder="مثال: تهران، خیابان آزادی، روبروی دانشگاه شریف" value=""/>
 				<!-- <p class="note">Leave this blank if the location is not important</p> -->
 			</div>
 
@@ -52,7 +52,7 @@
 			<!-- Job Type -->
 			<div class="form">
 				<h5>نوع شغل</h5>
-				<select data-placeholder="تمام‌وقت" class="chosen-select-no-single">
+				<select name="type" data-placeholder="تمام‌وقت" class="chosen-select-no-single">
 					<option value="1">تمام‌وقت</option>
 					<option value="2">نیمه‌وقت</option>
 					<option value="2">کارآموزی</option>
@@ -65,7 +65,7 @@
 			<div class="form">
 				<div class="select">
 					<h5>دسته‌بندی</h5>
-					<select data-placeholder="  انتخاب دسته‌بندی‌ " class="chosen-select" multiple>
+					<select name="category" data-placeholder="  انتخاب دسته‌بندی‌ " class="chosen-select" multiple>
 						<option value="1">توسعه‌دهنده‌ی وب</option>
 						<option value="2">توسعه‌دهنده‌ی اپلیکیشن موبایل</option>
 						<option value="3">طراحی اپلیکیشن</option>
@@ -89,7 +89,7 @@
 			<!-- Description -->
 			<div class="form">
 				<h5>توضیحات</h5>
-				<textarea class="WYSIWYG" name="summary" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
+				<textarea name="description" class="WYSIWYG" name="summary" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
 			</div>
 
 			<!-- Application email/url -->
@@ -101,7 +101,7 @@
 			<!-- TClosing Date -->
 			<div class="form">
 				<h5>تاریخ اتمام <span>(اختیاری)</span></h5>
-				<input data-role="date" type="text" placeholder="yyyy-mm-dd">
+				<input name="deadline" data-role="date" type="text" placeholder="yyyy-mm-dd">
 				<p class="note">ددلاین اقدام برای این شفل</p>
 			</div>
 
@@ -151,7 +151,7 @@
 
 
 			<div class="divider margin-top-0"></div>
-			<a href="#" class="button big margin-top-5"> <i class="fa fa-arrow-circle-left"></i> نمایش </a>
+			<a href="#" class="button big margin-top-5"> <i class="fa fa-arrow-circle-left"></i> افزودن </a>
 
 
 		</div>

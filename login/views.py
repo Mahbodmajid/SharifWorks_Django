@@ -1,7 +1,7 @@
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from login.forms import RegisterForm, JobSeekerRegisterForm, EmployerRegisterForm, LoginForm
-
+from login.models import Advertise
 
 def index(request):
     return render(request, 'index.html')
@@ -73,3 +73,9 @@ def job_seeker_login(request):
 
 def employer_login(request):
     return render(request, 'index.html')
+
+
+def user_posts(request):
+    user = request.user  # khode user TODO: change
+    posts = Advertise.objects.filter(employer=user)
+    return render(request, 'index.html', posts)

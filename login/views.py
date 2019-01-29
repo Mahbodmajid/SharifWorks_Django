@@ -91,11 +91,14 @@ def resume_page(request):
     return render(request, 'resume-page.html')
 
 
-def add_job(request):
-    return render(request, 'add-job.html')
+def job_form(request):
+    return render(request, 'job-form.html')
 
 
 def logout(request):
     logout(request)
     return redirect('index')
 
+
+def add_job(request):
+    return None

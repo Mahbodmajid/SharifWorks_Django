@@ -11,16 +11,12 @@ class Skill(models.Model):
 
 class JobSeekerProfile(models.Model):
     class Meta:
-        verbose_name = _('Profile')
+        verbose_name = _('Job Seeker Profile')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email = models.EmailField(name='email', primary_key=True)
-    first_name = models.CharField(max_length=10)
-    last_name = models.CharField(max_length=10)
     skills = models.ManyToManyField(Skill, related_name='tags')
-    bio = models.TextField()
-    joined_date = models.DateField(auto_now_add=True, null=True, blank=True)
-    # homepage = models.URLField()
-    cv = models.FileField(upload_to='files/cvs', null=True, blank=True)
+    bio = models.TextField(blank=True)
+    homepage = models.URLField(blank=True)
+    cv = models.FileField(upload_to='files/cvs', blank=True)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -33,12 +29,13 @@ class JobSeekerProfile(models.Model):
 
 
 class EmployerProfile(models.Model):
+    class Meta:
+        verbose_name = _('Employer Profile')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email = models.EmailField(name='email', primary_key=True)
     company_name = models.CharField(max_length=10)
     company_disc = models.TextField()
     company_type = models.BooleanField()  # False: public       True: private
-    founded_date = models.DateField()
+    founded_date = models.DateField(blank=True)
     address = models.CharField(max_length=100)
     # TODO: not finished yet
 

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from login.models import JobSeekerProfile, EmployerProfile, Advertise
+from login.models import JobSeekerProfile, EmployerProfile, Advertise, Choices
 
 # Register forms -------------------------------------------------------------------------------------------------------
 
@@ -56,16 +56,14 @@ class JobSeekerProfileForm(forms.ModelForm):
         model = JobSeekerProfile
         fields = ('bio', 'homepage', 'cv', 'skills')
 
-
-# class AdvertiseForm(forms.ModelForm):
-#     class Meta:
-#         model = Advertise
-#         fields = ('title', 'type', 'category')
-
-    # type = forms.ModelChoiceField
+# Advertise forms -----------------------------------------------------------------------------------------------------
 
 
-# class ProfileForm(forms.ModelForm):
-#     class Meta:
-#         model = JobSeekerProfile
-#         fields = ('image',)
+class AdvertiseForm(forms.ModelForm):
+    class Meta:
+        model = Advertise
+        fields = ('title', 'type', 'category', 'deadline', 'description', 'address')
+
+    type = forms.ModelChoiceField(choices=Choices.JOBTYPES)
+    category = forms.ModelChoiceField(choices=Choices.JOBCATS)
+

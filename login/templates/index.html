@@ -45,7 +45,7 @@
             {% block navbar %}
                 <ul id="responsive">
 
-                    <li><a href="index.html">خانه</a>
+                    <li><a href="{% url 'index' %}">خانه</a>
                     </li>
 
                     <li><a href="{% url 'my-account-employer' %}">برای کارفرمایان</a>
@@ -89,8 +89,8 @@
 				</div>
 
 				<div class="caption sfb" data-x="center" data-y="370" data-speed="400" data-start="1600" data-easing="easeOutExpo">
-					<a href="my-account-job-seeker.html" class="slider-button">کارجو</a>
-					<a href="my-account-employer.html" class="slider-button">کارفرما</a>
+					<a href="{% url 'my-account-job-seeker' %}" class="slider-button">کارجو</a>
+					<a href="{% url 'my-account-employer' %}" class="slider-button">کارفرما</a>
 				</div>
 			</li>
 
@@ -158,7 +158,7 @@
 </div>
 
 <!-- Back To Top Button -->
-<div id="backtotop"><a href="#"></a></div>
+<div id="backtotop"><a href="{% url 'index' %}"></a></div>
 
 </div>
 <!-- Wrapper / End -->

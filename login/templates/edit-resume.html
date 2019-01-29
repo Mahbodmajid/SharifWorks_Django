@@ -1,0 +1,174 @@
+{% extends 'job-seeker-home.html' %}
+
+{% block title %}
+    شریف‌کار - ویرایش اطلاعات
+{% endblock %}
+
+{% block titlebar-text %}
+<h2> <i class="fa fa-plus-circle"></i> ویرایش اطلاعات</h2>
+{% endblock %}
+
+{% block content %}
+
+<!-- Content
+================================================== -->
+<div class="container">
+	
+	<!-- Submit Page -->
+	<div class="sixteen columns">
+		<div class="submit-page">
+
+			<!-- Notice -->
+			<!-- <div class="notification notice closeable margin-bottom-40">
+				<p><span>Have an account?</span> If you don’t have an account you can create one below by entering your email address. A password will be automatically emailed to you.</p>
+			</div> -->
+
+
+			<!-- Linked In -->
+			<div class="form">
+				<h5> صفحه‌ی LinkedIn</h5>
+				<a href="#" class="button linkedin-btn" dir="rtl" >منتقل کردن از LinkedIn</a>
+			</div>
+
+			<!-- Email -->
+			<div class="form">
+				<h5>نام</h5>
+				<input class="search-field" type="text" placeholder="نام" value=""/>
+			</div>
+			<div class="form">
+				<h5>نام خانوادگی</h5>
+				<input class="search-field" type="text" placeholder="نام خانوادگی" value=""/>
+			</div>
+
+			<!-- Email -->
+			<!-- <div class="form">
+				<h5>Your Email</h5>
+				<input class="search-field" type="text" placeholder="mail@example.com" value=""/>
+			</div> -->
+
+			<!-- Title -->
+			<div class="form">
+				<h5>عنوان حرفه‌ای</h5>
+				<input class="search-field" type="text" placeholder="مثال: توسعه‌دهنده‌ی وب" value=""/>
+			</div>
+
+			<!-- Location -->
+			<div class="form">
+				<h5>آدرس</h5>
+				<input class="search-field" type="text" placeholder="مثال: تهران، خیابان شریعتی" value=""/>
+			</div>
+
+			<!-- Choose Skill -->
+			<div class="form">
+				<div class="select">
+					<h5>مهارت‌ها</h5>
+					<select data-placeholder="انتخاب مهارت‌ها" class="chosen-select" multiple>
+						<option value="HTML">HTML</option>
+						<option value="Django">Django</option>
+						<option value="Node.js">Node.js</option>
+						<option value="Machine Learning">Machine Learning</option>
+						<option value="UI/UX">UI/UX</option>
+					</select>
+				</div>
+			</div>
+
+			<!-- CV -->
+			<div class="form">
+				<h5>رزومه </h5>
+				<label class="upload-btn">
+				    <input type="file" multiple />
+				    <i class="fa fa-upload" dir="rtl" ></i>  انتخاب فایل
+				</label>
+				<span class="fake-input" dir="rtl" >هیچ فایلی انتخاب نشده‌است</span>
+			</div>
+
+
+			<!-- Logo -->
+			<div class="form">
+				<h5>عکس <span>(اختیاری)</span></h5>
+				<label class="upload-btn">
+				    <input type="file" multiple />
+				    <i class="fa fa-upload" dir="rtl" ></i> انتخاب فایل
+				</label>
+				<span class="fake-input" dir="rtl" >هیچ فایلی انتخاب نشده‌است</span>
+			</div>
+
+			<!-- Email -->
+			<div class="form">
+				<h5>ویدیو <span>(اختیاری)</span></h5>
+				<input class="search-field" type="text" placeholder=" لینک به ویدیو معرفی شما" value=""/>
+			</div>
+
+			<!-- Description -->
+			<div class="form">
+				<h5>توضیحات</h5>
+				<textarea class="WYSIWYG" name="summary" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
+			</div>
+
+
+			<!-- Add URLs -->
+			<div class="form with-line">
+				<h5>لینک‌(ها) <span>(اختیاری)</span></h5>
+				<div class="form-inside">
+					
+					<!-- Adding URL(s) -->
+					<div class="form boxed box-to-clone url-box">
+						<a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
+						<input class="search-field" type="text" placeholder="عنوان" value=""/>
+						<input class="search-field" type="text" dir="ltr" placeholder="http://" value=""/>
+					</div>
+
+					<a href="#" class="button gray add-url add-box"><i class="fa fa-plus-circle"></i>  اضافه‌کردن لینک</a>
+					<p class="note">مثال:‌ لینک به صفحه‌ی شخصی شما</p>
+				</div>
+			</div>
+
+
+			<!-- Education -->
+			<!-- <div class="form with-line">
+				<h5>Education <span>(optional)</span></h5>
+				<div class="form-inside">
+
+					
+					<div class="form boxed box-to-clone education-box">
+						<a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
+						<input class="search-field" type="text" placeholder="School Name" value=""/>
+						<input class="search-field" type="text" placeholder="Qualification(s)" value=""/>
+						<input class="search-field" type="text" placeholder="Start / end date" value=""/>
+						<textarea name="desc" id="desc" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+					</div>
+
+					<a href="#" class="button gray add-education add-box"><i class="fa fa-plus-circle"></i> Add Education</a>
+				</div>
+			</div> -->
+
+
+			<!-- Experience  -->
+			<!-- <div class="form with-line">
+				<h5>Experience <span>(optional)</span></h5>
+				<div class="form-inside">
+
+					
+					<div class="form boxed box-to-clone experience-box">
+						<a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
+						<input class="search-field" type="text" placeholder="Employer" value=""/>
+						<input class="search-field" type="text" placeholder="Job Title" value=""/>
+						<input class="search-field" type="text" placeholder="Start / end date" value=""/>
+						<textarea name="desc1" id="desc1" cols="30" rows="10" placeholder="Notes (optional)"></textarea>
+					</div>
+
+					<a href="#" class="button gray add-experience add-box"><i class="fa fa-plus-circle"></i> Add Experience</a>
+				</div>
+			</div> -->
+
+
+			<div class="divider margin-top-0 padding-reset"></div>
+			<a href="#" class="button big margin-top-5"> <i class="fa fa-arrow-circle-left"></i> ویرایش</a>
+
+		</div>
+	</div>
+
+</div>
+
+
+{% endblock %}

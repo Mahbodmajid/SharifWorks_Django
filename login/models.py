@@ -46,4 +46,17 @@ class EmployerProfile(models.Model):
 class Advertise(models.Model):
     title = models.CharField(max_length=100)
     deadline = models.DateField(null=True)
-    # cat = models.
+    JOBTYPES = (
+        ('F', 'Full-Time'),
+        ('P', 'Part-Time'),
+        ('I', 'Internship'),
+        ('L', 'Freelancer')
+    )
+    type = models.CharField(max_length=1, choices=JOBTYPES)
+
+    CATS = (
+        ('DEV', 'Developer'),
+    )
+
+    category = models.CharField(max_length=3, choices=CATS)
+

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from login.models import JobSeekerProfile, EmployerProfile
+from login.models import JobSeekerProfile, EmployerProfile, Advertise
 
 
 class JobSeekerRegisterForm(forms.ModelForm):
@@ -58,6 +58,14 @@ class JobSeekerLoginForm(forms.ModelForm):
 
     email = forms.EmailInput()
     password = forms.CharField(label="گذرواژه", widget=forms.PasswordInput)
+
+
+# class AdvertiseForm(forms.ModelForm):
+#     class Meta:
+#         model = Advertise
+#         fields = ('title', 'type', 'category')
+
+    # type = forms.ModelChoiceField
 
 
 # class ProfileForm(forms.ModelForm):

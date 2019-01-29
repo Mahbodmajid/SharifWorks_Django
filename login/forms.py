@@ -9,7 +9,7 @@ from login.models import JobSeekerProfile, EmployerProfile, Advertise
 class RegisterForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'password', 'password2')
 
     password = forms.CharField(label="گذرواژه", widget=forms.PasswordInput)
     password2 = forms.CharField(label="تکرار گذرواژه", widget=forms.PasswordInput)

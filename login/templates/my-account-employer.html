@@ -44,27 +44,16 @@
 
 				<form method="post" class="login" action="{% url 'employer-home' %}">
                     {% csrf_token %}
-                    {% for field in login_form %}
 
-                        {{ field }}
+                    <p class="form-row form-row-wide">
+                        <label for="username">ایمیل:</label>
+                        <input dir= "ltr" type="email" class="input-text" name="username" id="username" value="" />
+                    </p>
 
-                        {% if field.html_name == "username" %}
-                            <p class="form-row form-row-wide">
-                                <label for="username">ایمیل:</label>
-                                <input dir= "ltr" type="email" class="input-text" name="username" id="username" value="" />
-                            </p>
-                        {% endif %}
-
-                        {% if field.html_name == "password" %}
-                            <p class="form-row form-row-wide">
-                                <label for="password">گذرواژه:</label>
-                                <input dir= "ltr" class="input-text" type="password" name="password" id="password" />
-                            </p>
-                        {% endif %}
-
-                    {% endfor %}
-
-
+                    <p class="form-row form-row-wide">
+                        <label for="password">گذرواژه:</label>
+                        <input dir= "ltr" class="input-text" type="password" name="password" id="password" />
+                    </p>
 
 
 					<p class="form-row">
@@ -91,7 +80,7 @@
 
 						<p class="form-row form-row-wide">
 							<label for="reg_name">نام شرکت:</label>
-							<input type="text" class="input-text" name="email" id="reg_name" value="" />
+							<input type="text" class="input-text" name="company_name" id="reg_name" value="" />
 						</p>
 
 						<script>
@@ -109,43 +98,43 @@
 
 						<div class="form-group">
 							<label for="reg_brief_description">کمی توضیح درباره‌ی شرکت(حداکثر ۱۰۰ کاراکتر):</label>
-							<textarea class="form-control limited" id="reg_brief_description" rows="3" maxlength="100"></textarea>
+							<textarea class="form-control limited" id="reg_brief_description" name="company_disc" rows="3" maxlength="100"></textarea>
 						</div>
 
 						<p class="form-row form-row-wide">
 							<label for="reg_is_public">نوع شرکت:</label>
-							<select class="form-control" id="reg_is_public">
+							<select class="form-control" id="reg_is_public" name="company_type">
 								<option>خصوصی</option>
 								<option>دولتی</option>
 							</select>
 						</p>
 
-						<p class="form-row form-row-wide">
-							<label for="reg_constitution_year">سال ساخت شرکت:</label>
-							<select id="reg_constitution_year" style="width:100%;" class="form-control selectWidth" >
-								<option>1397</option>
-								<option>1396</option>
-								<option>1395</option>
-								<option>1394</option>
-								<option>1393</option>
-								<option>1392</option>
-								<option>1391</option>
-								<option>1390</option>
-								<option>1389</option>
-								<option>1388</option>
-								<option>1387</option>
-								<option>1386</option>
-								<option>1385</option>
-								<option>1384</option>
-								<option>1383</option>
-								<option>1382</option>
-								<option>1381</option>
-							</select>
-						</p>
+{#						<p class="form-row form-row-wide">#}
+{#							<label for="reg_constitution_year">سال ساخت شرکت:</label>#}
+{#							<select id="reg_constitution_year" style="width:100%;" class="form-control selectWidth" >#}
+{#								<option>1397</option>#}
+{#								<option>1396</option>#}
+{#								<option>1395</option>#}
+{#								<option>1394</option>#}
+{#								<option>1393</option>#}
+{#								<option>1392</option>#}
+{#								<option>1391</option>#}
+{#								<option>1390</option>#}
+{#								<option>1389</option>#}
+{#								<option>1388</option>#}
+{#								<option>1387</option>#}
+{#								<option>1386</option>#}
+{#								<option>1385</option>#}
+{#								<option>1384</option>#}
+{#								<option>1383</option>#}
+{#								<option>1382</option>#}
+{#								<option>1381</option>#}
+{#							</select>#}
+{#						</p>#}
 
 						<p class="form-row form-row-wide">
 							<label for="reg_email">ایمیل:</label>
-							<input dir= "ltr"  type="email" class="input-text" name="email" id="reg_email" value="" />
+							<input dir= "ltr"  type="email" class="input-text" name="username" id="reg_email" value="" />
 						</p>
 
 
@@ -157,7 +146,7 @@
 
 						<p class="form-row form-row-wide">
 							<label for="reg_password2">تکرار گذرواژه:</label>
-							<input dir= "ltr" type="password" class="input-text" name="password" id="reg_password2" />
+							<input dir= "ltr" type="password" class="input-text" name="password2" id="reg_password2" />
 						</p>
 
 									

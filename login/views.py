@@ -98,12 +98,14 @@ def resume_page(request):
     return render(request, 'resume-page.html')
 
 
-def add_job(request):
-    advertise_form = AdvertiseForm
-    return render(request, 'add-job.html', {'register_form': advertise_form})
+def job_form(request):
+    return render(request, 'job-form.html', {'register_form': advertise_form})
 
 
 def logout(request):
     logout(request)
     return redirect('index')
 
+
+def add_job(request):
+    return None

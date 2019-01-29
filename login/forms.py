@@ -5,6 +5,7 @@ from login.models import JobSeekerProfile, EmployerProfile, Advertise
 
 # Register forms -------------------------------------------------------------------------------------------------------
 
+
 class RegisterForm(forms.ModelForm):
     class Meta:
         model = User

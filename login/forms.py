@@ -32,7 +32,15 @@ class JobSeekerRegisterForm(forms.ModelForm):
             raise forms.ValidationError('رمزها همخوانی ندارند.')
 
 
-class ProfileForm(forms.ModelForm):
-    class Meta:
-        model = JobSeekerProfile
-        fields = ('image',)
+class EmployerLoginForm(forms.ModelForm):
+    pass
+
+
+class EmployerRegisterFrom(forms.ModelForm):
+    pass
+
+
+# class ProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = JobSeekerProfile
+#         fields = ('image',)

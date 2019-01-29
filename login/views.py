@@ -34,11 +34,11 @@ def job_seeker_register(request):
             # user.jobseekerprofile.bio = profile_form.cleaned_data['bio']
             # user.jobseekerprofile.cv = profile_form.cleaned_data['cv']
             login(request, user)
-            return redirect('home')  # TODO
+            return redirect('job-seeker-home')  # TODO
         else:
-            return redirect('index')  # TODO
+            return redirect('my-account-job-seeker')  # TODO
     else:
-        return redirect('index')  # TODO
+        return redirect('my-account-job-seeker')  # TODO
 
 
 def employer_register(request):
@@ -79,3 +79,28 @@ def user_posts(request):
     user = request.user  # khode user TODO: change
     posts = Advertise.objects.filter(employer=user)
     return render(request, 'index.html', posts)
+
+def job_seeker_home(request):
+    return render(request, 'job-seeker-home.html')
+
+
+def employer_home(request):
+    return render(request, 'employer-home.html')
+
+
+def edit_resume(request):
+    return render(request, 'edit-resume.html')
+
+
+def resume_page(request):
+    return render(request, 'resume-page.html')
+
+
+def add_job(request):
+    return render(request, 'add-job.html')
+
+
+def logout(request):
+    logout(request)
+    return redirect('index')
+

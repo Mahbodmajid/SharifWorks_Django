@@ -29,8 +29,10 @@ def my_account_employer(request):
 def job_seeker_register(request):
     if request.method == 'POST':
         user_form = RegisterForm(request.POST)
+        print("bbbbb")
         # profile_form = JobSeekerRegisterForm(request.POST, request.FILES)
         if user_form.is_valid():
+            print("aaaaaaa")
             user = user_form.save(commit=False)
             user.set_password(user_form.cleaned_data['password'])
             user.save()

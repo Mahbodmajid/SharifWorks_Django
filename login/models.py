@@ -31,7 +31,8 @@ class JobSeekerProfile(models.Model):
     @receiver(post_save, sender=User)
     def update_user_profile(sender, instance, **kwargs):
         if sender.is_jobseeker:
-            instance.profile.save()
+            # TODO WTF?
+            instance.userprofile.save()
 
 
 class EmployerProfile(models.Model):

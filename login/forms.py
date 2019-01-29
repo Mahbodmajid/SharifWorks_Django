@@ -36,7 +36,7 @@ class EmployerLoginForm(forms.ModelForm):
     pass
 
 
-class EmployerRegisterFrom(forms.ModelForm):
+class EmployerRegisterForm(forms.ModelForm):
     pass
 
 

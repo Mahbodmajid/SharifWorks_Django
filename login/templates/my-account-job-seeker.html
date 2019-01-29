@@ -41,7 +41,7 @@
 
 				<h3 class="margin-bottom-10 margin-top-10">ورود</h3>
 
-				<form method="post" class="login" action="job-seeker-home.html">
+				<form method="post" class="login" action="{% url 'job-seeker-login' %}">
 
 					
 					<p class="form-row form-row-wide">
@@ -74,7 +74,7 @@
 
 					<h3 class="margin-bottom-10 margin-top-10">ثبت‌نام</h3>
 
-					<form method="post" class="register" action="{% url 'job-seeker-home.html' %}">
+					<form method="post" class="register" action="{% url 'job-seeker-register' %}">
                         {% csrf_token %}
 
 

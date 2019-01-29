@@ -19,3 +19,18 @@ def my_account_employer(request):
     context = {'login_form': login_form, 'register_form': register_form}
     return render(request, 'my-account-employer.html', context)
 
+
+def job_seeker_register(request):
+    return render(request, 'index.html')
+
+
+def employer_register(request):
+    return render(request, 'index.html')
+
+
+def job_seeker_login(request):
+    return render(request, 'index.html')
+
+
+def employer_login(request):
+    return render(request, 'index.html')

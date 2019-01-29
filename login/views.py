@@ -35,6 +35,7 @@ def job_seeker_register(request):
             print("aaaaaaa")
             user = user_form.save(commit=False)
             user.set_password(user_form.cleaned_data['password'])
+            user.is_jobseeker = True
             user.save()
             # user.jobseekerprofile.bio = profile_form.cleaned_data['bio']
             # user.jobseekerprofile.cv = profile_form.cleaned_data['cv']
@@ -54,6 +55,7 @@ def employer_register(request):
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save(commit=False)
             user.set_password(user_form.cleaned_data['password'])
+            user.is_employer = True
             user.save()
             user.employerprofile.company_name = profile_form.cleaned_data['company_name']
             user.employerprofile.company_type = profile_form.cleaned_data['company_type']

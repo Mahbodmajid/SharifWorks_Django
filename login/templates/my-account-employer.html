@@ -78,6 +78,8 @@
 
 					<form method="post" class="register" action="{% url 'employer-register' %}">
 
+                        {% csrf_token %}
+
 						<p class="form-row form-row-wide">
 							<label for="reg_name">نام شرکت:</label>
 							<input type="text" class="input-text" name="company_name" id="reg_name" value="" />

@@ -45,6 +45,7 @@ def employer_register(request):
     if request.method == 'POST':
         user_form = RegisterForm(request.POST)
         profile_form = EmployerRegisterForm(request.POST)
+        print("Employer Register Request")
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save(commit=False)
             user.set_password(user_form.cleaned_data['password'])

@@ -53,7 +53,7 @@ class EmployerProfile(models.Model):
     @receiver(post_save, sender=User)
     def update_user_profile(sender, instance, **kwargs):
         if instance.is_employer:
-            instance.job_seeker_profile.save()
+            instance.employer_profile.save()
 
 
 class Choices:

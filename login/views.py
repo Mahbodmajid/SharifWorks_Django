@@ -69,11 +69,13 @@ def employer_register(request):
 
 
 def job_seeker_login(request):
-    return render(request, 'index.html')
+    # TODO: Validation
+    return render(request, 'job-seeker-home.html')
 
 
 def employer_login(request):
-    return render(request, 'index.html')
+    # TODO: Validation
+    return render(request, 'employer-home.html')
 
 
 def user_posts(request):

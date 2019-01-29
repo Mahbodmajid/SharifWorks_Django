@@ -34,7 +34,7 @@
 {#				<input class="search-field" dir ="ltr" type="text" placeholder="mail@example.com" value=""/>#}
 {#			</div>#}
 
-            <form method="post" class="register" action={% url 'add-job' %}>
+            <form id="job_form" method="post" class="register" action={% url 'add-job' %}>
 
 
 			<!-- Title -->
@@ -154,7 +154,7 @@
 
 
 			<div class="divider margin-top-0"></div>
-			<a href="#" class="button big margin-top-5"> <i class="fa fa-arrow-circle-left"></i> افزودن </a>
+			<a href="javascript:{}" class="button big margin-top-5" onclick="document.getElementById('job_form').submit(); return false;"> <i class="fa fa-arrow-circle-left" ></i> افزودن </a>
             </form>
 
 		</div>

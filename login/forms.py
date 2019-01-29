@@ -49,7 +49,13 @@ class LoginForm(forms.ModelForm):
     password = forms.CharField(label="گذرواژه", widget=forms.PasswordInput)
 
 
-# Other forms ----------------------------------------------------------------------------------------------------------
+# Update Profile forms ------------------------------------------------------------------------------------------------
+
+class JobSeekerProfileForm(forms.ModelForm):
+    class Meta:
+        model = JobSeekerProfile
+        fields = ('bio', 'homepage', 'cv', 'skills')
+
 
 # class AdvertiseForm(forms.ModelForm):
 #     class Meta:

@@ -36,6 +36,7 @@ class JobSeekerProfile(models.Model):
             instance.employer_profile.save()
 
 
+
 class EmployerProfile(models.Model):
     class Meta:
         verbose_name = _('Employer Profile')
@@ -49,7 +50,7 @@ class EmployerProfile(models.Model):
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
-        if created:
+        if created and sender.is_employer:
             JobSeekerProfile.objects.create(user=instance)
 
     @receiver(post_save, sender=User)

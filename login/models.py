@@ -39,21 +39,34 @@ class EmployerProfile(models.Model):
     address = models.CharField(max_length=100)
     # TODO: not finished yet
 
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            JobSeekerProfile.objects.create(user=instance)
 
-class Advertise(models.Model):
-    title = models.CharField(max_length=100)
-    deadline = models.DateField(null=True)
+    @receiver(post_save, sender=User)
+    def update_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
+
+
+class Choices:
     JOBTYPES = (
         ('F', 'Full-Time'),
         ('P', 'Part-Time'),
         ('I', 'Internship'),
         ('L', 'Freelancer')
     )
-    type = models.CharField(max_length=1, choices=JOBTYPES)
 
-    CATS = (
+    JOBCATS = (
         ('DEV', 'Developer'),
     )
 
-    category = models.CharField(max_length=3, choices=CATS)
+
+class Advertise(models.Model):
+    title = models.CharField(max_length=100)
+    deadline = models.DateField(null=True)
+    type = models.CharField(max_length=1, choices=Choices.JOBTYPES)
+    category = models.CharField(max_length=3, choices=Choices.JOBCATS)
+    address = models.CharField(max_length=100, blank=True)
+    description = models.TextField(blank=True)
 

@@ -45,6 +45,7 @@ def employer_register(request):
     if request.method == 'POST':
         user_form = RegisterForm(request.POST)
         profile_form = EmployerRegisterForm(request.POST)
+        print("Employer Register Request")
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save(commit=False)
             user.set_password(user_form.cleaned_data['password'])
@@ -53,6 +54,12 @@ def employer_register(request):
             user.employerprofile.company_type = profile_form.cleaned_data['company_type']
             user.employerprofile.company_disc = profile_form.cleaned_data['company_disc']
             login(request, user)
+            print("Employer Signed In:")
+            print("Username: ", user.username)
+            print("Password: ", user.password)
+            print("company_name: ", user.employerprofile.company_name)
+            print("company_type: ", user.employerprofile.company_type)
+            print("company_disc: ", user.employerprofile.company_disc)
             return redirect('home')  # TODO
         else:
             return redirect('index')  # TODO

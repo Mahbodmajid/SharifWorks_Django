@@ -42,7 +42,7 @@
 
 				<h3 class="margin-bottom-10 margin-top-10">ورود</h3>
 
-				<form method="post" class="login" action="{% url 'employer-home' %}">
+				<form method="post" class="login" action="{% url 'employer-login' %}">
                     {% csrf_token %}
 
                     <p class="form-row form-row-wide">
@@ -77,6 +77,8 @@
 					<h3 class="margin-bottom-10 margin-top-10">ثبت‌نام</h3>
 
 					<form method="post" class="register" action="{% url 'employer-register' %}">
+
+                        {% csrf_token %}
 
 						<p class="form-row form-row-wide">
 							<label for="reg_name">نام شرکت:</label>

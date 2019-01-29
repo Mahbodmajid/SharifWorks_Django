@@ -35,11 +35,11 @@ def job_seeker_register(request):
             # user.jobseekerprofile.bio = profile_form.cleaned_data['bio']
             # user.jobseekerprofile.cv = profile_form.cleaned_data['cv']
             login(request, user)
-            return redirect('job-seeker-home')  # TODO
+            return redirect('job-seeker-home')
         else:
-            return redirect('my-account-job-seeker')  # TODO
+            return redirect('my-account-job-seeker')
     else:
-        return redirect('my-account-job-seeker')  # TODO
+        return redirect('my-account-job-seeker')
 
 
 def employer_register(request):
@@ -61,11 +61,11 @@ def employer_register(request):
             print("company_name: ", user.employerprofile.company_name)
             print("company_type: ", user.employerprofile.company_type)
             print("company_disc: ", user.employerprofile.company_disc)
-            return redirect('home')  # TODO
+            return redirect('employer-home')
         else:
-            return redirect('index')  # TODO
+            return redirect('my-account-employer')
     else:
-        return redirect('index')  # TODO
+        return redirect('my-account-employer')
 
 
 def job_seeker_login(request):

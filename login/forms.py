@@ -9,7 +9,7 @@ class JobSeekerLoginForm(forms.ModelForm):
         model = JobSeekerProfile
         fields = ('email', 'password')
 
-    email = forms.EmailInput(label='ایمیل')
+    email = forms.EmailInput()
     password = forms.CharField(label="گذرواژه", widget=forms.PasswordInput)
 
 
@@ -32,7 +32,7 @@ class JobSeekerRegisterForm(forms.ModelForm):
             raise forms.ValidationError('رمزها همخوانی ندارند.')
 
 
-class ProfileForm(forms.ModelForm):
-    class Meta:
-        model = JobSeekerProfile
-        fields = ('image',)
+# class ProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = JobSeekerProfile
+#         fields = ('image',)

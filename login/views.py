@@ -101,6 +101,7 @@ def resume_page(request):
 
 
 def job_form(request):
+    advertise_form = AdvertiseForm
     return render(request, 'job-form.html', {'register_form': advertise_form})
 
 

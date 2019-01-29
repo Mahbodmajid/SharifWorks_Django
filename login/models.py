@@ -25,15 +25,13 @@ class JobSeekerProfile(models.Model):
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
-        if created and sender.is_jobseeker:
+        if created and instance.is_jobseeker:
             JobSeekerProfile.objects.create(user=instance)
 
     @receiver(post_save, sender=User)
     def update_user_profile(sender, instance, **kwargs):
-        if sender.is_jobseeker:
+        if instance.is_jobseeker:
             instance.job_seeker_profile.save()
-        else:
-            instance.employer_profile.save()
 
 
 
@@ -50,15 +48,13 @@ class EmployerProfile(models.Model):
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
-        if created and sender.is_employer:
+        if created and instance.is_employer:
             JobSeekerProfile.objects.create(user=instance)
 
     @receiver(post_save, sender=User)
     def update_user_profile(sender, instance, **kwargs):
-        if sender.is_jobseeker:
+        ا
             instance.job_seeker_profile.save()
-        else:
-            instance.employer_profile.save()
 
 
 class Choices:

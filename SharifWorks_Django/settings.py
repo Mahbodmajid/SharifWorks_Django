@@ -116,9 +116,12 @@ USE_L10N = True
 USE_TZ = True
 
 AUTH_USER_MODEL = 'login.User'
-
+AUTH_PROFILE_MODULE = 'login.User'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+FILE_URL = '/file/'
+FILE_ROOT = os.path.join(BASE_DIR, 'file')

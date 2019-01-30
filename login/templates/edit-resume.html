@@ -19,6 +19,7 @@
 		<div class="submit-page">
 
             <form method="post" action="{% url "edit-resume" %}" id="edit-resume-form">
+                {% csrf_token %}
 			<!-- Notice -->
 			<!-- <div class="notification notice closeable margin-bottom-40">
 				<p><span>Have an account?</span> If you don’t have an account you can create one below by entering your email address. A password will be automatically emailed to you.</p>
@@ -72,7 +73,7 @@
 {#					</select>#}
 {#				</div>#}
 {#			</div>#}
-                {{ profile_form.skills }}
+{#                {{ profile_form.skills }}#}
 
 
 			<!-- CV -->

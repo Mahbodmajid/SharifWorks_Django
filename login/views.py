@@ -145,7 +145,9 @@ def add_job(request):
         add_job_form = AdvertiseForm(request.POST)
         print("Add Advertisement Request")
         if add_job_form.is_valid():
+            # user = request.user
             advertise = add_job_form.save(commit=False)
+            # advertise.employer = user
             advertise.save()
             print("title: ", advertise.title)
             print("type: ", advertise.type)
@@ -153,6 +155,14 @@ def add_job(request):
             print("deadline: ", advertise.deadline)
             print("description: ", advertise.description)
             print("address: ", advertise.address)
-            return redirect('employer-home')
+            context = {
+                'errors': {},
+                'success': 'آگهی با موفقیت ثبت شد.'
+            }
+            return render(request, "employer-home.html", context)
+        context = {
+            'errors': add_job_form.errors,
+            'success': {}
+        }
         print("Form Not Valid", add_job_form.errors)
-        return redirect('employer-home')
+        return render(request, "job-form.html", context)

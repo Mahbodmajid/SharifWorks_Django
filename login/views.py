@@ -119,19 +119,19 @@ def user_posts(request):
     return render(request, 'index.html', posts)
 
 
-@login_required
+@login_required(login_url='my-account-job-seeker')
 @job_seeker_required
 def job_seeker_home(request):
     return render(request, 'job-seeker-home.html')
 
 
-@login_required
+@login_required(login_url='my-account-employer')
 @employer_required
 def employer_home(request):
     return render(request, 'employer-home.html')
 
 
-@login_required
+@login_required(login_url='my-account-job-seeker')
 @job_seeker_required
 def edit_resume(request):
     if request.method == 'POST':
@@ -148,7 +148,7 @@ def edit_resume(request):
         return render(request, 'edit-resume.html')
 
 
-@login_required
+@login_required(login_url='my-account-job-seeker')
 @job_seeker_required
 def resume_page(request):
     user_form = RegisterForm
@@ -157,7 +157,7 @@ def resume_page(request):
     return render(request, 'resume-page.html', context)
 
 
-@login_required
+@login_required(login_url='my-account-employer')
 @employer_required
 def job_form(request):
     advertise_form = AdvertiseForm
@@ -169,7 +169,7 @@ def logout_view(request):
     return redirect('index')
 
 
-@login_required
+@login_required(login_url='my-account-employer')
 @employer_required
 def add_job(request):
     if request.method == 'POST':

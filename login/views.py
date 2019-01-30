@@ -1,7 +1,7 @@
 from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
-from login.forms import RegisterForm, JobSeekerRegisterForm, EmployerRegisterForm, LoginForm, AdvertiseForm
-from login.models import JobSeekerProfile, EmployerProfile
+from login.forms import RegisterForm, JobSeekerProfileForm, EmployerRegisterForm, LoginForm, AdvertiseForm
+from login.models import JobSeekerProfile, EmployerProfile, Advertise
 from django.contrib.auth import get_user_model
 User = get_user_model()
 # from login.models import Advertise
@@ -122,12 +122,27 @@ def employer_home(request):
     return render(request, 'employer-home.html')
 
 
+# TODO: add decorator (should be logged in)
 def edit_resume(request):
-    return render(request, 'edit-resume.html')
+    if request.method == 'POST':
+        user_form = RegisterForm(request.POST, instance=request.user)
+        profile_form = JobSeekerProfileForm(request.POST, request.FILES, instance=request.user.job_seeker_profile)
+        if profile_form.is_valid() and user_form.is_valid():
+            # user = request.user  # user that is logged in
+            user_form.save()
+            profile_form.save()
+            return redirect('employer-home')
+        else:
+            return redirect('my-account-employer')
+    else:
+        return render(request, 'edit-resume.html')
 
 
 def resume_page(request):
-    return render(request, 'resume-page.html')
+    user_form = RegisterForm
+    profile_form = JobSeekerProfileForm
+    context = {'user_form': user_form, 'profile_form': profile_form}
+    return render(request, 'resume-page.html', context)
 
 
 def job_form(request):

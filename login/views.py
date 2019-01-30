@@ -79,13 +79,33 @@ def employer_register(request):
 
 
 def job_seeker_login(request):
-    # TODO: Validation
-    return render(request, 'job-seeker-home.html')
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    users = User.objects.filter(username=username, is_jobseeker=True)
+    if len(users) == 0:
+        response = {'error': "چنین کاربری وجود ندارد.", 'tab': "1"}
+        return render(request, 'my-account-job-seeker.html', response)
+    elif not users[0].check_password(password):
+        response = {'error': "رمز عبور صحیح نیست.", 'tab': "1"}
+        return render(request, 'my-account-job-seeker.html', response)
+    login(request, users[0])
+    response = {'success': "شما با موفقیت وارد شدید."}
+    return render(request, 'job-seeker-home.html', response)
 
 
 def employer_login(request):
-    # TODO: Validation
-    return render(request, 'employer-home.html')
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    users = User.objects.filter(username=username, is_employer=True)
+    if len(users) == 0:
+        response = {'error': "چنین کاربری وجود ندارد.", 'tab': "1"}
+        return render(request, 'my-account-employer.html', response)
+    elif not users[0].check_password(password):
+        response = {'error': "رمز عبور صحیح نیست.", 'tab': "1"}
+        return render(request, 'my-account-employer.html', response)
+    login(request, users[0])
+    response = {'success': "شما با موفقیت وارد شدید."}
+    return render(request, 'employer-home.html', response)
 
 
 def user_posts(request):
@@ -136,5 +156,19 @@ def logout_view(request):
 
 
 def add_job(request):
-    return None
-
+    if request.method == 'POST':
+        add_job_form = AdvertiseForm(request.POST)
+        print("Add Advertisement Request")
+        if add_job_form.is_valid():
+            advertise = add_job_form.save(commit=False)
+            advertise.save()
+            print("title: ", advertise.title)
+            print("type: ", advertise.type)
+            print("category: ", advertise.category)
+            print("deadline: ", advertise.deadline)
+            print("description: ", advertise.description)
+            print("address: ", advertise.address)
+            return redirect('employer-home')
+        print("Form Not Valid", add_job_form.errors)
+        return redirect('employer-home')
+    return redirect('employer-home')

@@ -38,6 +38,13 @@
             <div class="tabs-container">
                 <!-- Login -->
                 <div class="tab-content" id="tab1" style="display: none;">
+                    {% if error is not None %}
+                        <div class="notification error closeable">
+                            <p><span>خطا!</span> {{ error }}</p>
+                            <a class="close" href="#"></a>
+                        </div>
+                    {% endif %}
+
 
                     <h3 class="margin-bottom-10 margin-top-10">ورود</h3>
 

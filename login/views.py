@@ -1,8 +1,8 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from login.forms import RegisterForm, JobSeekerProfileForm, EmployerRegisterForm, LoginForm, AdvertiseForm
-from login.models import JobSeekerProfile, EmployerProfile, Advertise
+from login.forms import RegisterForm, JobSeekerProfileForm, UpdateUserForm, EmployerRegisterForm, LoginForm, AdvertiseForm
+from login.models import JobSeekerProfile, EmployerProfile, Advertise, Skill
 from django.contrib.auth import get_user_model
 from login.decorators import employer_required, job_seeker_required
 
@@ -138,7 +138,7 @@ def edit_resume(request):
         print(request.POST)
         print(request.user)
         print(type(request.user))
-        user_form = RegisterForm(request.POST, instance=request.user)
+        user_form = UpdateUserForm(request.POST, request.FILES, instance=request.user)
         profile_form = JobSeekerProfileForm(request.POST, request.FILES, instance=request.user.job_seeker_profile)
         if profile_form.is_valid() and user_form.is_valid():
             # user = request.user  # user that is logged in
@@ -146,15 +146,21 @@ def edit_resume(request):
             profile_form.save()
             return redirect('employer-home')
         else:
+            print(user_form.errors)
+            print(profile_form.errors)
             return redirect('my-account-employer')
     else:
-        return render(request, 'edit-resume.html')
+        user_form = UpdateUserForm
+        profile_form = JobSeekerProfileForm
+        skills_choices = Skill.objects.all()
+        context = {'user_form': user_form, 'profile_form': profile_form, "skills_choices": skills_choices}
+        return render(request, 'edit-resume.html', context)
 
 
 @login_required(login_url='my-account-job-seeker')
 @job_seeker_required
 def resume_page(request):
-    user_form = RegisterForm
+    user_form = UpdateUserForm
     profile_form = JobSeekerProfileForm
     context = {'user_form': user_form, 'profile_form': profile_form}
     return render(request, 'resume-page.html', context)

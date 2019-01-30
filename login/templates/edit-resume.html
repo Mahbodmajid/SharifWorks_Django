@@ -67,7 +67,7 @@
 				<div class="select">
 					<h5>مهارت‌ها</h5>
 					<select data-placeholder="انتخاب مهارت‌ها"  name="skills" class="multiselect" multiple="multiple">
-                        {%  for choice in profile_form.skills.choices %}
+                        {%  for choice in skills_choices %}
 						<option value={{ choice.id }}>{{ choice.name }}</option>
                         {%  endfor %}
 					</select>

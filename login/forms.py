@@ -52,12 +52,18 @@ class LoginForm(forms.ModelForm):
 
 # Update Profile forms ------------------------------------------------------------------------------------------------
 
+class UpdateUserForm(forms.ModelForm):
+    class User:
+        model = User
+        fields = ('username', 'first_name', 'last_name')
+
+
 class JobSeekerProfileForm(forms.ModelForm):
     class Meta:
         model = JobSeekerProfile
         fields = ('bio', 'homepage', 'cv', 'skills')
 
-    skills = forms.ModelChoiceField(queryset=Skill.objects.all(), widget=forms.CheckboxSelectMultiple)
+    skills = forms.ModelChoiceField(queryset=Skill.objects.all(), widget=forms.SelectMultiple)
 
 # Advertise forms -----------------------------------------------------------------------------------------------------
 

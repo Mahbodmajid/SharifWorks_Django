@@ -2,7 +2,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from login.forms import RegisterForm, JobSeekerProfileForm, EmployerRegisterForm, LoginForm, AdvertiseForm
-from login.models import JobSeekerProfile, EmployerProfile, Advertise
+from login.models import JobSeekerProfile, EmployerProfile, Advertise, Skill
 from django.contrib.auth import get_user_model
 from login.decorators import employer_required, job_seeker_required
 
@@ -148,7 +148,9 @@ def edit_resume(request):
         else:
             return redirect('my-account-employer')
     else:
-        return render(request, 'edit-resume.html')
+        skills_choices = Skill.objects.all()
+        print(skills_choices)
+        return render(request, 'edit-resume.html', {"skills_choices": skills_choices})
 
 
 @login_required(login_url='my-account-job-seeker')

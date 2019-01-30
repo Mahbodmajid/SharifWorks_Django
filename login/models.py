@@ -78,7 +78,7 @@ class Advertise(models.Model):
     title = models.CharField(max_length=100)
     deadline = models.DateField(null=True)
     type = models.CharField(max_length=1, choices=Choices.JOBTYPES)
-    category = models.CharField(max_length=3, choices=Choices.JOBCATS)
+    category = models.CharField(max_length=3, choices=Choices.JOBCATS, blank=True)
     address = models.CharField(max_length=100, blank=True)
     description = models.TextField(blank=True)
 

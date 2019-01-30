@@ -161,7 +161,7 @@ def resume_page(request):
 @employer_required
 def job_form(request):
     advertise_form = AdvertiseForm
-    return render(request, 'job-form.html', {'register_form': advertise_form})
+    return render(request, 'job-form.html', {'advertise_form': advertise_form})
 
 
 def logout_view(request):

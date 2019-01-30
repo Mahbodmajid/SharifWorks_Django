@@ -1,7 +1,7 @@
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from login.forms import RegisterForm, JobSeekerRegisterForm, EmployerRegisterForm, LoginForm, AdvertiseForm
-from login.models import JobSeekerProfile, EmployerProfile
+from login.models import JobSeekerProfile, EmployerProfile, Advertise
 from django.contrib.auth import get_user_model
 User = get_user_model()
 # from login.models import Advertise

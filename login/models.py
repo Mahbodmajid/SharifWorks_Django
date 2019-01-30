@@ -21,7 +21,7 @@ class JobSeekerProfile(models.Model):
     skills = models.ManyToManyField(Skill, related_name='tags')
     bio = models.TextField(blank=True)
     homepage = models.URLField(blank=True)
-    cv = models.FileField(upload_to='files/cvs', blank=True)
+    cv = models.FileField(upload_to='docs/cvs', blank=True)
 
     # @receiver(post_save, sender=User)
     # def create_user_profile(sender, instance, created, **kwargs):

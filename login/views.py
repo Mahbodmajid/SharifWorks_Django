@@ -154,7 +154,7 @@ def resume_page(request):
     user_form = RegisterForm
     profile_form = JobSeekerProfileForm
     context = {'user_form': user_form, 'profile_form': profile_form}
-    return render(request, 'resume-page.html', context)
+    return render(request, 'edit-resume.html', context)
 
 
 @login_required(login_url='my-account-employer')

@@ -22,7 +22,7 @@ class JobSeekerProfile(models.Model):
     bio = models.TextField(blank=True)
     homepage = models.URLField(blank=True)
     cv = models.FileField(upload_to='docs/cvs', blank=True)
-    address = models.CharField(max_length=100)
+    address = models.CharField(max_length=100, blank=True)
 
     # @receiver(post_save, sender=User)
     # def create_user_profile(sender, instance, created, **kwargs):
@@ -43,7 +43,7 @@ class EmployerProfile(models.Model):
     company_disc = models.TextField()
     company_type = models.BooleanField()  # False: public       True: private
     # founded_date = models.DateField(blank=True)
-    address = models.CharField(max_length=100)
+    address = models.CharField(max_length=100, blank=True)
     # TODO: not finished yet
 
     # @receiver(post_save, sender=User)

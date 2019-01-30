@@ -65,6 +65,14 @@ class AdvertiseForm(forms.ModelForm):
         model = Advertise
         fields = ('title', 'type', 'category', 'deadline', 'description', 'address')
 
-    type = forms.ChoiceField(choices=Choices.JOBTYPES)
-    category = forms.ChoiceField(choices=Choices.JOBCATS)
+    title = forms.CharField(error_messages={'required': 'عنوان کار را وارد کنید.'})
+    type = forms.ChoiceField(choices=Choices.JOBTYPES,
+                             error_messages={'required': 'نوع کار را وارد کنید.',
+                                            'invalid_choice': 'نوع کار معتبر نیست'})
+    category = forms.ChoiceField(choices=Choices.JOBCATS,
+                                 error_messages={'required': 'دسته‌بندی کار را وارد کنید.',
+                                                 'invalid_choice': 'دسته‌بندی کار معتبر نیست'}
+                                 )
+    deadline = forms.DateField(error_messages={'required': 'تاریخ اتمام کار را وارد کنید.',
+                                                 'invalid_choice': 'تاریخ اتمام کار معتبر نیست'})
 

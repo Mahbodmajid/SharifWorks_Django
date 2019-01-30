@@ -1,4 +1,5 @@
 {% extends 'job-seeker-home.html' %}
+{% load staticfiles %}
 
 {% block title %}
     شریف‌کار - ویرایش اطلاعات
@@ -13,7 +14,9 @@
 <!-- Content
 ================================================== -->
 <div class="container">
-	
+
+
+
 	<!-- Submit Page -->
 	<div class="sixteen columns">
 		<div class="submit-page">
@@ -63,15 +66,19 @@
 			<div class="form">
 				<div class="select">
 					<h5>مهارت‌ها</h5>
-					<select data-placeholder="انتخاب مهارت‌ها"  name="skills" class="chosen-select" multiple>
-						<option value="HTML">HTML</option>
-						<option value="Django">Django</option>
-						<option value="Node.js">Node.js</option>
-						<option value="Machine Learning">Machine Learning</option>
-						<option value="UI/UX">UI/UX</option>
-					</select>
+					 <div class="form">
+                        <select class="multiselect" name="skills" multiple="multiple">
+                            <option value="HTML" selected>HTML</option>
+                            <option value="Django">Django</option>
+                            <option value="Node.js" selected>Node.js</option>
+                            <option value="Machine Learning">Machine Learning</option>
+                            <option value="UI/UX">UI/UX</option>
+                        </select>
+                     </div>
 				</div>
 			</div>
+
+
 
 			<!-- CV -->
 			<div class="form">

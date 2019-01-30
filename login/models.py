@@ -41,7 +41,7 @@ class EmployerProfile(models.Model):
     company_name = models.CharField(max_length=10)
     company_disc = models.TextField()
     company_type = models.BooleanField()  # False: public       True: private
-    founded_date = models.DateField(blank=True)
+    # founded_date = models.DateField(blank=True)
     address = models.CharField(max_length=100)
     # TODO: not finished yet
 

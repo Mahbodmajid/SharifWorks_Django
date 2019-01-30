@@ -57,10 +57,13 @@ def employer_register(request):
             user.set_password(user_form.cleaned_data['password'])
             user.is_employer = True
             user.save()
-            employer = EmployerProfile.objects.create(user=user)
-            employer.company_name = profile_form.cleaned_data['company_name']
-            employer.company_type = profile_form.cleaned_data['company_type']
-            employer.company_disc = profile_form.cleaned_data['company_disc']
+            employer = EmployerProfile.objects.create(user=user,
+                                                      company_name=profile_form.cleaned_data['company_name'],
+                                                      company_disc=profile_form.cleaned_data['company_disc'],
+                                                      company_type=profile_form.cleaned_data['company_type'])
+            user.employerprofile.company_name = profile_form.cleaned_data['company_name']
+            user.employerprofile.company_type = profile_form.cleaned_data['company_type']
+            user.employerprofile.company_disc = profile_form.cleaned_data['company_disc']
             login(request, user)
             print("Employer Signed In:")
             print("Username: ", user.username)

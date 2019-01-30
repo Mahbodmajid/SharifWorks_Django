@@ -61,16 +61,16 @@ def employer_register(request):
                                                       company_name=profile_form.cleaned_data['company_name'],
                                                       company_disc=profile_form.cleaned_data['company_disc'],
                                                       company_type=profile_form.cleaned_data['company_type'])
-            user.employerprofile.company_name = profile_form.cleaned_data['company_name']
-            user.employerprofile.company_type = profile_form.cleaned_data['company_type']
-            user.employerprofile.company_disc = profile_form.cleaned_data['company_disc']
+            user.employer_profile.company_name = profile_form.cleaned_data['company_name']
+            user.employer_profile.company_type = profile_form.cleaned_data['company_type']
+            user.employer_profile.company_disc = profile_form.cleaned_data['company_disc']
             login(request, user)
             print("Employer Signed In:")
             print("Username: ", user.username)
             print("Password: ", user.password)
-            print("company_name: ", user.employerprofile.company_name)
-            print("company_type: ", user.employerprofile.company_type)
-            print("company_disc: ", user.employerprofile.company_disc)
+            print("company_name: ", user.employer_profile.company_name)
+            print("company_type: ", user.employer_profile.company_type)
+            print("company_disc: ", user.employer_profile.company_disc)
             return redirect('employer-home')
         else:
             return redirect('my-account-employer')

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from login.models import JobSeekerProfile, EmployerProfile, Advertise, Choices
+from login.models import JobSeekerProfile, EmployerProfile, Advertise, Choices, Skill
 from django.contrib.auth import get_user_model
 User = get_user_model()
 # Register forms -------------------------------------------------------------------------------------------------------
@@ -57,6 +57,8 @@ class JobSeekerProfileForm(forms.ModelForm):
         model = JobSeekerProfile
         fields = ('bio', 'homepage', 'cv', 'skills')
 
+    skills = forms.ModelChoiceField(queryset=Skill.objects.all(), widget=forms.CheckboxSelectMultiple)
+
 # Advertise forms -----------------------------------------------------------------------------------------------------
 
 
@@ -66,10 +68,10 @@ class AdvertiseForm(forms.ModelForm):
         fields = ('title', 'type', 'category', 'deadline', 'description', 'address')
 
     title = forms.CharField(error_messages={'required': 'عنوان کار را وارد کنید.'})
-    type = forms.ChoiceField(choices=Choices.JOBTYPES,
+    type = forms.ChoiceField(choices=Choices.JOBTYPES, widget=forms.SelectMultiple,
                              error_messages={'required': 'نوع کار را وارد کنید.',
                                             'invalid_choice': 'نوع کار معتبر نیست'})
-    category = forms.ChoiceField(choices=Choices.JOBCATS,
+    category = forms.ChoiceField(choices=Choices.JOBCATS, widget=forms.SelectMultiple,
                                  error_messages={'required': 'دسته‌بندی کار را وارد کنید.',
                                                  'invalid_choice': 'دسته‌بندی کار معتبر نیست'}
                                  )

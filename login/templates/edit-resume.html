@@ -1,5 +1,4 @@
 {% extends 'job-seeker-home.html' %}
-{% load staticfiles %}
 
 {% block title %}
     شریف‌کار - ویرایش اطلاعات
@@ -22,6 +21,7 @@
 		<div class="submit-page">
 
             <form method="post" action="{% url "edit-resume" %}" id="edit-resume-form">
+                {% csrf_token %}
 			<!-- Notice -->
 			<!-- <div class="notification notice closeable margin-bottom-40">
 				<p><span>Have an account?</span> If you don’t have an account you can create one below by entering your email address. A password will be automatically emailed to you.</p>
@@ -63,28 +63,23 @@
 			</div>
 
 			<!-- Choose Skill -->
-			<div class="form">
+{#			<div class="form">#}
 				<div class="select">
 					<h5>مهارت‌ها</h5>
-					 <div class="form">
-                        <select class="multiselect" name="skills" multiple="multiple">
-                            <option value="HTML" selected>HTML</option>
-                            <option value="Django">Django</option>
-                            <option value="Node.js" selected>Node.js</option>
-                            <option value="Machine Learning">Machine Learning</option>
-                            <option value="UI/UX">UI/UX</option>
-                        </select>
-                     </div>
+					<select data-placeholder="انتخاب مهارت‌ها"  name="skills" class="multiselect" multiple="multiple">
+                        {%  for choice in profile_form.skills.choices %}
+						<option value={{ choice.id }}>{{ choice.name }}</option>
+                        {%  endfor %}
+					</select>
 				</div>
-			</div>
-
+{#			</div>#}
 
 
 			<!-- CV -->
 			<div class="form">
 				<h5>رزومه </h5>
 				<label class="upload-btn">
-				    <input type="file" multiple name="cv" />
+				    <input type="file"  name="cv" />
 				    <i class="fa fa-upload" dir="rtl" ></i>  انتخاب فایل
 				</label>
 				<span class="fake-input" dir="rtl" >هیچ فایلی انتخاب نشده‌است</span>

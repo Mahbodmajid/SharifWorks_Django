@@ -141,4 +141,18 @@ def logout_view(request):
 
 
 def add_job(request):
-    return None
+    if request.method == 'POST':
+        add_job_form = AdvertiseForm(request.POST)
+        print("Add Advertisement Request")
+        if add_job_form.is_valid():
+            advertise = add_job_form.save(commit=False)
+            advertise.save()
+            print("title: ", advertise.title)
+            print("type: ", advertise.type)
+            print("category: ", advertise.category)
+            print("deadline: ", advertise.deadline)
+            print("description: ", advertise.description)
+            print("address: ", advertise.address)
+            return redirect('employer-home')
+        print("Form Not Valid", add_job_form.errors)
+        return redirect('employer-home')

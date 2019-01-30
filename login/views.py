@@ -160,9 +160,9 @@ def add_job(request):
         add_job_form = AdvertiseForm(request.POST)
         print("Add Advertisement Request")
         if add_job_form.is_valid():
-            # user = request.user
+            user = request.user
             advertise = add_job_form.save(commit=False)
-            # advertise.employer = user
+            advertise.employer_id = user.id
             advertise.save()
             print("title: ", advertise.title)
             print("type: ", advertise.type)

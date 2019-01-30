@@ -1,8 +1,8 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from login.forms import RegisterForm, JobSeekerRegisterForm, EmployerRegisterForm, LoginForm, AdvertiseForm
-from login.models import JobSeekerProfile, EmployerProfile
+from login.forms import RegisterForm, JobSeekerProfileForm, EmployerRegisterForm, LoginForm, AdvertiseForm
+from login.models import JobSeekerProfile, EmployerProfile, Advertise
 from django.contrib.auth import get_user_model
 from login.decorators import employer_required, job_seeker_required
 
@@ -134,13 +134,27 @@ def employer_home(request):
 @login_required
 @job_seeker_required
 def edit_resume(request):
-    return render(request, 'edit-resume.html')
+    if request.method == 'POST':
+        user_form = RegisterForm(request.POST, instance=request.user)
+        profile_form = JobSeekerProfileForm(request.POST, request.FILES, instance=request.user.job_seeker_profile)
+        if profile_form.is_valid() and user_form.is_valid():
+            # user = request.user  # user that is logged in
+            user_form.save()
+            profile_form.save()
+            return redirect('employer-home')
+        else:
+            return redirect('my-account-employer')
+    else:
+        return render(request, 'edit-resume.html')
 
 
 @login_required
 @job_seeker_required
 def resume_page(request):
-    return render(request, 'resume-page.html')
+    user_form = RegisterForm
+    profile_form = JobSeekerProfileForm
+    context = {'user_form': user_form, 'profile_form': profile_form}
+    return render(request, 'resume-page.html', context)
 
 
 @login_required
@@ -162,7 +176,9 @@ def add_job(request):
         add_job_form = AdvertiseForm(request.POST)
         print("Add Advertisement Request")
         if add_job_form.is_valid():
+            user = request.user
             advertise = add_job_form.save(commit=False)
+            advertise.employer_id = user.id
             advertise.save()
             print("title: ", advertise.title)
             print("type: ", advertise.type)
@@ -170,6 +186,14 @@ def add_job(request):
             print("deadline: ", advertise.deadline)
             print("description: ", advertise.description)
             print("address: ", advertise.address)
-            return redirect('employer-home')
+            context = {
+                'errors': {},
+                'success': 'آگهی با موفقیت ثبت شد.'
+            }
+            return render(request, "employer-home.html", context)
+        context = {
+            'errors': add_job_form.errors,
+            'success': {}
+        }
         print("Form Not Valid", add_job_form.errors)
-        return redirect('employer-home')
+        return render(request, "job-form.html", context)

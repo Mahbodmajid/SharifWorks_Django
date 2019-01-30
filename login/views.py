@@ -135,6 +135,9 @@ def employer_home(request):
 @job_seeker_required
 def edit_resume(request):
     if request.method == 'POST':
+        print(request.POST)
+        print(request.user)
+        print(type(request.user))
         user_form = RegisterForm(request.POST, instance=request.user)
         profile_form = JobSeekerProfileForm(request.POST, request.FILES, instance=request.user.job_seeker_profile)
         if profile_form.is_valid() and user_form.is_valid():
@@ -154,7 +157,7 @@ def resume_page(request):
     user_form = RegisterForm
     profile_form = JobSeekerProfileForm
     context = {'user_form': user_form, 'profile_form': profile_form}
-    return render(request, 'edit-resume.html', context)
+    return render(request, 'resume-page.html', context)
 
 
 @login_required(login_url='my-account-employer')

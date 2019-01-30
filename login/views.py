@@ -1,9 +1,14 @@
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from login.forms import RegisterForm, JobSeekerProfileForm, EmployerRegisterForm, LoginForm, AdvertiseForm
 from login.models import JobSeekerProfile, EmployerProfile, Advertise
 from django.contrib.auth import get_user_model
+from login.decorators import employer_required, job_seeker_required
+
 User = get_user_model()
+
+
 # from login.models import Advertise
 
 
@@ -114,15 +119,20 @@ def user_posts(request):
     return render(request, 'index.html', posts)
 
 
+@login_required
+@job_seeker_required
 def job_seeker_home(request):
     return render(request, 'job-seeker-home.html')
 
 
+@login_required
+@employer_required
 def employer_home(request):
     return render(request, 'employer-home.html')
 
 
-# TODO: add decorator (should be logged in)
+@login_required
+@job_seeker_required
 def edit_resume(request):
     if request.method == 'POST':
         user_form = RegisterForm(request.POST, instance=request.user)
@@ -138,6 +148,8 @@ def edit_resume(request):
         return render(request, 'edit-resume.html')
 
 
+@login_required
+@job_seeker_required
 def resume_page(request):
     user_form = RegisterForm
     profile_form = JobSeekerProfileForm
@@ -145,6 +157,8 @@ def resume_page(request):
     return render(request, 'resume-page.html', context)
 
 
+@login_required
+@employer_required
 def job_form(request):
     advertise_form = AdvertiseForm
     return render(request, 'job-form.html', {'register_form': advertise_form})
@@ -155,6 +169,8 @@ def logout_view(request):
     return redirect('index')
 
 
+@login_required
+@employer_required
 def add_job(request):
     if request.method == 'POST':
         add_job_form = AdvertiseForm(request.POST)

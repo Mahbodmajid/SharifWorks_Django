@@ -137,9 +137,11 @@ def edit_resume(request):
     if request.method == 'POST':
         print(request.POST)
         print(request.user)
+        print(request.FILES)
         print(type(request.user))
         user_form = UpdateUserForm(request.POST, request.FILES, instance=request.user)
-        profile_form = JobSeekerProfileForm(request.POST, request.FILES, instance=request.user.job_seeker_profile)
+        print(user_form)
+        profile_form = JobSeekerProfileForm(request.POST, request.FILES, instance=request.user)
         if profile_form.is_valid() and user_form.is_valid():
             # user = request.user  # user that is logged in
             user_form.save()

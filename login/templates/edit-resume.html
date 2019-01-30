@@ -20,7 +20,7 @@
 	<div class="sixteen columns">
 		<div class="submit-page">
 
-            <form method="post" action="{% url "edit-resume" %}" id="edit-resume-form">
+            <form method="post" action="{% url "edit-resume" %}" id="edit-resume-form" enctype="multipart/form-data">
                 {% csrf_token %}
 			<!-- Notice -->
 			<!-- <div class="notification notice closeable margin-bottom-40">

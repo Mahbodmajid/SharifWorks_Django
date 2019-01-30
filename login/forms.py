@@ -53,9 +53,9 @@ class LoginForm(forms.ModelForm):
 # Update Profile forms ------------------------------------------------------------------------------------------------
 
 class UpdateUserForm(forms.ModelForm):
-    class User:
+    class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name')
+        fields = ('first_name', 'last_name')
 
 
 class JobSeekerProfileForm(forms.ModelForm):

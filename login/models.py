@@ -22,6 +22,7 @@ class JobSeekerProfile(models.Model):
     bio = models.TextField(blank=True)
     homepage = models.URLField(blank=True)
     cv = models.FileField(upload_to='docs/cvs', blank=True)
+    address = models.CharField(max_length=100)
 
     # @receiver(post_save, sender=User)
     # def create_user_profile(sender, instance, created, **kwargs):

@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
 from login.forms import RegisterForm, JobSeekerRegisterForm, EmployerRegisterForm, LoginForm, AdvertiseForm
 from login.models import JobSeekerProfile, EmployerProfile
@@ -112,7 +112,7 @@ def job_form(request):
     return render(request, 'job-form.html', {'register_form': advertise_form})
 
 
-def logout(request):
+def logout_view(request):
     logout(request)
     return redirect('index')
 

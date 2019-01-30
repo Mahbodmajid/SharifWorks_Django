@@ -79,13 +79,33 @@ def employer_register(request):
 
 
 def job_seeker_login(request):
-    # TODO: Validation
-    return render(request, 'job-seeker-home.html')
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    users = User.objects.filter(username=username, is_jobseeker=True)
+    if len(users) == 0:
+        response = {'error': "چنین کاربری وجود ندارد.", 'tab': "1"}
+        return render(request, 'my-account-job-seeker.html', response)
+    elif not users[0].check_password(password):
+        response = {'error': "رمز عبور صحیح نیست.", 'tab': "1"}
+        return render(request, 'my-account-job-seeker.html', response)
+    login(request, users[0])
+    response = {'success': "شما با موفقیت وارد شدید."}
+    return render(request, 'job-seeker-home.html', response)
 
 
 def employer_login(request):
-    # TODO: Validation
-    return render(request, 'employer-home.html')
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    users = User.objects.filter(username=username, is_employer=True)
+    if len(users) == 0:
+        response = {'error': "چنین کاربری وجود ندارد.", 'tab': "1"}
+        return render(request, 'my-account-employer.html', response)
+    elif not users[0].check_password(password):
+        response = {'error': "رمز عبور صحیح نیست.", 'tab': "1"}
+        return render(request, 'my-account-employer.html', response)
+    login(request, users[0])
+    response = {'success': "شما با موفقیت وارد شدید."}
+    return render(request, 'employer-home.html', response)
 
 
 def user_posts(request):

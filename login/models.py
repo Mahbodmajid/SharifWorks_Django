@@ -69,8 +69,11 @@ class Choices:
     )
 
 
+DEFAULT_EMP_ID = 1
+
+
 class Advertise(models.Model):
-    # employer = models.ForeignKey(User, on_delete=models.CASCADE)
+    employer = models.ForeignKey(User, on_delete=models.CASCADE, default=DEFAULT_EMP_ID)
     title = models.CharField(max_length=100)
     deadline = models.DateField(null=True)
     type = models.CharField(max_length=1, choices=Choices.JOBTYPES)

@@ -55,7 +55,7 @@ class LoginForm(forms.ModelForm):
 class UpdateUserForm(forms.ModelForm):
     class User:
         model = User
-        fields = ('username', 'first_name', 'last_name')
+        fields = ('first_name', 'last_name')
 
 
 class JobSeekerProfileForm(forms.ModelForm):

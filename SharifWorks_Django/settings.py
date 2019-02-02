@@ -124,8 +124,8 @@ AUTH_PROFILE_MODULE = 'login.User'
 STATIC_URL = '/static/'
 
 
-FILE_URL = '/file/'
-FILE_ROOT = os.path.join(BASE_DIR, 'file')
+FILE_URL = '/files/'
+FILE_ROOT = os.path.join(BASE_DIR, 'files')
 
 LOGIN_URL='index'
 

@@ -22,6 +22,7 @@
 
             <form method="post" action="{% url "edit-resume" %}" id="edit-resume-form" enctype="multipart/form-data">
                 {% csrf_token %}
+
 			<!-- Notice -->
 			<!-- <div class="notification notice closeable margin-bottom-40">
 				<p><span>Have an account?</span> If you don’t have an account you can create one below by entering your email address. A password will be automatically emailed to you.</p>
@@ -67,8 +68,8 @@
 				<div class="select">
 					<h5>مهارت‌ها</h5>
 					<select data-placeholder="انتخاب مهارت‌ها"  name="skills" class="multiselect" multiple="multiple">
-                        {%  for choice in skills_choices %}
-						<option value={{ choice.id }}>{{ choice.name }}</option>
+                        {%  for choice in profile_form.skills.field.queryset %}
+						<option value="{{ choice.id }}">{{ choice.name }}</option>
                         {%  endfor %}
 					</select>
 				</div>

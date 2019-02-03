@@ -143,19 +143,19 @@ def edit_resume(request):
         print(user_form)
         profile_form = JobSeekerProfileForm(request.POST, request.FILES, instance=request.user)
         if profile_form.is_valid() and user_form.is_valid():
+
             # user = request.user  # user that is logged in
-            user_form.save()
-            profile_form.save()
+            # user_form.save()
+            profile_form.save_m2m()
             return redirect('employer-home')
         else:
-            print(user_form.errors)
+            # print(user_form.errors)
             print(profile_form.errors)
             return redirect('my-account-employer')
     else:
         user_form = UpdateUserForm
         profile_form = JobSeekerProfileForm
-        skills_choices = Skill.objects.all()
-        context = {'user_form': user_form, 'profile_form': profile_form, "skills_choices": skills_choices}
+        context = {'user_form': user_form, 'profile_form': profile_form}
         return render(request, 'edit-resume.html', context)
 
 

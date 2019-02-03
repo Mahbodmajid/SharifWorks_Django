@@ -18,7 +18,7 @@ class JobSeekerProfile(models.Model):
     class Meta:
         verbose_name = _('Job Seeker Profile')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="job_seeker_profile")
-    skills = models.ManyToManyField(Skill, related_name='tags')
+    skills = models.ManyToManyField(Skill, related_name='skills')
     bio = models.TextField(blank=True)
     homepage = models.URLField(blank=True)
     cv = models.FileField(upload_to='files/cvs', blank=True)

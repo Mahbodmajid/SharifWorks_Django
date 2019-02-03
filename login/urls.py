@@ -12,6 +12,7 @@ urlpatterns = [
     path('jobseeker/home/', views.job_seeker_home, name="job-seeker-home"),
     path('jobseeker/edit/', views.edit_resume, name="edit-resume"),
     path('jobseeker/profile/', views.resume_page, name="resume-page"),
+    path('jobseeker/browse-jobs/', views.borwse_jobs, name="browse-jobs"),
     path('employer/home/', views.employer_home, name="employer-home"),
     path('employer/job-form/', views.job_form, name="job-form"),
     path('employer/add-job/', views.add_job, name="add-job"),

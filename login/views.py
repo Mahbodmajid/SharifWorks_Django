@@ -208,3 +208,7 @@ def add_job(request):
         }
         print("Form Not Valid", add_job_form.errors)
         return render(request, "job-form.html", context)
+
+
+def borwse_jobs(request):
+    return render(request, 'browse-jobs.html')

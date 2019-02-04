@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from login.models import JobSeekerProfile, EmployerProfile, Advertise, Choices, Skill
+from login.models import JobSeekerProfile, EmployerProfile, Advertise, Choices, Skill, Comment, JobReq
 from django.contrib.auth import get_user_model
 User = get_user_model()
 # Register forms -------------------------------------------------------------------------------------------------------
@@ -85,4 +85,13 @@ class AdvertiseForm(forms.ModelForm):
                                                'invalid': 'تاریخ اتمام کار معتبر نیست'})
 
 
+class JobReqForm(forms.ModelForm):
+    class Meta:
+        model = JobReq
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('description', 'rate',)
 

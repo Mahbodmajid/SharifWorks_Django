@@ -13,6 +13,7 @@ from login.decorators import employer_required, job_seeker_required
 
 User = get_user_model()
 
+
 # from login.models import Advertise
 
 
@@ -200,7 +201,7 @@ def add_job(request):
             user = request.user
             advertise = add_job_form.save(commit=False)
             advertise.employer_id = user.id
-            advertise.save()
+            # advertise.save()
             print("title: ", advertise.title)
             print("type: ", advertise.type)
             print("category: ", advertise.category)
@@ -264,7 +265,12 @@ def browse_jobs(request):
     skills = request.GET.getlist('skills')
     print("Ad Search. city: ", city, "skills: ", skills)
     search_form = AdvertiseSearchForm
-    context = {'search_form': search_form}
+    related_advs = []
+    for adv in Advertise.objects.all():  # TODO: search based on skills
+        if adv.city == city:
+            related_advs.append(adv)
+
+    context = {'search_form': search_form, 'advs': related_advs}
     return render(request, 'browse-jobs.html', context)
 
 
@@ -301,12 +307,16 @@ def profile_view(request):
         context = {'error': 'کاربر مورد نظر یافت نشد.'}
         return render(request, 'error_page.html', context)
     else:
-        profile_contents = query_user[0]
-        context = {'profile': profile_contents}
-        if profile_contents.is_jobseeker:
-            return render(request, 'employer-profile.html', context)
-        else:
+        profile_contents = None
+        if query_user[0].is_jobseeker:
+            profile_contents = JobSeekerProfile.objects.get(user_id=user_id)
+            context = {'profile': profile_contents}
             return render(request, 'job-seeker-profile.html', context)
+
+        elif query_user[0].is_employer:
+            profile_contents = EmployerProfile.objects.filter(user_id=user_id)
+            context = {'profile': profile_contents}
+            return render(request, 'employer-profile.html', context)
 
 
 @login_required(login_url='login')

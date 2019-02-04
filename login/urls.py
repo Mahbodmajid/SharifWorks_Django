@@ -3,18 +3,17 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('accounts/jobseeker/', views.my_account_job_seeker, name="my-account-job-seeker"),
-    path('accounts/employer/', views.my_account_employer, name="my-account-employer"),
-    path('accounts/jobseeker/register/', views.job_seeker_register, name="job-seeker-register"),
-    path('accounts/employer/register/', views.employer_register, name="employer-register"),
-    path('accounts/jobseeker/login/', views.job_seeker_login, name="job-seeker-login"),
-    path('accounts/employer/login/', views.employer_login, name="employer-login"),
-    path('jobseeker/home/', views.job_seeker_home, name="job-seeker-home"),
-    path('jobseeker/edit/', views.edit_resume, name="edit-resume"),
-    path('jobseeker/profile/', views.resume_page, name="resume-page"),
-    path('employer/home/', views.employer_home, name="employer-home"),
-    path('employer/profile/', views.employer_profile, name="employer-profile"),
-    path('employer/job-form/', views.job_form, name="job-form"),
-    path('employer/add-job/', views.add_job, name="add-job"),
-    path('accounts/logout/', views.logout_view, name="logout")
+
+    # POST REQUESTS:
+    path('jobseeker/', views.job_seeker_register, name="job-seeker-register"),
+    path('employer/', views.employer_register, name="employer-register"),
+    path('login/', views.login_view, name="login"),
+
+    path('home/', views.home, name="home"),
+    path('edit-resume/', views.edit_resume, name="edit-resume"),
+    path('profile/', views.resume_page, name="resume-page"),
+    path('add-job/', views.add_job, name="add-job"),
+    path('logout/', views.logout_view, name="logout"),
+
+    path('browse-jobs/', views.browse_jobs, name="browse-jobs"),
 ]

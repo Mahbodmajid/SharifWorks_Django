@@ -3,164 +3,125 @@
 
 {% block content %}
 
-<!-- Titlebar
-================================================== -->
-<div id="titlebar" class="single">
-	<div class="container">
+    <!-- Titlebar
+    ================================================== -->
+    <div id="titlebar" class="single">
+        <div class="container">
 
-		<div class="sixteen columns">
-			<h2>حساب کاربری کارفرما</h2>
-			<nav id="breadcrumbs">
-				<ul>
-					<li>شما اینجا هستید:</li>
-					<li><a href="{% url 'index' %}">خانه</a></li>
-					<li class="pi">حساب کاربری کارفرما</li>
-				</ul>
-			</nav>
-		</div>
+            <div class="sixteen columns">
+                <h2>حساب کاربری کارفرما</h2>
+                <nav id="breadcrumbs">
+                    <ul>
+                        <li>شما اینجا هستید:</li>
+                        <li><a href="{% url 'index' %}">خانه</a></li>
+                        <li class="pi">حساب کاربری کارفرما</li>
+                    </ul>
+                </nav>
+            </div>
 
-	</div>
-</div>
-
-
-<!-- Content
-================================================== -->
-
-<!-- Container -->
-<div class="container">
-
-	<div class="my-account">
-
-		<ul class="tabs-nav">
-			<li class=""><a href="#tab1"><i class="fa fa-lock"></i> ورود</a></li>
-			<li><a href="#tab2"><i class="fa fa-user"></i> ثبت‌نام</a></li>
-		</ul>
-
-		<div class="tabs-container">
-			<!-- Login -->
-			<div class="tab-content" id="tab1" style="display: none;">
-
-				<h3 class="margin-bottom-10 margin-top-10">ورود</h3>
-
-				<form method="post" class="login" action="{% url 'employer-login' %}">
-                    {% csrf_token %}
-
-                    <p class="form-row form-row-wide">
-                        <label for="username">ایمیل:</label>
-                        <input dir= "ltr" type="email" class="input-text" name="username" id="username" value="" />
-                    </p>
-
-                    <p class="form-row form-row-wide">
-                        <label for="password">گذرواژه:</label>
-                        <input dir= "ltr" class="input-text" type="password" name="password" id="password" />
-                    </p>
+        </div>
+    </div>
 
 
-					<p class="form-row">
-						<input type="submit" class="button" name="login" value="ورود" />
+    <!-- Content
+    ================================================== -->
 
-						<label for="rememberme" class="rememberme">
-						<input name="rememberme" type="checkbox" id="rememberme" value="forever" /> مرا به‌خاطر بسپار</label>
-					</p>
+    <!-- Container -->
+    <div class="container">
 
-					<p class="lost_password">
-						<a href="my-account-employer-forget-pass.html" >فراموشی رمز عبور</a>
-					</p>
+        <div class="my-account">
+            {% if error is not None %}
+                <div class="notification error closeable">
+                    <p><span>خطا!</span> {{ error }}</p>
+                    <a class="close" href="#"></a>
+                </div>
+            {% endif %}
 
-					
-				</form>
-			</div>
+            <h3 class="margin-bottom-10 margin-top-10">ثبت‌نام</h3>
 
-				<!-- Register -->
-				<div class="tab-content" id="tab2" style="display: none;">
+            <form method="post" class="register" action="{% url 'employer-register' %}">
 
-					<h3 class="margin-bottom-10 margin-top-10">ثبت‌نام</h3>
+                {% csrf_token %}
 
-					<form method="post" class="register" action="{% url 'employer-register' %}">
+                <p class="form-row form-row-wide">
+                    <label for="reg_name">نام شرکت:</label>
+                    <input type="text" class="input-text" name="company_name" id="reg_name" value=""/>
+                </p>
 
-                        {% csrf_token %}
+                <script>
+                    $('input.limited').maxlength({
+                        alwaysShow: true,
+                        threshold: 10,
+                        warningClass: "label label-success",
+                        limitReachedClass: "label label-danger",
+                        separator: ' of ',
+                        preText: 'You have ',
+                        postText: ' chars remaining.',
+                        validate: true
+                    });
+                </script>
 
-						<p class="form-row form-row-wide">
-							<label for="reg_name">نام شرکت:</label>
-							<input type="text" class="input-text" name="company_name" id="reg_name" value="" />
-						</p>
+                <div class="form-group">
+                    <label for="reg_brief_description">کمی توضیح درباره‌ی شرکت(حداکثر ۱۰۰ کاراکتر):</label>
+                    <textarea class="form-control limited" id="reg_brief_description" name="company_disc" rows="3"
+                              maxlength="100"></textarea>
+                </div>
 
-						<script>
-							$('input.limited').maxlength({
-								alwaysShow: true,
-								threshold: 10,
-								warningClass: "label label-success",
-								limitReachedClass: "label label-danger",
-								separator: ' of ',
-								preText: 'You have ',
-								postText: ' chars remaining.',
-								validate: true
-							});
-						</script>
+                <p class="form-row form-row-wide">
+                    <label for="reg_is_public">نوع شرکت:</label>
+                    <select class="form-control" id="reg_is_public" name="company_type">
+                        <option>خصوصی</option>
+                        <option>دولتی</option>
+                    </select>
+                </p>
 
-						<div class="form-group">
-							<label for="reg_brief_description">کمی توضیح درباره‌ی شرکت(حداکثر ۱۰۰ کاراکتر):</label>
-							<textarea class="form-control limited" id="reg_brief_description" name="company_disc" rows="3" maxlength="100"></textarea>
-						</div>
+                {#						<p class="form-row form-row-wide">#}
+                {#							<label for="reg_constitution_year">سال ساخت شرکت:</label>#}
+                {#							<select id="reg_constitution_year" style="width:100%;" class="form-control selectWidth" >#}
+                {#								<option>1397</option>#}
+                {#								<option>1396</option>#}
+                {#								<option>1395</option>#}
+                {#								<option>1394</option>#}
+                {#								<option>1393</option>#}
+                {#								<option>1392</option>#}
+                {#								<option>1391</option>#}
+                {#								<option>1390</option>#}
+                {#								<option>1389</option>#}
+                {#								<option>1388</option>#}
+                {#								<option>1387</option>#}
+                {#								<option>1386</option>#}
+                {#								<option>1385</option>#}
+                {#								<option>1384</option>#}
+                {#								<option>1383</option>#}
+                {#								<option>1382</option>#}
+                {#								<option>1381</option>#}
+                {#							</select>#}
+                {#						</p>#}
 
-						<p class="form-row form-row-wide">
-							<label for="reg_is_public">نوع شرکت:</label>
-							<select class="form-control" id="reg_is_public" name="company_type">
-								<option>خصوصی</option>
-								<option>دولتی</option>
-							</select>
-						</p>
-
-{#						<p class="form-row form-row-wide">#}
-{#							<label for="reg_constitution_year">سال ساخت شرکت:</label>#}
-{#							<select id="reg_constitution_year" style="width:100%;" class="form-control selectWidth" >#}
-{#								<option>1397</option>#}
-{#								<option>1396</option>#}
-{#								<option>1395</option>#}
-{#								<option>1394</option>#}
-{#								<option>1393</option>#}
-{#								<option>1392</option>#}
-{#								<option>1391</option>#}
-{#								<option>1390</option>#}
-{#								<option>1389</option>#}
-{#								<option>1388</option>#}
-{#								<option>1387</option>#}
-{#								<option>1386</option>#}
-{#								<option>1385</option>#}
-{#								<option>1384</option>#}
-{#								<option>1383</option>#}
-{#								<option>1382</option>#}
-{#								<option>1381</option>#}
-{#							</select>#}
-{#						</p>#}
-
-						<p class="form-row form-row-wide">
-							<label for="reg_email">ایمیل:</label>
-							<input dir= "ltr"  type="email" class="input-text" name="username" id="reg_email" value="" />
-						</p>
+                <p class="form-row form-row-wide">
+                    <label for="reg_email">ایمیل:</label>
+                    <input dir="ltr" type="email" class="input-text" name="username" id="reg_email" value=""/>
+                </p>
 
 
+                <p class="form-row form-row-wide">
+                    <label for="reg_password">گذرواژه:</label>
+                    <input dir="ltr" type="password" class="input-text" name="password" id="reg_password"/>
+                </p>
 
-						<p class="form-row form-row-wide">
-							<label for="reg_password">گذرواژه:</label>
-							<input dir= "ltr" type="password" class="input-text" name="password" id="reg_password" />
-						</p>
-
-						<p class="form-row form-row-wide">
-							<label for="reg_password2">تکرار گذرواژه:</label>
-							<input dir= "ltr" type="password" class="input-text" name="password2" id="reg_password2" />
-						</p>
-
-									
-						<p class="form-row">
-							<input type="submit" class="button" name="register" value="ثبت‌نام" />
-						</p>
+                <p class="form-row form-row-wide">
+                    <label for="reg_password2">تکرار گذرواژه:</label>
+                    <input dir="ltr" type="password" class="input-text" name="password2" id="reg_password2"/>
+                </p>
 
 
-					</form>
-				</div>
-		</div>
-	</div>
-</div>
+                <p class="form-row">
+                    <input type="submit" class="button" name="register" value="ثبت‌نام"/>
+                </p>
 
-{%  endblock %}
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

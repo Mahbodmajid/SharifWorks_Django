@@ -15,6 +15,7 @@ User = get_user_model()
 
 
 def index(request):
+<<<<<<< HEAD
     sessions = Session.objects.filter(expire_date__gte=timezone.now())
     uid_list = []
 
@@ -41,14 +42,14 @@ def my_account_job_seeker(request):
     context = {'login_form': login_form, 'register_form': register_form}
     return render(request, 'my-account-job-seeker.html', context)
 
+=======
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        return render(request, 'index.html')
+>>>>>>> ebbba4908f61abbe7f5f6e258fac3decb683af01
 
-def my_account_employer(request):
-    login_form = LoginForm
-    register_form = RegisterForm
-    employer_register_form = EmployerRegisterForm
-    context = {'login_form': login_form, 'register_form': register_form,
-               'employer_register_form': employer_register_form}
-    return render(request, 'my-account-employer.html', context)
+# register
 
 
 def job_seeker_register(request):
@@ -64,11 +65,17 @@ def job_seeker_register(request):
             # user.jobseekerprofile.bio = profile_form.cleaned_data['bio']
             # user.jobseekerprofile.cv = profile_form.cleaned_data['cv']
             login(request, user)
-            return redirect('job-seeker-home')
+            return redirect('home')
         else:
-            return redirect('my-account-job-seeker')
+
+            return redirect('job-seeker-register')
     else:
-        return redirect('my-account-job-seeker')
+        if request.user.is_authenticated:
+            return redirect('home')
+        else:
+            register_form = RegisterForm
+            context = {'register_form': register_form}
+            return render(request, 'my-account-job-seeker.html', context)
 
 
 def employer_register(request):
@@ -99,37 +106,58 @@ def employer_register(request):
         else:
             return redirect('my-account-employer')
     else:
-        return redirect('my-account-employer')
+        if request.user.is_authenticated:
+            return redirect('home')
+        else:
+            register_form = RegisterForm
+            employer_register_form = EmployerRegisterForm
+            context = {'register_form': register_form,
+                       'employer_register_form': employer_register_form}
+            return render(request, 'my-account-employer.html', context)
+
+# login
 
 
 def job_seeker_login(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    users = User.objects.filter(username=username, is_jobseeker=True)
-    if len(users) == 0:
-        response = {'error': "چنین کاربری وجود ندارد.", 'tab': "1"}
-        return render(request, 'my-account-job-seeker.html', response)
-    elif not users[0].check_password(password):
-        response = {'error': "رمز عبور صحیح نیست.", 'tab': "1"}
-        return render(request, 'my-account-job-seeker.html', response)
-    login(request, users[0])
-    response = {'success': "شما با موفقیت وارد شدید."}
-    return render(request, 'job-seeker-home.html', response)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        users = User.objects.filter(username=username, is_jobseeker=True)
+        if len(users) == 0:
+            response = {'error': "چنین کاربری وجود ندارد.", 'tab': "1"}
+            return render(request, 'my-account-job-seeker.html', response)
+        elif not users[0].check_password(password):
+            response = {'error': "رمز عبور صحیح نیست.", 'tab': "1"}
+            return render(request, 'my-account-job-seeker.html', response)
+        login(request, users[0])
+        response = {'success': "شما با موفقیت وارد شدید."}
+        return render(request, 'job-seeker-home.html', response)
+    else:
+        if request.user.is_authenticated:
+            return redirect('home')
+        else:
+            return redirect('job-seeker-register')
 
 
 def employer_login(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    users = User.objects.filter(username=username, is_employer=True)
-    if len(users) == 0:
-        response = {'error': "چنین کاربری وجود ندارد.", 'tab': "1"}
-        return render(request, 'my-account-employer.html', response)
-    elif not users[0].check_password(password):
-        response = {'error': "رمز عبور صحیح نیست.", 'tab': "1"}
-        return render(request, 'my-account-employer.html', response)
-    login(request, users[0])
-    response = {'success': "شما با موفقیت وارد شدید."}
-    return render(request, 'employer-home.html', response)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        users = User.objects.filter(username=username, is_employer=True)
+        if len(users) == 0:
+            response = {'error': "چنین کاربری وجود ندارد.", 'tab': "1"}
+            return render(request, 'my-account-employer.html', response)
+        elif not users[0].check_password(password):
+            response = {'error': "رمز عبور صحیح نیست.", 'tab': "1"}
+            return render(request, 'my-account-employer.html', response)
+        login(request, users[0])
+        response = {'success': "شما با موفقیت وارد شدید."}
+        return render(request, 'employer-home.html', response)
+    else:
+        if request.user.is_authenticated:
+            return redirect('home')
+        else:
+            return redirect('employer-register')
 
 
 def user_posts(request):
@@ -138,19 +166,7 @@ def user_posts(request):
     return render(request, 'index.html', posts)
 
 
-@login_required(login_url='my-account-job-seeker')
-@job_seeker_required
-def job_seeker_home(request):
-    return render(request, 'job-seeker-home.html')
-
-
-@login_required(login_url='my-account-employer')
-@employer_required
-def employer_home(request):
-    return render(request, 'employer-home.html')
-
-
-@login_required(login_url='my-account-job-seeker')
+@login_required(login_url='login')
 @job_seeker_required
 def edit_resume(request):
     if request.method == 'POST':
@@ -170,7 +186,7 @@ def edit_resume(request):
         else:
             # print(user_form.errors)
             print(profile_form.errors)
-            return redirect('my-account-employer')
+            return redirect('login')
     else:
         user_form = UpdateUserForm
         profile_form = JobSeekerProfileForm
@@ -178,7 +194,7 @@ def edit_resume(request):
         return render(request, 'edit-resume.html', context)
 
 
-@login_required(login_url='my-account-job-seeker')
+@login_required(login_url='login')
 @job_seeker_required
 def resume_page(request):
     user_form = UpdateUserForm
@@ -187,19 +203,13 @@ def resume_page(request):
     return render(request, 'resume-page.html', context)
 
 
-@login_required(login_url='my-account-employer')
-@employer_required
-def job_form(request):
-    advertise_form = AdvertiseForm
-    return render(request, 'job-form.html', {'advertise_form': advertise_form})
-
-
 def logout_view(request):
-    logout(request)
+    if request.user.is_authenticated:
+        logout(request)
     return redirect('index')
 
 
-@login_required(login_url='my-account-employer')
+@login_required(login_url='login')
 @employer_required
 def add_job(request):
     if request.method == 'POST':
@@ -217,17 +227,61 @@ def add_job(request):
             print("description: ", advertise.description)
             print("address: ", advertise.address)
             context = {
-                'errors': {},
                 'success': 'آگهی با موفقیت ثبت شد.'
             }
-            return render(request, "employer-home.html", context)
+            return render(request, "job-form.html", context)
         context = {
             'errors': add_job_form.errors,
-            'success': {}
+            'before': {
+                'title': request.POST.get("title"),
+                'type': request.POST.get("type"),
+                'category': request.POST.get("category"),
+                'deadline': request.POST.get("deadline"),
+                'description': request.POST.get("description"),
+                'address': request.POST.get("address")
+            }
         }
         print("Form Not Valid", add_job_form.errors)
         return render(request, "job-form.html", context)
+    elif request.method == 'GET':
+        advertise_form = AdvertiseForm
+        return render(request, 'job-form.html', {'advertise_form': advertise_form})
+
+
+@login_required(login_url='login')
+def home(request, response=None):
+    if request.user.is_jobseeker is True:
+        return render(request, 'job-seeker-home.html', response)
+    else:
+        return render(request, 'employer-home.html', response)
+
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        users = User.objects.filter(username=username)
+        if len(users) == 0:
+            response = {'error': "چنین کاربری وجود ندارد."}
+            return render(request, 'login.html', response)
+        elif not users[0].check_password(password):
+            response = {'error': "رمز عبور صحیح نیست."}
+            return render(request, 'login.html', response)
+        user = users[0]
+        login(request, user)
+        response = {'success': "شما با موفقیت وارد شدید."}
+        return home(request, response)
+    else:
+        if request.user.is_authenticated:
+            return redirect('home')
+        else:
+            return render(request, 'login.html')
+
+
+def browse_jobs(request):
+    return render(request, 'browse-jobs.html')
 
 
 def employer_profile(request):
     return render(request, 'employer-profile.html', {})
+

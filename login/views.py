@@ -4,7 +4,7 @@ from django.contrib.sessions.models import Session
 from django.shortcuts import render, redirect
 from django.utils import timezone
 
-from login.forms import RegisterForm, JobSeekerProfileForm, UpdateUserForm, EmployerRegisterForm, LoginForm, AdvertiseForm
+from login.forms import RegisterForm, JobSeekerProfileForm, UpdateUserForm, EmployerRegisterForm, AdvertiseForm, CommentForm
 from login.models import JobSeekerProfile, EmployerProfile, Advertise, Skill
 from django.contrib.auth import get_user_model
 from login.decorators import employer_required, job_seeker_required
@@ -271,5 +271,14 @@ def browse_jobs(request):
 
 
 def employer_profile(request):
-    return render(request, 'employer-profile.html', {})
-
+    if request.method == "GET":
+        id = request.body  # TODO
+        employer = EmployerProfile.objects.get(id)
+        return render(request, 'employer-profile.html', {'employer': employer})
+    elif request.method == "POST":
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            # comment.job_seeker =
+            # comment.employer =
+            # return redirect('home')

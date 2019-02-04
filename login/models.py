@@ -17,6 +17,7 @@ class Skill(models.Model):
 class JobSeekerProfile(models.Model):
     class Meta:
         verbose_name = _('Job Seeker Profile')
+
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="job_seeker_profile")
     skills = models.ManyToManyField(Skill, related_name='skills')
     bio = models.TextField(blank=True)
@@ -38,11 +39,13 @@ class JobSeekerProfile(models.Model):
 class EmployerProfile(models.Model):
     class Meta:
         verbose_name = _('Employer Profile')
+
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="employer_profile")
     company_name = models.CharField(max_length=10)
     company_disc = models.TextField()
     company_type = models.BooleanField()  # False: public       True: private
     # founded_date = models.DateField(blank=True)
+    homepage = models.URLField(blank=True)
     address = models.CharField(max_length=100, blank=True)
     # TODO: not finished yet
 
@@ -86,7 +89,7 @@ DEFAULT_EMP_ID = 1
 
 
 class Advertise(models.Model):
-    employer = models.ForeignKey(User, on_delete=models.CASCADE, default=DEFAULT_EMP_ID)
+    employer = models.ForeignKey(EmployerProfile, on_delete=models.CASCADE, default=DEFAULT_EMP_ID)
     title = models.CharField(max_length=100)
     deadline = models.DateField(null=True)
     type = models.CharField(max_length=1, choices=Choices.JOBTYPES)
@@ -98,4 +101,5 @@ class Advertise(models.Model):
 
 class JobReq(models.Model):
     advertise = models.ForeignKey(Advertise, on_delete=models.CASCADE)
-    job_seeker = models.ForeignKey(User, on_delete=models.CASCADE)
+    job_seeker = models.ForeignKey(JobSeekerProfile, on_delete=models.CASCADE)
+    state = models.IntegerField(default=0)  # 0: applied     1: accepted        2: rejected

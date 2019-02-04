@@ -2814,7 +2814,6 @@ img.mfp-img {
 .resumes-list .resumes-list-content,
 .job-list .job-list-content {
 	display: block;
-	margin-right: 125px;
 	position: relative;
 }
 
@@ -5153,6 +5152,8 @@ div.sceditor-group:first-child {
 .submit-page h5 span {  color: #888; }
 
 .submit-page .form { margin-bottom: 34px; }
+
+.search-page .form { margin-bottom: 18px; }
 
 .submit-page .form .note {
 	margin-top: 9px;

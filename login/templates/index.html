@@ -75,8 +75,10 @@
 	</div>
 </div>
 </header>
-<div class="clearfix"></div>
 
+{% block titlebar %}
+<div class="clearfix"></div>
+{% endblock %}
 {% block content %}
 
 
@@ -189,6 +191,9 @@
 <script src="{%  static "scripts/jquery.counterup.min.js" %}"></script>
 <script src="{%  static "scripts/jquery.jpanelmenu.js" %}"></script>
 <script src="{%  static "scripts/stacktable.js" %}"></script>
+
+{% block scripts %}
+{% endblock %}
 
 
 </body>

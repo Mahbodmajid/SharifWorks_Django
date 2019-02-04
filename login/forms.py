@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 
 from login.models import JobSeekerProfile, EmployerProfile, Advertise, Choices, Skill, Comment, JobReq
 from django.contrib.auth import get_user_model
@@ -83,6 +84,20 @@ class AdvertiseForm(forms.ModelForm):
                                  )
     deadline = forms.DateField(error_messages={'required': 'تاریخ اتمام کار را وارد کنید.',
                                                'invalid': 'تاریخ اتمام کار معتبر نیست'})
+
+
+# class JobReqForm(forms.ModelForm):
+#     class Meta:
+#         model = JobReq
+
+class AdvertiseSearchForm(forms.ModelForm):
+    class Meta:
+        fields = ('city', 'skills')
+
+    skills = forms.ModelChoiceField(queryset=Skill.objects.all(), widget=forms.SelectMultiple)
+    city = forms.CharField()
+
+
 
 
 class CommentForm(forms.ModelForm):

@@ -323,7 +323,7 @@ def profile_view(request):
 def comment_view(request):
     return None
 
-
+@login_required(login_url='login')
 def job_view(request):
     if request.method == "POST":
         adv_id = request.POST.get('advertise_id')
@@ -331,3 +331,11 @@ def job_view(request):
         job_req = JobReq.objects.create(advertise_id=adv_id, job_seeker_id=request.user.id)
     return render(request, 'job-page.html', {'advertise': advertise})
 
+
+@login_required(login_url='login')
+def job_requests_view(request):
+    if request.method == "POST":
+        pass
+    elif request.method == "GET":
+        user_id = request.GET.get("user_id", "")
+        return render(request, 'job-page.html', {'employer': EmployerProfile.objects.get(user_id)})

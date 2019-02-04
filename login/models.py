@@ -57,6 +57,13 @@ class EmployerProfile(models.Model):
     #         instance.employer_profile.save()
 
 
+class Comment(models.Model):
+    employer = models.ForeignKey(EmployerProfile, on_delete=models.CASCADE())
+    job_seeker = models.ForeignKey(JobSeekerProfile, on_delete=models.CASCADE())
+    description = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+
 class Choices:
     JOBTYPES = (
         ('F', 'Full-Time'),
@@ -82,3 +89,7 @@ class Advertise(models.Model):
     address = models.CharField(max_length=100, blank=True)
     description = models.TextField(blank=True)
 
+
+class JobReq(models.Model):
+    advertise = models.ForeignKey(Advertise, on_delete=models.CASCADE())
+    job_seeker = models.ForeignKey(User, on_delete=models.CASCADE())

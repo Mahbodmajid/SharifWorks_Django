@@ -23,6 +23,8 @@
 ================================================== -->
 <link rel="stylesheet" href="{%  static "css/style.css" %}">
 <link rel="stylesheet" href="{%  static "css/colors/green.css" %}" id="colors">
+{% block styles %}
+{% endblock %}
 
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -131,7 +133,7 @@
 
 			<div class="four columns">
 				<div class="counter-box">
-					<span class="counter">768</span>
+					<span class="counter">{{ online_users }}</span>
 					<p>رزومه‌ی ارسالی</p>
 				</div>
 			</div>

@@ -1,6 +1,9 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.sessions.models import Session
 from django.shortcuts import render, redirect
+from django.utils import timezone
+
 from login.forms import RegisterForm, JobSeekerProfileForm, UpdateUserForm, EmployerRegisterForm, LoginForm, AdvertiseForm
 from login.models import JobSeekerProfile, EmployerProfile, Advertise, Skill
 from django.contrib.auth import get_user_model
@@ -8,15 +11,31 @@ from login.decorators import employer_required, job_seeker_required
 
 User = get_user_model()
 
-
 # from login.models import Advertise
 
 
 def index(request):
+    sessions = Session.objects.filter(expire_date__gte=timezone.now())
+    uid_list = []
+
+    # Build a list of user ids from that query
+    for session in sessions:
+        data = session.get_decoded()
+        # print(data)
+        uid_list.append(data.get('_auth_user_id', None))
+
+    online_users = len(uid_list)
+
+    # users = User.objects.all()
+    # online_users = []
+    # for user in users:
+    #     if user.is_authenticated:
+    #         online_users.append(user)
     if request.user.is_authenticated:
         return redirect('home')
     else:
-        return render(request, 'index.html')
+        return render(request, 'index.html', {'online_users': online_users})
+
 
 # register
 
@@ -249,3 +268,8 @@ def login_view(request):
 
 def browse_jobs(request):
     return render(request, 'browse-jobs.html')
+
+
+def employer_profile(request):
+    return render(request, 'employer-profile.html', {})
+

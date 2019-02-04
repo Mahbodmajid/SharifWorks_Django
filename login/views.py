@@ -15,7 +15,6 @@ User = get_user_model()
 
 
 def index(request):
-<<<<<<< HEAD
     sessions = Session.objects.filter(expire_date__gte=timezone.now())
     uid_list = []
 
@@ -32,22 +31,11 @@ def index(request):
     # for user in users:
     #     if user.is_authenticated:
     #         online_users.append(user)
-
-    return render(request, 'index.html', {'online_users': online_users})
-
-
-def my_account_job_seeker(request):
-    login_form = LoginForm
-    register_form = RegisterForm
-    context = {'login_form': login_form, 'register_form': register_form}
-    return render(request, 'my-account-job-seeker.html', context)
-
-=======
     if request.user.is_authenticated:
         return redirect('home')
     else:
-        return render(request, 'index.html')
->>>>>>> ebbba4908f61abbe7f5f6e258fac3decb683af01
+        return render(request, 'index.html', {'online_users': online_users})
+
 
 # register
 

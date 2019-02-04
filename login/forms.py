@@ -92,6 +92,7 @@ class AdvertiseForm(forms.ModelForm):
 
 class AdvertiseSearchForm(forms.ModelForm):
     class Meta:
+        model = Advertise
         fields = ('city', 'skills')
 
     skills = forms.ModelChoiceField(queryset=Skill.objects.all(), widget=forms.SelectMultiple)

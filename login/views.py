@@ -4,7 +4,8 @@ from django.contrib.sessions.models import Session
 from django.shortcuts import render, redirect
 from django.utils import timezone
 
-from login.forms import RegisterForm, JobSeekerProfileForm, UpdateUserForm, EmployerRegisterForm, AdvertiseForm, CommentForm
+from login.forms import RegisterForm, JobSeekerProfileForm, UpdateUserForm, EmployerRegisterForm, AdvertiseForm, \
+    CommentForm, AdvertiseSearchForm
 from login.models import JobSeekerProfile, EmployerProfile, Advertise, Skill
 from django.contrib.auth import get_user_model
 from login.decorators import employer_required, job_seeker_required
@@ -267,7 +268,12 @@ def login_view(request):
 
 
 def browse_jobs(request):
-    return render(request, 'browse-jobs.html')
+    city = request.GET.get('city')
+    skills = request.GET.getlist('skills')
+    print("Ad Search. city: ", city, "skills: ", skills)
+    search_form = AdvertiseSearchForm
+    context = {'search_form': search_form}
+    return render(request, 'browse-jobs.html', context)
 
 
 def employer_profile(request):

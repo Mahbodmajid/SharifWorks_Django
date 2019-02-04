@@ -12,6 +12,7 @@ from login.decorators import employer_required, job_seeker_required
 
 User = get_user_model()
 
+
 # from login.models import Advertise
 
 
@@ -295,12 +296,16 @@ def profile_view(request):
         context = {'error': 'کاربر مورد نظر یافت نشد.'}
         return render(request, 'error_page.html', context)
     else:
-        profile_contents = query_user[0]
-        context = {'profile': profile_contents}
-        if profile_contents.is_jobseeker:
-            return render(request, 'employer-profile.html', context)
-        else:
+        profile_contents = None
+        if query_user[0].is_jobseeker:
+            profile_contents = JobSeekerProfile.objects.get(user_id=user_id)
+            context = {'profile': profile_contents}
             return render(request, 'job-seeker-profile.html', context)
+
+        elif query_user[0].is_employer:
+            profile_contents = EmployerProfile.objects.filter(user_id=user_id)
+            context = {'profile': profile_contents}
+            return render(request, 'employer-profile.html', context)
 
 
 @login_required(login_url='login')

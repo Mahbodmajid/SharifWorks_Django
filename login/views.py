@@ -313,3 +313,6 @@ def profile_view(request):
 def comment_view(request):
     return None
 
+
+def job_view(request):
+    return render(request, 'job-page.html')

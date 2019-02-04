@@ -1,83 +1,19 @@
+{% extends 'job-seeker-home.html' %}
 {% load staticfiles %}
-<!DOCTYPE html>
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
-<head>
-
-<!-- Basic Page Needs
-================================================== -->
-<meta charset="utf-8">
-<title>شریف‌کار - جست‌وجوی کار</title>
-
-<!-- Mobile Specific Metas
-================================================== -->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-<!-- CSS
-================================================== -->
-    <link rel="stylesheet" href="{% static "css/style.css" %}">
-    <link rel="stylesheet" href="{% static "css/colors/green.css" %}" id="colors">
-
-    <link href="{%  static "css/select2.css" %}" rel="stylesheet" />
-
-<!--[if lt IE 9]>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-
-</head>
-
-<body>
-<div id="wrapper">
 
 
-<!-- Header
-================================================== -->
-<header>
-<div class="container">
-	<div class="sixteen columns">
-
-		<!-- Logo -->
-		<div id="logo">
-			<h1><a href="job-seeker-home.html"><img src="images/logo.png" alt="شریف‌کار" /></a></h1>
-		</div>
-
-		<!-- Menu -->
-		<nav id="navigation" class="menu">
-			<ul id="responsive">
-				<li><a href="job-seeker-home.html"> خانه</a> </li>
-				<li><a href="resume-page.html">پروفایل</a></li>
-				<li><a href="add-resume.html">ویرایش اطلاعات</a></li>
-				<li><a href="job-alerts.html">پیشنهادات مصاحبه</a></li>
-				<li><a href="browse-jobs.html">جست‌وجوی کار</a></li>
-				<li><a href="job-seeker-change-pass.html">  تغییر گذرواژه <i class="fa fa-key"></i></a> </li>
-				<li><a href="index.html">خروج <i class="fa fa-sign-out"></i> </a></li>
-			</ul>
-		</nav>
-
-		<!-- Navigation -->
-		<div id="mobile-navigation">
-			<a href="#menu" class="menu-trigger"><i class="fa fa-reorder"></i> منو</a>
-		</div>
-
-	</div>
-</div>
-</header>
-<div class="clearfix"></div>
+{% block navbar %}
+    <ul id="responsive">
+        {% include 'job-seeker-urls.html' %}
+    </ul>
+{% endblock %}
 
 
-<!-- Titlebar
-================================================== -->
-<div id="titlebar">
-	<div class="container">
-		<div class="ten columns">
-			<span>۵۳۸ آگهی پیدا شد برای:</span>
-			<h2>دیجی‌کالا</h2>
-		</div>
+{% block titlebar-text %}
+<h2> <i class="fa fa-search"></i> جست‌وجوی کار</h2>
+{% endblock %}
 
-
-	</div>
-</div>
-
+{% block content %}
 
 <!-- Content
 ================================================== -->
@@ -90,20 +26,20 @@
 
 
         <form action="#" method="get" id="job-search-form">
-        <div class="form">
-            <h5>شهر</h5>
-            <input type="text" name="city" value=""/>
-        </div>
-        <div class="form">
-            <div class="select">
-                <h5>مهارت‌ها</h5>
-                <select data-placeholder="انتخاب مهارت‌ها"  name="skills" class="multiselect"  style="width: 100%" multiple="multiple">
-                    {%  for choice in search_form.skills.field.queryset %}
-                        <option value="{{ choice.id }}">{{ choice.name }}</option>
-                    {%  endfor %}
-                </select>
+            <div class="form">
+                <h5>شهر</h5>
+                <input type="text" name="city" value=""/>
             </div>
-        </div>
+            <div class="form">
+                <div class="select">
+                    <h5>مهارت‌ها</h5>
+                    <select data-placeholder="انتخاب مهارت‌ها"  name="skills" class="multiselect"  style="width: 100%" multiple="multiple">
+                        {%  for choice in search_form.skills.field.queryset %}
+                            <option value="{{ choice.id }}">{{ choice.name }}</option>
+                        {%  endfor %}
+                    </select>
+                </div>
+            </div>
 
 			<a href="#" onclick="document.getElementById('job-search-form').submit(); return false;" class="button big margin-top-5"> <i class="fa fa-search"></i> جستجو</a>
 		</form>
@@ -253,56 +189,4 @@
 
 </div>
 
-
-<!-- Footer
-================================================== -->
-<div class="margin-top-25"></div>
-
-<div id="footer">
-	<!-- Bottom -->
-	<div class="container">
-		<div class="footer-bottom">
-			<div class="sixteen columns">
-				<div class="copyrights">  کلیه‌ی حقوق این سایت متعلق به سامانه‌ی <a href="#">شریف‌کار </a>است. © ۱۳۹۷  </div>
-			</div>
-		</div>
-	</div>
-
-</div>
-
-<!-- Back To Top Button -->
-<div id="backtotop"><a href="#"></a></div>
-
-</div>
-<!-- Wrapper / End -->
-
-
-<!-- Scripts
-================================================== -->
-================================================== -->
-<script src="{%  static "scripts/jquery-2.1.3.min.js" %}"></script>
-<script src="{%  static "scripts/custom.js" %}"></script>
-<script src="{%  static "scripts/jquery.superfish.js" %}"></script>
-<script src="{%  static "scripts/jquery.themepunch.tools.min.js" %}"></script>
-<script src="{%  static "scripts/jquery.themepunch.revolution.min.js" %}"></script>
-<script src="{%  static "scripts/jquery.themepunch.showbizpro.min.js" %}"></script>
-<script src="{%  static "scripts/jquery.flexslider-min.js" %}"></script>
-<script src="{%  static "scripts/chosen.jquery.min.js"  %}"></script>
-<script src="{%  static "scripts/jquery.magnific-popup.min.js" %}"></script>
-<script src="{%  static "scripts/waypoints.min.js" %}"></script>
-<script src="{%  static "scripts/jquery.counterup.min.js" %}"></script>
-<script src="{%  static "scripts/jquery.jpanelmenu.js" %}"></script>
-<script src="{%  static "scripts/stacktable.js" %}"></script>
-<script src="{% static "scripts/select2.full.js" %}"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.multiselect').select2({
-            tags: true,
-            width: 'resolve'
-        });
-    });
-</script>
-
-
-</body>
-</html>
+{% endblock %}

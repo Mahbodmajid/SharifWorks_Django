@@ -7,7 +7,7 @@ from django.views.decorators.http import require_GET
 
 from login.forms import RegisterForm, JobSeekerProfileForm, UpdateUserForm, EmployerRegisterForm, AdvertiseForm, \
     CommentForm, AdvertiseSearchForm
-from login.models import JobSeekerProfile, EmployerProfile, Advertise, Skill
+from login.models import JobSeekerProfile, EmployerProfile, Advertise, Skill, JobReq
 from django.contrib.auth import get_user_model
 from login.decorators import employer_required, job_seeker_required
 
@@ -198,9 +198,9 @@ def add_job(request):
         add_job_form = AdvertiseForm(request.POST)
         print("Add Advertisement Request")
         if add_job_form.is_valid():
-            user = request.user
+            employer = EmployerProfile.objects.get(request.user.id)
             advertise = add_job_form.save(commit=False)
-            advertise.employer_id = user.id
+            advertise.employer_id = employer.id
             advertise.save()
             print("title: ", advertise.title)
             print("type: ", advertise.type)
@@ -325,4 +325,9 @@ def comment_view(request):
 
 
 def job_view(request):
-    return render(request, 'job-page.html')
+    if request.method == "POST":
+        adv_id = request.POST.get('advertise_id')
+        advertise = Advertise.objects.get(adv_id)
+        job_req = JobReq.objects.create(advertise_id=adv_id, job_seeker_id=request.user.id)
+    return render(request, 'job-page.html', {'advertise': advertise})
+

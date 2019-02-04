@@ -122,7 +122,7 @@
 				</ul>
 
 
-				<a href="#" class="button big margin-top-5">درخواست برای این آگهی شعلی</a>
+				<a onclick="send_request(1234);" class="button big margin-top-5" id="send_req_btn">درخواست برای این آگهی شعلی</a>
                 {# TODO: add link to apply for job page                #}
 
 
@@ -137,4 +137,21 @@
 
 
 </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script>
+        button_state = true;
+        function send_request(ad_id) {
+            if (button_state) {
+                $.post('https://webhook.site/3fcfc35e-5b08-45b7-b093-16dd7c82ea2c', {'advertiese_id': ad_id}, function (data) {});
+                button_state = false;
+                button = document.getElementById("send_req_btn")
+                button.innerText = "در حال بررسی درخواست"
+                button.className = "disabled-button"
+            }
+
+        }
+    </script>
 {% endblock %}

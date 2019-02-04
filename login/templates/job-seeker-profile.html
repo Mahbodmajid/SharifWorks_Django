@@ -22,15 +22,17 @@
 			<div class="resume-titlebar">
 				<img src="images/resumes-list-avatar-01.png" alt="">
 				<div class="resumes-list-content">
-					<h4>محمد محمدی <span>طراح گرافیکی UI/UX</span></h4>
-					<span class="icons"><i class="fa fa-map-marker"></i> تهران </span>
+					<h4> {{ profile.user.first_name }} {{ profile.user.last_name }} <span>طراح گرافیکی UI/UX</span></h4>
+					<span class="icons"><i class="fa fa-map-marker"></i> {{ profile.address }} </span>
 					<span class="icons"><i class="fa fa-money"></i>  ۱۰۰ تومان/ساعت </span>
-					<span class="icons"><a href="#"><i class="fa fa-link"></i> وب‌سایت</a></span>
-					<span class="icons"><a href="mailto:john.doe@example.com"><i class="fa fa-envelope"></i> mhm@sharif.com</a></span>
+					<span class="icons"><a href="{{ profile.homepage }}"><i class="fa fa-link"></i> وب‌سایت</a></span>
+					<span class="icons"><a href="mailto:{{ profile.user.username }}"><i class="fa fa-envelope"></i> {{ profile.user.username }} </a></span>
 					<div class="skills">
-						<span>JavaScript</span>
-						<span>PHP</span>
-						<span>WordPress</span>
+                        {% for skill in profile.skills.all %}
+						<span> skill.name </span>
+                        {% endfor %}
+{#						<span>PHP</span>#}
+{#						<span>WordPress</span>#}
 					</div>
 					<div class="clearfix"></div>
 					<div class="show-transactions">
@@ -42,7 +44,7 @@
 
 		<div class="six columns">
 			<!--<div class="two-buttons">-->
-
+{#            # TODO #}
 				<a href="#small-dialog" class="button"><i class="fa fa-file-text"></i> دانلود رزومه </a>
 
 				<!--<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup">-->

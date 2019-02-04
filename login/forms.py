@@ -71,9 +71,10 @@ class JobSeekerProfileForm(forms.ModelForm):
 class AdvertiseForm(forms.ModelForm):
     class Meta:
         model = Advertise
-        fields = ('title', 'type', 'category', 'deadline', 'description', 'address')
+        fields = ('title', 'type', 'category', 'deadline', 'description', 'city', 'address')
 
     title = forms.CharField(error_messages={'required': 'عنوان کار را وارد کنید.'})
+    city = forms.CharField(error_messages={'required': 'شهر کار را وارد کنید.'})
     type = forms.ChoiceField(choices=Choices.JOBTYPES,
                              error_messages={'required': 'نوع کار را وارد کنید.',
                                             'invalid_choice': 'نوع کار معتبر نیست'})

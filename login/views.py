@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.models import Session
 from django.shortcuts import render, redirect
 from django.utils import timezone
+from django.views.decorators.http import require_GET
 
 from login.forms import RegisterForm, JobSeekerProfileForm, UpdateUserForm, EmployerRegisterForm, AdvertiseForm, \
     CommentForm, AdvertiseSearchForm
@@ -183,15 +184,6 @@ def edit_resume(request):
         return render(request, 'edit-resume.html', context)
 
 
-@login_required(login_url='login')
-@job_seeker_required
-def resume_page(request):
-    user_form = UpdateUserForm
-    profile_form = JobSeekerProfileForm
-    context = {'user_form': user_form, 'profile_form': profile_form}
-    return render(request, 'resume-page.html', context)
-
-
 def logout_view(request):
     if request.user.is_authenticated:
         logout(request)
@@ -288,3 +280,36 @@ def employer_profile(request):
             # comment.job_seeker =
             # comment.employer =
             # return redirect('home')
+
+
+@login_required(login_url='login')
+def resume_page(request):
+    user_form = UpdateUserForm
+    profile_form = JobSeekerProfileForm
+    context = {'user_form': user_form, 'profile_form': profile_form}
+    return render(request, 'job-seeker-profile.html', context)
+
+
+@require_GET
+@login_required(login_url='login')
+def profile_view(request):
+    user_id = request.GET.get("user_id", "")
+    if user_id == "":
+        user_id = request.user.id
+    query_user = User.objects.filter(id=user_id)
+    if len(query_user) == 0:
+        context = {'error': 'کاربر مورد نظر یافت نشد.'}
+        return render(request, 'error_page.html', context)
+    else:
+        profile_contents = query_user[0]
+        context = {'profile': profile_contents}
+        if profile_contents.is_jobseeker:
+            return render(request, 'employer-profile.html', context)
+        else:
+            return render(request, 'job-seeker-profile.html', context)
+
+
+@login_required(login_url='login')
+def comment_view(request):
+    return None
+

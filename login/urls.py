@@ -11,9 +11,9 @@ urlpatterns = [
 
     path('home/', views.home, name="home"),
     path('edit-resume/', views.edit_resume, name="edit-resume"),
-    path('profile/', views.resume_page, name="profile"),
+    path('profile/', views.profile_view, name="profile"),
+    path('comment/', views.comment_view, name="comment"),
     path('add-job/', views.add_job, name="add-job"),
     path('logout/', views.logout_view, name="logout"),
-
     path('browse-jobs/', views.browse_jobs, name="browse-jobs"),
 ]

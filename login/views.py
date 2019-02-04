@@ -71,9 +71,9 @@ def employer_register(request):
             print("company_name: ", user.employer_profile.company_name)
             print("company_type: ", user.employer_profile.company_type)
             print("company_disc: ", user.employer_profile.company_disc)
-            return redirect('employer-home')
+            return redirect('home')
         else:
-            return redirect('my-account-employer')
+            return redirect('employer-register')
     else:
         if request.user.is_authenticated:
             return redirect('home')

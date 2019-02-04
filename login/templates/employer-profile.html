@@ -65,7 +65,7 @@
 		<h3 class="margin-bottom-15">موقعیت‌های شغلی</h3>
 
 		<ul class="job-list full">
-            {% for adv in profile.advertise_set %}
+            {% for adv in profile.advertise_set.all %}
                 <li><a href="job-page.html">
                     <img src="images/job-list-logo-01.png" alt="">
                     <div class="job-list-content">
@@ -102,7 +102,7 @@
 		<h3 class="margin-bottom-15">نظرات کارکنان</h3>
 
 		<ul class="resumes-list">
-            {% for comment in profile.comment_set %}
+            {% for comment in profile.comment_set.all %}
                 <li><a href="job-seeker-profile.html">
                     <img src="images/resumes-list-avatar-01.png" alt="">
                     <div class="resumes-list-content">

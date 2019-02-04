@@ -201,7 +201,7 @@ def add_job(request):
             user = request.user
             advertise = add_job_form.save(commit=False)
             advertise.employer_id = user.id
-            # advertise.save()
+            advertise.save()
             print("title: ", advertise.title)
             print("type: ", advertise.type)
             print("category: ", advertise.category)
@@ -314,7 +314,7 @@ def profile_view(request):
             return render(request, 'job-seeker-profile.html', context)
 
         elif query_user[0].is_employer:
-            profile_contents = EmployerProfile.objects.filter(user_id=user_id)
+            profile_contents = EmployerProfile.objects.get(user_id=user_id)
             context = {'profile': profile_contents}
             return render(request, 'employer-profile.html', context)
 

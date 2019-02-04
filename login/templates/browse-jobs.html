@@ -1,0 +1,349 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<meta charset="utf-8">
+<title>شریف‌کار - جست‌وجوی کار</title>
+
+<!-- Mobile Specific Metas
+================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="{% static "css/colors/green.css" %}" id="colors">
+
+    <link href="{%  static "css/select2.css" %}" rel="stylesheet" />
+
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+<div id="wrapper">
+
+
+<!-- Header
+================================================== -->
+<header>
+<div class="container">
+	<div class="sixteen columns">
+
+		<!-- Logo -->
+		<div id="logo">
+			<h1><a href="job-seeker-home.html"><img src="images/logo.png" alt="شریف‌کار" /></a></h1>
+		</div>
+
+		<!-- Menu -->
+		<nav id="navigation" class="menu">
+			<ul id="responsive">
+				<li><a href="job-seeker-home.html"> خانه</a> </li>
+				<li><a href="resume-page.html">پروفایل</a></li>
+				<li><a href="add-resume.html">ویرایش اطلاعات</a></li>
+				<li><a href="job-alerts.html">پیشنهادات مصاحبه</a></li>
+				<li><a href="browse-jobs.html">جست‌وجوی کار</a></li>
+				<li><a href="job-seeker-change-pass.html">  تغییر گذرواژه <i class="fa fa-key"></i></a> </li>
+				<li><a href="index.html">خروج <i class="fa fa-sign-out"></i> </a></li>
+			</ul>
+		</nav>
+
+		<!-- Navigation -->
+		<div id="mobile-navigation">
+			<a href="#menu" class="menu-trigger"><i class="fa fa-reorder"></i> منو</a>
+		</div>
+
+	</div>
+</div>
+</header>
+<div class="clearfix"></div>
+
+
+<!-- Titlebar
+================================================== -->
+<div id="titlebar">
+	<div class="container">
+		<div class="ten columns">
+			<span>۵۳۸ آگهی پیدا شد برای:</span>
+			<h2>دیجی‌کالا</h2>
+		</div>
+
+
+	</div>
+</div>
+
+
+<!-- Content
+================================================== -->
+<div class="container">
+	<!-- Recent Jobs -->
+	<div class="eleven columns">
+	<div class="padding-right">
+		
+		<form action="#" method="get" class="list-search">
+			<button><i class="fa fa-search"></i></button>
+			<input type="text" placeholder="عنوان شغل، کلیدواژه‌ها یا نام شرکت" value=""/>
+			<div class="clearfix"></div>
+		</form>
+
+		<ul class="job-list full">
+
+			<li><a href="job-page.html">
+				<img src="images/job-list-logo-01.png" alt="">
+				<div class="job-list-content">
+					<h4>بازاریاب (SEO) <span class="full-time">تمام‌وقت</span></h4>
+					<div class="job-icons">
+						<span><i class="fa fa-briefcase"></i> دیجی‌کالا</span>
+						<span><i class="fa fa-map-marker"></i> تهران</span>
+						<span><i class="fa fa-money"></i> ۳۰۰ تومان/ساعت</span>
+					</div>
+					<!-- <p>The SEO/SEM Specialist will work with industry leaders and top retailers to define and deliver best practices through innovative SEO methodologies.</p> -->
+				</div>
+				</a>
+				<div class="clearfix"></div>
+			</li>
+
+			<li><a href="job-page.html">
+				<img src="images/job-list-logo-02.png" alt="">
+				<div class="job-list-content">
+					<h4>توسعه‌دهنده PHP <span class="part-time">نیمه‌وقت</span></h4>
+					<div class="job-icons">
+						<span><i class="fa fa-briefcase"></i> دیجی‌کالا</span>
+						<span><i class="fa fa-map-marker"></i> تهران</span>
+						<span><i class="fa fa-money"></i> ۹۰ تومان/ساعت</span>
+					</div>
+					<!-- <p>Vivamus eleifend metus elit. Aenean facilisis placerat faucibus. Praesent commodo at mi nec imperdiet. Etiam at libero nec nunc iaculis ullamcorper.</p> -->
+				</div>
+				</a>
+				<div class="clearfix"></div>
+			</li>
+
+			<!-- <li><a href="job-page-alt.html">
+				<img src="images/job-list-logo-03.png" alt="">
+				<div class="job-list-content">
+					<h4>Restaurant Team Member - Crew <span class="full-time">Full-Time</span></h4>
+					<div class="job-icons">
+						<span><i class="fa fa-briefcase"></i> King</span>
+						<span><i class="fa fa-map-marker"></i> Sydney</span>
+						<span><i class="fa fa-money"></i> $15 / hour</span>
+					</div>
+					<p>Duis eu sem erat. Aliquam vestibulum justo at quam facilisis, sit amet condimentum dui laoreet. Nunc feugiat ante quis pulvinar ornare. In tempus lorem ipsum.</p>
+				</div>
+				</a>
+				<div class="clearfix"></div>
+			</li>
+
+			<li><a href="job-page.html">
+				<img src="images/job-list-logo-04.png" alt="">
+				<div class="job-list-content">
+					<h4>Power Systems User Experience Designer  <span class="internship">Internship</span></h4>
+					<div class="job-icons">
+						<span><i class="fa fa-briefcase"></i> Hexagon</span>
+						<span><i class="fa fa-map-marker"></i> London</span>
+						<span><i class="fa fa-money"></i> $75 / hour</span>
+					</div>
+					<p>Praesent eu imperdiet quam. Fusce posuere venenatis lorem vel lacinia. Integer orci magna, accumsan nec velit quis, porttitor pulvinar nulla. Nullam viverra risus massa.</p>
+				</div>
+				</a>
+				<div class="clearfix"></div>
+			</li> -->
+
+			<li><a href="job-page-alt.html">
+				<img src="images/job-list-logo-05.png" alt="">
+				<div class="job-list-content">
+					<h4>توسعه‌دهنده‌ی اپلیکیشن iOS <span class="temporary">موقتی</span></h4>
+					<div class="job-icons">
+						<span><i class="fa fa-briefcase"></i> دیجی‌کالا</span>
+						<span><i class="fa fa-map-marker"></i> تهران</span>
+						<span><i class="fa fa-money"></i> ۲۱۵ تومان/ساعت</span>
+					</div>
+					<!-- <p>Sodales mollis metus eget egestas. Duis sit amet sem pretium, facilisis libero ut, lobortis arcu. Cras ipsum libero, suscipit ut nisl vitae, commodo pretium mauris.</p> -->
+				</div>
+				</a>
+				<div class="clearfix"></div>
+			</li>
+		</ul>
+		<div class="clearfix"></div>
+
+		<div class="pagination-container">
+			<nav class="pagination">
+				<ul>
+					<li><a href="#" class="current-page">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li class="blank">...</li>
+					<li><a href="#">22</a></li>
+				</ul>
+			</nav>
+
+			<nav class="pagination-next-prev">
+				<ul>
+					<li><a href="#" class="prev">قبلی</a></li>
+					<li><a href="#" class="next">بعدی</a></li>
+				</ul>
+			</nav>
+		</div>
+
+	</div>
+	</div>
+
+
+	<!-- Widgets -->
+	<div class="five columns">
+
+		<!-- Sort by -->
+		<div class="widget">
+			<h4>مرتب کردن بر اساس:</h4>
+
+			<!-- Select -->
+			<select data-placeholder="Choose Category" class="chosen-select-no-single">
+				<option selected="selected" value="recent">آخرین</option>
+				<option value="oldest">اولین</option>
+				<option value="expiry">نزدیک‌ترین مهلت اتمام</option>
+				<option value="ratehigh">بیش‌ترین دستمزد بر زمان</option>
+				<option value="ratelow">کمترین دستمزد بر زمان</option>
+			</select>
+
+		</div>
+
+		<!-- Location -->
+		<!-- <div class="widget">
+			<h4>Location</h4>
+			<form action="#" method="get">
+				<input type="text" placeholder="State / Province" value=""/>
+				<input type="text" placeholder="City" value=""/>
+
+				<input type="text" class="miles" placeholder="Miles" value=""/>
+				<label for="zip-code" class="from">from</label>
+				<input type="text" id="zip-code" class="zip-code" placeholder="Zip-Code" value=""/><br>
+
+				<button class="button">Filter</button>
+			</form>
+		</div> -->
+
+		<!-- Job Type -->
+		<div class="widget">
+			<h4></h4>
+
+			<ul class="checkboxes">
+				<li>
+					<input id="check-1" type="checkbox" name="check" value="check-1" checked>
+					<label for="check-1">همه موارد</label>
+				</li>
+				<li>
+					<input id="check-2" type="checkbox" name="check" value="check-2">
+					<label for="check-2">تمام‌وقت <span>(۳۲)</span></label>
+				</li>
+				<li>
+					<input id="check-3" type="checkbox" name="check" value="check-3">
+					<label for="check-3">نیمه‌وقت <span>(۸۰)</span></label>
+				</li>
+				<li>
+					<input id="check-4" type="checkbox" name="check" value="check-4">
+					<label for="check-4">کارآموزی <span>(۲۵)</span></label>
+				</li>
+				<li>
+					<input id="check-5" type="checkbox" name="check" value="check-5">
+					<label for="check-5">آزاد <span>(۴۶)</span></label>
+				</li>
+			</ul>
+
+		</div>
+
+		<!-- Rate/Hr -->
+		<div class="widget">
+				<h4>دستمزد بر ساعت</h4>
+	
+				<ul class="checkboxes">
+					<li>
+						<input id="check-6" type="checkbox" name="check" value="check-6" checked>
+						<label for="check-6">تمام گزینه‌ها</label>
+					</li>
+					<li>
+						<input id="check-7" type="checkbox" name="check" value="check-7">
+						<label for="check-7"> ۰ تا ۱۰۰ تومان <span>(۱۲)</span></label>
+					</li>
+					<li>
+						<input id="check-8" type="checkbox" name="check" value="check-8">
+						<label for="check-8"> ۱۰۰ تا ۲۰۰ تومان <span>(۲۵)</span></label>
+					</li>
+					<li>
+						<input id="check-9" type="checkbox" name="check" value="check-9">
+						<label for="check-9">۲۰۰ تا ۳۰۰ تومان <span>(۸)</span></label>
+					</li>
+					<li>
+						<input id="check-10" type="checkbox" name="check" value="check-10">
+						<label for="check-10">۳۰۰ تا ۴۰۰ تومان <span>(۴)</span></label>
+					</li>
+					<li>
+						<input id="check-11" type="checkbox" name="check" value="check-11">
+						<label for="check-11">۴۰۰ تومان <span>(۵)</span></label>
+					</li>
+				</ul>
+	
+			</div>
+
+
+
+	</div>
+	<!-- Widgets / End -->
+
+
+</div>
+
+
+<!-- Footer
+================================================== -->
+<div class="margin-top-25"></div>
+
+<div id="footer">
+	<!-- Bottom -->
+	<div class="container">
+		<div class="footer-bottom">
+			<div class="sixteen columns">
+				<div class="copyrights">  کلیه‌ی حقوق این سایت متعلق به سامانه‌ی <a href="#">شریف‌کار </a>است. © ۱۳۹۷  </div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+</div>
+<!-- Wrapper / End -->
+
+
+<!-- Scripts
+================================================== -->
+================================================== -->
+<script src="{%  static "scripts/jquery-2.1.3.min.js" %}"></script>
+<script src="{%  static "scripts/custom.js" %}"></script>
+<script src="{%  static "scripts/jquery.superfish.js" %}"></script>
+<script src="{%  static "scripts/jquery.themepunch.tools.min.js" %}"></script>
+<script src="{%  static "scripts/jquery.themepunch.revolution.min.js" %}"></script>
+<script src="{%  static "scripts/jquery.themepunch.showbizpro.min.js" %}"></script>
+<script src="{%  static "scripts/jquery.flexslider-min.js" %}"></script>
+<script src="{%  static "scripts/chosen.jquery.min.js"  %}"></script>
+<script src="{%  static "scripts/jquery.magnific-popup.min.js" %}"></script>
+<script src="{%  static "scripts/waypoints.min.js" %}"></script>
+<script src="{%  static "scripts/jquery.counterup.min.js" %}"></script>
+<script src="{%  static "scripts/jquery.jpanelmenu.js" %}"></script>
+<script src="{%  static "scripts/stacktable.js" %}"></script>
+<script src="{% static "scripts/select2.full.js" %}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.multiselect').select2({tags: true});
+    });
+</script>
+
+
+</body>
+</html>

@@ -18,6 +18,8 @@ def index(request):
     else:
         return render(request, 'index.html')
 
+# register
+
 
 def job_seeker_register(request):
     if request.method == 'POST':
@@ -82,6 +84,8 @@ def employer_register(request):
                        'employer_register_form': employer_register_form}
             return render(request, 'my-account-employer.html', context)
 
+# login
+
 
 def job_seeker_login(request):
     if request.method == 'POST':
@@ -129,12 +133,6 @@ def user_posts(request):
     user = request.user  # khode user TODO: change
     posts = Advertise.objects.filter(employer=user)
     return render(request, 'index.html', posts)
-
-
-@login_required(login_url='login')
-@employer_required
-def employer_home(request):
-    return render(request, 'employer-home.html')
 
 
 @login_required(login_url='login')
@@ -216,7 +214,7 @@ def add_job(request):
         return render(request, "job-form.html", context)
 
 
-@login_required(login_url='index')
+@login_required(login_url='login')
 def home(request, response=None):
     if request.user.is_jobseeker is True:
         return render(request, 'job-seeker-home.html', response)
@@ -246,3 +244,5 @@ def login_view(request):
             return render(request, 'login.html')
 
 
+def browse_jobs(request):
+    return render(request, 'browse-jobs.html')

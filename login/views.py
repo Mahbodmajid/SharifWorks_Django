@@ -323,13 +323,16 @@ def profile_view(request):
 def comment_view(request):
     return None
 
+
 @login_required(login_url='login')
 def job_view(request):
-    if request.method == "POST":
-        adv_id = request.POST.get('advertise_id')
+    if request.method == "GET":
+        adv_id = request.GET.get('advertise_id')
         advertise = Advertise.objects.get(adv_id)
         job_req = JobReq.objects.create(advertise_id=adv_id, job_seeker_id=request.user.id)
-    return render(request, 'job-page.html', {'advertise': advertise})
+        return render(request, 'job-page.html', {'advertise': advertise})
+    else:
+        pass
 
 
 @login_required(login_url='login')

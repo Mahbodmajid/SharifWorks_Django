@@ -24,10 +24,10 @@
 				<img src="images/resumes-list-avatar-01.png" alt="">
 				<div class="resumes-list-content">
 {#                    TODO: khosoosi ya omoomisho ba company_type okay konim #}
-					<h4> {{ employer.company_name }} <span>شرکت خصوصی</span></h4>
-					<span class="icons"><i class="fa fa-map-marker"></i> {{ employer.city }} </span>
-					<span class="icons"><a href="{{ employer.homepage }}"><i class="fa fa-link"></i> وب‌سایت</a></span>
-					<span class="icons"><a href="mailto:{{ employer.user.username }}"><i class="fa fa-envelope"></i> {{ employer.user.username }} </a></span>
+					<h4> {{ profile.company_name }} <span>شرکت خصوصی</span></h4>
+					<span class="icons"><i class="fa fa-map-marker"></i> {{ profile.city }} </span>
+					<span class="icons"><a href="{{ profile.homepage }}"><i class="fa fa-link"></i> وب‌سایت</a></span>
+					<span class="icons"><a href="mailto:{{ profile.user.username }}"><i class="fa fa-envelope"></i> {{ profile.user.username }} </a></span>
 					<span class="icons">
                         <div class="rating four-stars">
                             <div class="star-rating"></div>
@@ -58,21 +58,21 @@
 		<h3 class="margin-bottom-15">درباره‌ی کسب و کار</h3>
 
 		<p class="margin-reset">
-            {{ employer.company_disc }}
+            {{ profile.company_disc }}
 {#			  فروشگاه اینترنتی دیجیکالا از پیشروان تجارت الکتریک در ایران است. این شرکت با بیش از ۲ هزار نیرو روزانه به بیش از ۳۰ هزار سفارش پاسخ می‌دهد. ما در دیجیکالا منتظر شما دوستان مستعد شریفی هستیم :)#}
 		</p>
 
 		<h3 class="margin-bottom-15">موقعیت‌های شغلی</h3>
 
 		<ul class="job-list full">
-            {% for adv in employer.advertise_set %}
+            {% for adv in profile.advertise_set %}
                 <li><a href="job-page.html">
                     <img src="images/job-list-logo-01.png" alt="">
                     <div class="job-list-content">
 {#                        # TODO: #}
                         <h4> {{ adv.title }} <span class="full-time">تمام‌وقت</span></h4>
                         <div class="job-icons">
-                            <span><i class="fa fa-briefcase"></i> {{ employer.company_name }}</span>
+                            <span><i class="fa fa-briefcase"></i> {{ profile.company_name }}</span>
                             <span><i class="fa fa-map-marker"></i> {{ adv.address }}</span>
                             <span><i class="fa fa-money"></i> ۳۰۰ تومان/ساعت</span>
                         </div>
@@ -102,7 +102,7 @@
 		<h3 class="margin-bottom-15">نظرات کارکنان</h3>
 
 		<ul class="resumes-list">
-            {% for comment in employer.comment_set %}
+            {% for comment in profile.comment_set %}
                 <li><a href="job-seeker-profile.html">
                     <img src="images/resumes-list-avatar-01.png" alt="">
                     <div class="resumes-list-content">

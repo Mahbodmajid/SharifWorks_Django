@@ -1,0 +1,10 @@
+{% if request.user.is_jobseeker %}
+        <ul id="responsive">
+            {% include 'job-seeker-urls.html' %}
+        </ul>
+{% else %}
+
+        <ul id="responsive">
+            {% include 'employer-urls.html' %}
+        </ul>
+{% endif %}

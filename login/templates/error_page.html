@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+    {% block title %}
+        شریف‌کار - خطا
+    {% endblock %}
+
+
+{% block navbar %}
+    {% if user_type == "employer" %}
+        {% include 'employer-urls.html' %}
+    {% else %}
+        {% include 'job-seeker-urls.html' %}
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+{% endblock %}
+
+
+<div class="notification error closeable">
+    <p><span>خطا!</span> {{ error }}</p>
+    <a class="close" href="#"></a>
+</div>

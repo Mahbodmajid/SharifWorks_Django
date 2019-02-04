@@ -51,7 +51,7 @@
 					<li><a href="#">برای کارجوها</a>
 						<ul>
 							<li><a href="job-seeker-home.html"> خانه</a> </li>
-							<li><a href="resume-page.html">پروفایل</a></li>
+							<li><a href="job-seeker-profile.html">پروفایل</a></li>
 							<li><a href="add-resume.html">ویرایش اطلاعات</a></li>
 							<li><a href="job-alerts.html">پیشنهادات مصاحبه</a></li>
 							<li><a href="browse-jobs.html">جست‌وجوی کار</a></li>
@@ -172,7 +172,7 @@
 
 		<ul class="resumes-list">
             {% for comment in employer.comment_set %}
-                <li><a href="resume-page.html">
+                <li><a href="job-seeker-profile.html">
                     <img src="images/resumes-list-avatar-01.png" alt="">
                     <div class="resumes-list-content">
                         <h4> {{ comment.job_seeker.first_name }} <span>طراح گرافیکی</span></h4>
@@ -184,7 +184,7 @@
                 </li>
             {% endfor %}
 
-{#			<li><a href="resume-page.html">#}
+{#			<li><a href="job-seeker-profile.html">#}
 {#				<img src="images/avatar-placeholder.png" alt="">#}
 {#				<div class="resumes-list-content">#}
 {#					<h4>مهدی مهدوی <span>توسعه‌دهنده‌ی iOS </span></h4>#}

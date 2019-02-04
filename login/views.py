@@ -7,7 +7,7 @@ from django.views.decorators.http import require_GET
 
 from login.forms import RegisterForm, JobSeekerProfileForm, UpdateUserForm, EmployerRegisterForm, AdvertiseForm, \
     CommentForm, AdvertiseSearchForm
-from login.models import JobSeekerProfile, EmployerProfile, Advertise, Skill
+from login.models import JobSeekerProfile, EmployerProfile, Advertise, Skill, JobReq
 from django.contrib.auth import get_user_model
 from login.decorators import employer_required, job_seeker_required
 
@@ -198,9 +198,9 @@ def add_job(request):
         add_job_form = AdvertiseForm(request.POST)
         print("Add Advertisement Request")
         if add_job_form.is_valid():
-            user = request.user
+            employer = EmployerProfile.objects.get(request.user.id)
             advertise = add_job_form.save(commit=False)
-            advertise.employer_id = user.id
+            advertise.employer_id = employer.id
             advertise.save()
             print("title: ", advertise.title)
             print("type: ", advertise.type)
@@ -325,15 +325,17 @@ def comment_view(request):
 
 @login_required(login_url='login')
 def job_view(request):
-    ad_id = request.GET.get("ad_id")
-    if not str.isdigit(ad_id):
-        context = {'error': 'آگهی مورد نظر یافت نشد.'}
-        return render(request, 'error_page.html', context)
-    ad_id = int(ad_id)
-    query_advertise = Advertise.objects.filter(id=ad_id)
-    if len(query_advertise) > 0:
-        advertise = query_advertise[0]
-        return render(request, 'job-page.html', {"advertise": advertise})
-    else:
-        context = {'error': 'آگهی مورد نظر یافت نشد.'}
-        return render(request, 'error_page.html', context)
+    if request.method == "POST":
+        adv_id = request.POST.get('advertise_id')
+        advertise = Advertise.objects.get(adv_id)
+        job_req = JobReq.objects.create(advertise_id=adv_id, job_seeker_id=request.user.id)
+    return render(request, 'job-page.html', {'advertise': advertise})
+
+
+@login_required(login_url='login')
+def job_requests_view(request):
+    if request.method == "POST":
+        pass
+    elif request.method == "GET":
+        user_id = request.GET.get("user_id", "")
+        return render(request, 'job-page.html', {'employer': EmployerProfile.objects.get(user_id)})

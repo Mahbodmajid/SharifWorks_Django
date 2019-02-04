@@ -5,7 +5,8 @@ from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.views.decorators.http import require_GET
 
-from login.forms import RegisterForm, JobSeekerProfileForm, UpdateUserForm, EmployerRegisterForm, AdvertiseForm, CommentForm
+from login.forms import RegisterForm, JobSeekerProfileForm, UpdateUserForm, EmployerRegisterForm, AdvertiseForm, \
+    CommentForm, AdvertiseSearchForm
 from login.models import JobSeekerProfile, EmployerProfile, Advertise, Skill
 from django.contrib.auth import get_user_model
 from login.decorators import employer_required, job_seeker_required
@@ -200,7 +201,7 @@ def add_job(request):
             user = request.user
             advertise = add_job_form.save(commit=False)
             advertise.employer_id = user.id
-            advertise.save()
+            # advertise.save()
             print("title: ", advertise.title)
             print("type: ", advertise.type)
             print("category: ", advertise.category)
@@ -260,7 +261,17 @@ def login_view(request):
 
 
 def browse_jobs(request):
-    return render(request, 'browse-jobs.html')
+    city = request.GET.get('city')
+    skills = request.GET.getlist('skills')
+    print("Ad Search. city: ", city, "skills: ", skills)
+    search_form = AdvertiseSearchForm
+    related_advs = []
+    for adv in Advertise.objects.all():  # TODO: search based on skills
+        if adv.city == city:
+            related_advs.append(adv)
+
+    context = {'search_form': search_form, 'advs': related_advs}
+    return render(request, 'browse-jobs.html', context)
 
 
 def employer_profile(request):
@@ -312,3 +323,6 @@ def profile_view(request):
 def comment_view(request):
     return None
 
+
+def job_view(request):
+    return render(request, 'job-page.html')

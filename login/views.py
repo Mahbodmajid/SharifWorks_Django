@@ -172,15 +172,9 @@ def resume_page(request):
     return render(request, 'resume-page.html', context)
 
 
-@login_required(login_url='login')
-@employer_required
-def job_form(request):
-    advertise_form = AdvertiseForm
-    return render(request, 'job-form.html', {'advertise_form': advertise_form})
-
-
 def logout_view(request):
-    logout(request)
+    if request.user.is_authenticated:
+        logout(request)
     return redirect('index')
 
 
@@ -202,16 +196,25 @@ def add_job(request):
             print("description: ", advertise.description)
             print("address: ", advertise.address)
             context = {
-                'errors': {},
                 'success': 'آگهی با موفقیت ثبت شد.'
             }
-            return render(request, "employer-home.html", context)
+            return render(request, "job-form.html", context)
         context = {
             'errors': add_job_form.errors,
-            'success': {}
+            'before': {
+                'title': request.POST.get("title"),
+                'type': request.POST.get("type"),
+                'category': request.POST.get("category"),
+                'deadline': request.POST.get("deadline"),
+                'description': request.POST.get("description"),
+                'address': request.POST.get("address")
+            }
         }
         print("Form Not Valid", add_job_form.errors)
         return render(request, "job-form.html", context)
+    elif request.method == 'GET':
+        advertise_form = AdvertiseForm
+        return render(request, 'job-form.html', {'advertise_form': advertise_form})
 
 
 @login_required(login_url='login')

@@ -23,9 +23,18 @@
             <div class="submit-page">
 
 {#                <!-- Notice -->#}
-                    <div class="notification error closeable margin-bottom-40">
-                        {{ errors }}
+                {% if success is not None %}
+                    <div class="notification success closeable">
+                        <p><span>موفقیت!</span> {{ success }}</p>
+                        <a class="close" href="#"></a>
                     </div>
+                {% endif %}
+                {% if errors is not None %}
+                    <div class="notification error closeable">
+                        <p><span>خطا!</span> {{ errors }}</p>
+                        <a class="close" href="#"></a>
+                    </div>
+                {% endif %}
 
                 <!-- Email -->
                 {#			<div class="form">#}
@@ -40,14 +49,14 @@
                     <!-- Title -->
                     <div class="form">
                         <h5>عنوان کار</h5>
-                        <input class="search-field" name="title" type="text" placeholder="" value=""/>
+                        <input class="search-field" name="title" type="text" placeholder="" value="{{ before.title }}"/>
                     </div>
 
                     <!-- Location -->
                     <div class="form">
                         <h5>مکان <span>(اختیاری)</span></h5>
                         <input class="search-field" name="address" type="text"
-                               placeholder="مثال: تهران، خیابان آزادی، روبروی دانشگاه شریف" value=""/>
+                               placeholder="مثال: تهران، خیابان آزادی، روبروی دانشگاه شریف" value="{{ before.address }}"/>
                         <!-- <p class="note">Leave this blank if the location is not important</p> -->
                     </div>
 
@@ -57,10 +66,26 @@
                     <div class="form">
                         <h5>نوع شغل</h5>
                         <select name="type" data-placeholder="تمام‌وقت" class="chosen-select-no-single">
-                            <option value="F">تمام‌وقت</option>
-                            <option value="P">نیمه‌وقت</option>
-                            <option value="I">کارآموزی</option>
-                            <option value="L">آزاد</option>
+                            {% if before.type == 'F' %}
+                                <option value="F" selected="selected">تمام‌وقت</option>
+                                {% else %}
+                                <option value="F">تمام‌وقت</option>
+                            {% endif %}
+                            {% if before.type == 'P' %}
+                                <option value="P" selected="selected">نیمه‌وقت</option>
+                                {% else %}
+                                <option value="P">نیمه‌وقت</option>
+                            {% endif %}
+                            {% if before.type == 'I' %}
+                                <option value="I" selected="selected">کارآموزی</option>
+                                {% else %}
+                                <option value="I">کارآموزی</option>
+                            {% endif %}
+                            {% if before.type == 'L' %}
+                                <option value="L" selected="selected">آزاد</option>
+                                {% else %}
+                                <option value="L">آزاد</option>
+                            {% endif %}
                         </select>
                     </div>
 

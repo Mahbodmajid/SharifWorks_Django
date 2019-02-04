@@ -82,7 +82,7 @@ class AdvertiseForm(forms.ModelForm):
                                                  'invalid_choice': 'دسته‌بندی کار معتبر نیست'}
                                  )
     deadline = forms.DateField(error_messages={'required': 'تاریخ اتمام کار را وارد کنید.',
-                                               'invalid_choice': 'تاریخ اتمام کار معتبر نیست'})
+                                               'invalid': 'تاریخ اتمام کار معتبر نیست'})
 
 
 

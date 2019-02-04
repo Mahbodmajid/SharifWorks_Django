@@ -145,7 +145,7 @@
         button_state = true;
         function send_request(ad_id) {
             if (button_state) {
-                $.post('https://webhook.site/3fcfc35e-5b08-45b7-b093-16dd7c82ea2c', {'advertiese_id': ad_id}, function (data) {});
+                $.post('job/', {'advertiese_id': ad_id}, function (data) {});
                 button_state = false;
                 button = document.getElementById("send_req_btn")
                 button.innerText = "در حال بررسی درخواست"

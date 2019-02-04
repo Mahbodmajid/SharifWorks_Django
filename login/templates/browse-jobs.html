@@ -85,17 +85,33 @@
 	<!-- Recent Jobs -->
 	<div class="eleven columns">
 	<div class="padding-right">
-		
-		<form action="#" method="get" class="list-search">
-			<button><i class="fa fa-search"></i></button>
-			<input type="text" placeholder="عنوان شغل، کلیدواژه‌ها یا نام شرکت" value=""/>
-			<div class="clearfix"></div>
+
+        <div class="search-page">
+
+
+        <form action="#" method="get" id="job-search-form">
+        <div class="form">
+            <h5>شهر</h5>
+            <input type="text" name="city" value=""/>
+        </div>
+        <div class="form">
+            <div class="select">
+                <h5>مهارت‌ها</h5>
+                <select data-placeholder="انتخاب مهارت‌ها"  name="skills" class="multiselect"  style="width: 100%" multiple="multiple">
+                    {%  for choice in search_form.skills.field.queryset %}
+                        <option value="{{ choice.id }}">{{ choice.name }}</option>
+                    {%  endfor %}
+                </select>
+            </div>
+        </div>
+
+			<a href="#" onclick="document.getElementById('job-search-form').submit(); return false;" class="button big margin-top-5"> <i class="fa fa-search"></i> جستجو</a>
 		</form>
+        </div>
 
 		<ul class="job-list full">
 
 			<li><a href="job-page.html">
-				<img src="images/job-list-logo-01.png" alt="">
 				<div class="job-list-content">
 					<h4>بازاریاب (SEO) <span class="full-time">تمام‌وقت</span></h4>
 					<div class="job-icons">
@@ -104,66 +120,6 @@
 						<span><i class="fa fa-money"></i> ۳۰۰ تومان/ساعت</span>
 					</div>
 					<!-- <p>The SEO/SEM Specialist will work with industry leaders and top retailers to define and deliver best practices through innovative SEO methodologies.</p> -->
-				</div>
-				</a>
-				<div class="clearfix"></div>
-			</li>
-
-			<li><a href="job-page.html">
-				<img src="images/job-list-logo-02.png" alt="">
-				<div class="job-list-content">
-					<h4>توسعه‌دهنده PHP <span class="part-time">نیمه‌وقت</span></h4>
-					<div class="job-icons">
-						<span><i class="fa fa-briefcase"></i> دیجی‌کالا</span>
-						<span><i class="fa fa-map-marker"></i> تهران</span>
-						<span><i class="fa fa-money"></i> ۹۰ تومان/ساعت</span>
-					</div>
-					<!-- <p>Vivamus eleifend metus elit. Aenean facilisis placerat faucibus. Praesent commodo at mi nec imperdiet. Etiam at libero nec nunc iaculis ullamcorper.</p> -->
-				</div>
-				</a>
-				<div class="clearfix"></div>
-			</li>
-
-			<!-- <li><a href="job-page-alt.html">
-				<img src="images/job-list-logo-03.png" alt="">
-				<div class="job-list-content">
-					<h4>Restaurant Team Member - Crew <span class="full-time">Full-Time</span></h4>
-					<div class="job-icons">
-						<span><i class="fa fa-briefcase"></i> King</span>
-						<span><i class="fa fa-map-marker"></i> Sydney</span>
-						<span><i class="fa fa-money"></i> $15 / hour</span>
-					</div>
-					<p>Duis eu sem erat. Aliquam vestibulum justo at quam facilisis, sit amet condimentum dui laoreet. Nunc feugiat ante quis pulvinar ornare. In tempus lorem ipsum.</p>
-				</div>
-				</a>
-				<div class="clearfix"></div>
-			</li>
-
-			<li><a href="job-page.html">
-				<img src="images/job-list-logo-04.png" alt="">
-				<div class="job-list-content">
-					<h4>Power Systems User Experience Designer  <span class="internship">Internship</span></h4>
-					<div class="job-icons">
-						<span><i class="fa fa-briefcase"></i> Hexagon</span>
-						<span><i class="fa fa-map-marker"></i> London</span>
-						<span><i class="fa fa-money"></i> $75 / hour</span>
-					</div>
-					<p>Praesent eu imperdiet quam. Fusce posuere venenatis lorem vel lacinia. Integer orci magna, accumsan nec velit quis, porttitor pulvinar nulla. Nullam viverra risus massa.</p>
-				</div>
-				</a>
-				<div class="clearfix"></div>
-			</li> -->
-
-			<li><a href="job-page-alt.html">
-				<img src="images/job-list-logo-05.png" alt="">
-				<div class="job-list-content">
-					<h4>توسعه‌دهنده‌ی اپلیکیشن iOS <span class="temporary">موقتی</span></h4>
-					<div class="job-icons">
-						<span><i class="fa fa-briefcase"></i> دیجی‌کالا</span>
-						<span><i class="fa fa-map-marker"></i> تهران</span>
-						<span><i class="fa fa-money"></i> ۲۱۵ تومان/ساعت</span>
-					</div>
-					<!-- <p>Sodales mollis metus eget egestas. Duis sit amet sem pretium, facilisis libero ut, lobortis arcu. Cras ipsum libero, suscipit ut nisl vitae, commodo pretium mauris.</p> -->
 				</div>
 				</a>
 				<div class="clearfix"></div>
@@ -340,7 +296,10 @@
 <script src="{% static "scripts/select2.full.js" %}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('.multiselect').select2({tags: true});
+        $('.multiselect').select2({
+            tags: true,
+            width: 'resolve'
+        });
     });
 </script>
 

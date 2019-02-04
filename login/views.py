@@ -200,7 +200,7 @@ def add_job(request):
             user = request.user
             advertise = add_job_form.save(commit=False)
             advertise.employer_id = user.id
-            advertise.save()
+            # advertise.save()
             print("title: ", advertise.title)
             print("type: ", advertise.type)
             print("category: ", advertise.category)
@@ -264,7 +264,12 @@ def browse_jobs(request):
     skills = request.GET.getlist('skills')
     print("Ad Search. city: ", city, "skills: ", skills)
     search_form = AdvertiseSearchForm
-    context = {'search_form': search_form}
+    related_advs = []
+    for adv in Advertise.objects.all():  # TODO: search based on skills
+        if adv.city == city:
+            related_advs.append(adv)
+
+    context = {'search_form': search_form, 'advs': related_advs}
     return render(request, 'browse-jobs.html', context)
 
 

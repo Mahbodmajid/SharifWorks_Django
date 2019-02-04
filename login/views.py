@@ -323,6 +323,17 @@ def profile_view(request):
 def comment_view(request):
     return None
 
-
+@login_required(login_url='login')
 def job_view(request):
-    return render(request, 'job-page.html')
+    ad_id = request.GET.get("ad_id")
+    if not str.isdigit(ad_id):
+        context = {'error': 'آگهی مورد نظر یافت نشد.'}
+        return render(request, 'error_page.html', context)
+    ad_id = int(ad_id)
+    query_advertise = Advertise.objects.filter(id=ad_id)
+    if len(query_advertise) > 0:
+        advertise = query_advertise[0]
+        return render(request, 'job-page.html', {"advertise": advertise})
+    else:
+        context = {'error': 'آگهی مورد نظر یافت نشد.'}
+        return render(request, 'error_page.html', context)

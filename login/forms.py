@@ -85,9 +85,9 @@ class AdvertiseForm(forms.ModelForm):
                                                'invalid': 'تاریخ اتمام کار معتبر نیست'})
 
 
-class JobReqForm(forms.ModelForm):
-    class Meta:
-        model = JobReq
+# class JobReqForm(forms.ModelForm):
+#     class Meta:
+#         model = JobReq
 
 
 class CommentForm(forms.ModelForm):

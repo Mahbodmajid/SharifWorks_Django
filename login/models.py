@@ -58,8 +58,8 @@ class EmployerProfile(models.Model):
 
 
 class Comment(models.Model):
-    employer = models.ForeignKey(EmployerProfile, on_delete=models.CASCADE())
-    job_seeker = models.ForeignKey(JobSeekerProfile, on_delete=models.CASCADE())
+    employer = models.ForeignKey(EmployerProfile, on_delete=models.CASCADE)
+    job_seeker = models.ForeignKey(JobSeekerProfile, on_delete=models.CASCADE)
     description = models.TextField()
     rate = models.IntegerField(blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
@@ -92,5 +92,5 @@ class Advertise(models.Model):
 
 
 class JobReq(models.Model):
-    advertise = models.ForeignKey(Advertise, on_delete=models.CASCADE())
-    job_seeker = models.ForeignKey(User, on_delete=models.CASCADE())
+    advertise = models.ForeignKey(Advertise, on_delete=models.CASCADE)
+    job_seeker = models.ForeignKey(User, on_delete=models.CASCADE)

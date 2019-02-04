@@ -314,7 +314,7 @@ def profile_view(request):
             return render(request, 'job-seeker-profile.html', context)
 
         elif query_user[0].is_employer:
-            profile_contents = EmployerProfile.objects.filter(user_id=user_id)
+            profile_contents = EmployerProfile.objects.get(user_id=user_id)
             context = {'profile': profile_contents}
             return render(request, 'employer-profile.html', context)
 

@@ -201,7 +201,7 @@ def add_job(request):
             user = request.user
             advertise = add_job_form.save(commit=False)
             advertise.employer_id = user.id
-            # advertise.save()
+            advertise.save()
             print("title: ", advertise.title)
             print("type: ", advertise.type)
             print("category: ", advertise.category)

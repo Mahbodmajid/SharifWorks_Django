@@ -296,7 +296,7 @@ def profile_view(request):
         return render(request, 'error_page.html', context)
     else:
         profile_contents = query_user[0]
-        context = {'profile_contents': profile_contents}
+        context = {'profile': profile_contents}
         if profile_contents.is_jobseeker:
             return render(request, 'employer-profile.html', context)
         else:

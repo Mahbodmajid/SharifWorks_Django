@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+
+
+<!-- Titlebar
+================================================== -->
+<div id="titlebar" class="single">
+	<div class="container">
+
+		<div class="sixteen columns">
+			<h2>ورود</h2>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- Content
+================================================== -->
+
+<!-- Container -->
+<div class="container">
+
+	<div class="my-account">
+
+			<!-- Login -->
+			<div class="tab-content" id="tab1" style="display: none;">
+                 {% if error is not None %}
+                        <div class="notification error closeable">
+                            <p><span>خطا!</span> {{ error }}</p>
+                            <a class="close" href="#"></a>
+                        </div>
+                 {% endif %}
+
+				<h3 class="margin-bottom-10 margin-top-10">ورود</h3>
+
+				<form method="post" class="login" action={% url 'login' %}>
+                    {% csrf_token %}
+					
+					<p class="form-row form-row-wide">
+						<label for="username">ایمیل:</label>
+						<input dir= "ltr" type="email" class="input-text" name="username" id="username" value="" />
+					</p>
+
+					<p class="form-row form-row-wide">
+						<label for="password">گذرواژه:</label>
+						<input dir= "ltr" class="input-text" type="password" name="password" id="password" />
+					</p>
+
+					<p class="form-row">
+						<input type="submit" class="button" name="login" value="ورود" />
+
+						<label for="rememberme" class="rememberme">
+						<input name="rememberme" type="checkbox" id="rememberme" value="forever" /> مرا به‌خاطر بسپار</label>
+					</p>
+
+					<p class="lost_password">
+						<a href="my-account-employer-forget-pass.html" >فراموشی رمز عبور</a>
+					</p>
+
+					
+				</form>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

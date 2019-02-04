@@ -53,10 +53,13 @@
                     <li><a href="{% url 'index' %}">خانه</a>
                     </li>
 
-                    <li><a href="{% url 'my-account-employer' %}">برای کارفرمایان</a>
+                    <li><a href="{% url 'employer-register' %}">برای کارفرمایان</a>
                     </li>
 
-                    <li><a href="{% url 'my-account-job-seeker' %}">برای کارجوها</a>
+                    <li><a href="{% url 'job-seeker-register' %}">برای کارجوها</a>
+                    </li>
+
+                    <li><a href="{% url 'login' %}">ورود</a>
                     </li>
                 </ul>
             {% endblock %}
@@ -94,8 +97,8 @@
 				</div>
 
 				<div class="caption sfb" data-x="center" data-y="370" data-speed="400" data-start="1600" data-easing="easeOutExpo">
-					<a href="{% url 'my-account-job-seeker' %}" class="slider-button">کارجو</a>
-					<a href="{% url 'my-account-employer' %}" class="slider-button">کارفرما</a>
+					<a href="{% url 'job-seeker-register' %}" class="slider-button">کارجو</a>
+					<a href="{% url 'employer-register' %}" class="slider-button">کارفرما</a>
 				</div>
 			</li>
 

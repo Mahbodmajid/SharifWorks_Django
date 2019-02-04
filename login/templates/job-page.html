@@ -6,12 +6,11 @@
 
 
 {% block navbar %}
-    {% if user_type == "employer" %}
-        {% include 'employer-urls.html' %}
-    {% else %}
-        {% include 'job-seeker-urls.html' %}
-    {% endif %}
+{% include 'shared-urls.html' %}
 {% endblock %}
+
+
+{% block content %}
 <!-- Titlebar
 ================================================== -->
 <div id="titlebar">
@@ -39,7 +38,6 @@
 		
 		<!-- Company Info -->
 		<div class="company-info">
-			<img src="images/company-logo.png" alt="">
 			<div class="content">
 				<h4>شرکت گیمرهای حرفه‌ای </h4>
 				<span><a href="{{ advertise.title }}"><i class="fa fa-link"></i> وب‌سایت</a></span>
@@ -168,48 +166,4 @@
 
 
 </div>
-
-
-<!-- Footer
-================================================== -->
-<div class="margin-top-50"></div>
-
-<div id="footer">
-	<!-- Bottom -->
-	<div class="container">
-		<div class="footer-bottom">
-			<div class="sixteen columns">
-				<div class="copyrights">  کلیه‌ی حقوق این سایت متعلق به سامانه‌ی <a href="#">شریف‌کار </a>است. © ۱۳۹۷  </div>
-			</div>
-		</div>
-	</div>
-
-</div>
-
-<!-- Back To Top Button -->
-<div id="backtotop"><a href="#"></a></div>
-
-</div>
-<!-- Wrapper / End -->
-
-
-<!-- Scripts
-================================================== -->
-<script src="scripts/jquery-2.1.3.min.js"></script>
-<script src="scripts/custom.js"></script>
-<script src="scripts/jquery.superfish.js"></script>
-<script src="scripts/jquery.themepunch.tools.min.js"></script>
-<script src="scripts/jquery.themepunch.revolution.min.js"></script>
-<script src="scripts/jquery.themepunch.showbizpro.min.js"></script>
-<script src="scripts/jquery.flexslider-min.js"></script>
-<script src="scripts/chosen.jquery.min.js"></script>
-<script src="scripts/jquery.magnific-popup.min.js"></script>
-<script src="scripts/waypoints.min.js"></script>
-<script src="scripts/jquery.counterup.min.js"></script>
-<script src="scripts/jquery.jpanelmenu.js"></script>
-<script src="scripts/stacktable.js"></script>
-
-
-
-</body>
-</html>
+{% endblock %}

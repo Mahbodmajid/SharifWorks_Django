@@ -104,3 +104,5 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('description', 'rate',)
 
+#     TODO: COMMENT FORM VALIDATION
+

@@ -66,7 +66,7 @@ class Comment(models.Model):
     job_seeker = models.ForeignKey(JobSeekerProfile, on_delete=models.CASCADE)
     description = models.TextField()
     rate = models.IntegerField(blank=True, null=True)
-    created_date = models.DateTimeField(auto_now_add=True)
+    created_date = models.DateTimeField(auto_now_add=True, null=True)
 
 
 class Choices:
@@ -103,4 +103,7 @@ class Advertise(models.Model):
 class JobReq(models.Model):
     advertise = models.ForeignKey(Advertise, on_delete=models.CASCADE)
     job_seeker = models.ForeignKey(JobSeekerProfile, on_delete=models.CASCADE)
-    state = models.IntegerField(default=0)  # 0: applied     1: accepted        2: rejected
+    state = models.IntegerField(default=1)  # 1: applied         2: accepted        3: rejected
+    created_date = models.DateTimeField(auto_now_add=True, null=True)
+    deadline = models.DateTimeField(blank=True, null=True)
+

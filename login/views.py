@@ -1,6 +1,7 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.models import Session
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.views.decorators.http import require_GET, require_POST
@@ -383,21 +384,61 @@ def comment_view(request):
 @login_required(login_url='login')
 def job_view(request):
     if request.method == "GET":
-        adv_id = request.GET.get('advertise_id')
-        advertise = Advertise.objects.get(adv_id)
-        job_req = JobReq.objects.create(advertise_id=adv_id, job_seeker_id=request.user.id)
-        return render(request, 'job-page.html', {'advertise': advertise})
+        adv_id = request.GET.get('advertise_id', '')
+        job_reqs = JobReq.objects.filter(advertise_id=adv_id, job_seeker__user_id=request.user.id)
+        state = 0
+        job_req = None
+        if len(job_reqs) == 1:
+            job_req = job_reqs[0]
+            state = job_req.state
+        elif len(job_reqs) > 1:
+            state = -1  # invalid
+
+        if adv_id == '' or not str.isdigit(adv_id):
+            context = {'error': 'آگهی مورد نظر یافت نشد.'}
+            return render(request, 'error_page.html', context)
+
+        query_advertise = Advertise.objects.filter(id=adv_id)
+        if len(query_advertise) == 0:
+            context = {'error': 'آگهی مورد نظر یافت نشد.'}
+            return render(request, 'error_page.html', context)
+        advertise = query_advertise[0]
+
+        return render(request, 'job-page.html', {'advertise': advertise, 'state': state})
     else:
-        pass
+        context = {'error': 'آگهی مورد نظر یافت نشد.'}
+        return render(request, 'error_page.html', context)
 
 
 @login_required(login_url='login')
 def job_requests_view(request):
     if request.method == "POST":
-        pass
+        adv_id = request.POST.get('advertiese_id')
+        if adv_id == '':
+            return HttpResponse("failure", content_type="text/plain")
+        query_advertise = Advertise.objects.filter(id=adv_id)
+        if len(query_advertise) == 0:
+            return HttpResponse("failure", content_type="text/plain")
+
+        jobseekeer = JobSeekerProfile.objects.get(user_id=request.user.id)
+        js_id = jobseekeer.id
+
+        query_jobreq = JobReq.objects.filter(advertise_id=adv_id, job_seeker_id=js_id)
+        if len(query_jobreq) > 0:
+            return HttpResponse("failure", content_type="text/plain")
+
+        JobReq.objects.create(state=1, advertise_id=adv_id, job_seeker_id=js_id)
+        return HttpResponse("success", content_type="text/plain")
     elif request.method == "GET":
         user_id = request.GET.get("user_id", "")
         return render(request, 'job-page.html', {'employer': EmployerProfile.objects.get(user_id)})
 
 
+@login_required(login_url='login')
+def employer_requests_view(request):
+    if request.method == "GET":
+        job_reqs = JobReq.objects.filter(advertise__employer_id=request.user.id)
+        return render(request, 'manage-jobs.html', {'job_reqs': job_reqs})
+    elif request.method == "POST":
+        pass
 

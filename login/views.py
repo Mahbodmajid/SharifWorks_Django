@@ -294,17 +294,26 @@ def login_view(request):
             return render(request, 'login.html')
 
 
+@login_required(login_url='login')
+@job_seeker_required()
 def browse_jobs(request):
     city = request.GET.get('city')
     skills = request.GET.getlist('skills')
     print("Ad Search. city: ", city, "skills: ", skills)
     search_form = AdvertiseSearchForm
     related_advs = []
-    for adv in Advertise.objects.all():  # TODO: search based on skills
+    for adv in Advertise.objects.all():
         if adv.city == city:
-            related_advs.append(adv)
+            adv_skills = [str(skill.id) for skill in adv.skills.all()]
+            if len(set.intersection(set(skills), set(adv_skills))) > 0:
+                related_advs.append(adv)
 
-    context = {'search_form': search_form, 'advs': related_advs}
+    context = {'search_form': search_form,
+               'advs': related_advs,
+               'before': {
+                   'city': city,
+                   'skills': [int(skill) for skill in skills]
+               }}
     return render(request, 'browse-jobs.html', context)
 
 
@@ -465,4 +474,3 @@ def employer_requests_view(request):
         print(job_req)
         print(job_req.state)
         return HttpResponse("success", content_type="text/plain")
-

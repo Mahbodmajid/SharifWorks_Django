@@ -167,31 +167,32 @@ def user_posts(request):
 @login_required(login_url='login')
 @job_seeker_required
 def edit_resume(request):
+    context = {}
     if request.method == 'POST':
-        print(request.POST)
-        print(request.user)
-        print(request.FILES)
-        print(type(request.user))
+        print(request.POST.get('bio'))
         user_form = UpdateUserForm(request.POST, request.FILES, instance=request.user)
         profile_form = JobSeekerProfileForm(request.POST, request.FILES, instance=request.user)
         print(user_form)
         print(profile_form)
         print("-----------------------")
         if profile_form.is_valid() and user_form.is_valid():
-            user = request.user  # user that is logged in
-            user_form.save()
-            profile_form.save()
-            return redirect('employer-home')
+            profile = profile_form.save(commit=False)
+            profile.save()
+            profile.job_seeker_profile.save()
+            ## TODO skills and cv are not working correctly
+            context['success'] = 'تغییرات شما با موفقیت ذخیره‌شد.'
         else:
-            print("errors:")
-            print(user_form.errors)
-            print(profile_form.errors)
-            return redirect('login')
-    else:
-        user_form = UpdateUserForm
-        profile_form = JobSeekerProfileForm
-        context = {'user_form': user_form, 'profile_form': profile_form}
-        return render(request, 'edit-resume.html', context)
+            context['errors'] = {
+                'user': user_form.errors,
+                'profile': profile_form.errors
+            }
+    user_form = UpdateUserForm
+    profile_form = JobSeekerProfileForm
+    job_seeker = JobSeekerProfile.objects.get(user_id=request.user.id)
+    context['user_form'] = user_form
+    context['profile_form'] = profile_form
+    context['job_seeker'] = job_seeker
+    return render(request, 'edit-resume.html', context)
 
 
 def logout_view(request):
@@ -364,9 +365,17 @@ def comment_view(request):
 @login_required(login_url='login')
 def job_view(request):
     if request.method == "GET":
-        adv_id = request.GET.get('job_id')
-        advertise = Advertise.objects.get(pk=adv_id)
-        # job_req = JobReq.objects.get(advertise_id=adv_id, job_seeker_id=request.user.id)
+        adv_id = request.GET.get('advertise_id', '')
+
+        if adv_id == '' or not str.isdigit(adv_id):
+            context = {'error': 'آگهی مورد نظر یافت نشد.'}
+            return render(request, 'error_page.html', context)
+
+        query_advertise = Advertise.objects.filter(id=adv_id)
+        if len(query_advertise) == 0:
+            context = {'error': 'آگهی مورد نظر یافت نشد.'}
+            return render(request, 'error_page.html', context)
+        advertise = query_advertise[0]
         return render(request, 'job-page.html', {'advertise': advertise})
     else:
         pass

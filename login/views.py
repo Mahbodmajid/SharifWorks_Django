@@ -240,9 +240,10 @@ def add_job(request):
                     new_skill_object = Skill.objects.create(name=new_skill)
                 else:
                     new_skill_object = Skill.objects.get(name=new_skill)
-                advertise.job_seeker_profile.skills.add(new_skill_object)
+                advertise.skills.add(new_skill_object)
 
             context['success'] = 'آگهی با موفقیت ثبت شد.'
+            context['all_skills'] = Skill.objects.all()
             return render(request, "job-form.html", context)
         else:
             context['all_skills'] = Skill.objects.all()
@@ -446,5 +447,22 @@ def employer_requests_view(request):
         print(job_reqs)
         return render(request, 'manage-jobs.html', {'job_reqs': job_reqs})
     elif request.method == "POST":
-        pass
+        print("POST req:")
+        print(request)
+        jobreq_id = request.POST.get('jobreq_id')
+        confirmed = request.POST.get('confirmed')
+        if jobreq_id == '':
+            return HttpResponse("failure", content_type="text/plain")
+        query_jobreq = JobReq.objects.filter(id=jobreq_id)
+        if len(query_jobreq) == 0:
+            return HttpResponse("failure", content_type="text/plain")
+
+        if len(query_jobreq) > 0:
+            return HttpResponse("failure", content_type="text/plain")
+
+        job_req = JobReq.objects.get(jobreq_id)
+        job_req.state = 2 if confirmed else 3
+        print(job_req)
+        print(job_req.state)
+        return HttpResponse("success", content_type="text/plain")
 

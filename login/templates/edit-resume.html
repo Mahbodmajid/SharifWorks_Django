@@ -1,4 +1,5 @@
 {% extends 'job-seeker-home.html' %}
+{% load staticfiles %}
 
 {% block title %}
     شریف‌کار - ویرایش اطلاعات
@@ -7,6 +8,12 @@
 {% block titlebar-text %}
     <h2><i class="fa fa-plus-circle"></i> ویرایش اطلاعات</h2>
 {% endblock %}
+
+
+{% block styles %}
+    <link href="{% static "css/select2.css" %}" rel="stylesheet"/>
+{% endblock %}
+
 
 {% block content %}
 
@@ -214,4 +221,14 @@
     </div>
 
 
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="{% static "scripts/select2.full.js" %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.multiselect').select2({tags: true, width: 'resolve'});
+        });
+    </script>
 {% endblock %}

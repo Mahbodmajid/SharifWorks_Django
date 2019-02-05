@@ -304,10 +304,10 @@ def browse_jobs(request):
     print("Ad Search. city: ", city, "skills: ", skills)
     related_advs = []
     for adv in Advertise.objects.all():
-        if adv.city in city:
+        if adv.city in city or len(city) == 0:
             adv_skills = [str(skill.id) for skill in adv.skills.all()]
 
-            if len(set.intersection(set(skills), set(adv_skills))) > 0:
+            if len(set.intersection(set(skills), set(adv_skills))) > 0 or len(skills) == 0:
                 adv.score = len(set.intersection(set(skills), set(adv_skills)))
                 related_advs.append(adv)
 
@@ -331,19 +331,6 @@ def browse_jobs(request):
                }}
     return render(request, 'browse-jobs.html', context)
 
-
-def employer_profile(request):
-    if request.method == "GET":
-        id = request.body  # TODO
-        employer = EmployerProfile.objects.get(id)
-        return render(request, 'employer-profile.html', {'employer': employer})
-    elif request.method == "POST":
-        comment_form = CommentForm(request.POST)
-        if comment_form.is_valid():
-            comment = comment_form.save(commit=False)
-            # comment.job_seeker =
-            # comment.employer =
-            # return redirect('home')
 
 
 @login_required(login_url='login')

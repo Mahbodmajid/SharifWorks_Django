@@ -122,7 +122,7 @@
 				</ul>
 
 
-				<a onclick="send_request(1234);" class="button big margin-top-5" id="send_req_btn">درخواست برای این آگهی شعلی</a>
+				<a onclick="send_request({{ advertise.id }});" class="button big margin-top-5" id="send_req_btn">درخواست برای این آگهی شعلی</a>
                 {# TODO: add link to apply for job page                #}
 
 {#              TODO:  if agahi dar hale darkhast #}
@@ -147,7 +147,10 @@
         button_state = true;
         function send_request(ad_id) {
             if (button_state) {
-                $.post('job/', {'advertiese_id': adv_id}, function (data) {});
+                $.post({% url 'request-job' %}, {
+                    'advertiese_id': ad_id,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                }, function (data) {});
                 button_state = false;
                 button = document.getElementById("send_req_btn")
                 button.innerText = "در حال بررسی درخواست"

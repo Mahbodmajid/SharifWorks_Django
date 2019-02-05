@@ -1,6 +1,7 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.models import Session
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.views.decorators.http import require_GET, require_POST
@@ -387,13 +388,15 @@ def job_view(request):
 
         return render(request, 'job-page.html', {'advertise': advertise, 'job_req': job_req})
     else:
-        pass
+        context = {'error': 'آگهی مورد نظر یافت نشد.'}
+        return render(request, 'error_page.html', context)
 
 
 @login_required(login_url='login')
 def job_requests_view(request):
     if request.method == "POST":
-        pass
+        print(request.POST.get('advertiese_id'))
+        return HttpResponse("success", content_type="text/plain")
     elif request.method == "GET":
         user_id = request.GET.get("user_id", "")
         return render(request, 'job-page.html', {'employer': EmployerProfile.objects.get(user_id)})

@@ -66,6 +66,9 @@
                 {#			  فروشگاه اینترنتی دیجیکالا از پیشروان تجارت الکتریک در ایران است. این شرکت با بیش از ۲ هزار نیرو روزانه به بیش از ۳۰ هزار سفارش پاسخ می‌دهد. ما در دیجیکالا منتظر شما دوستان مستعد شریفی هستیم :)#}
             </p>
 
+        <br>
+        <br>
+
             <h3 class="margin-bottom-15">موقعیت‌های شغلی</h3>
 
             <ul class="job-list full">
@@ -90,27 +93,13 @@
                                 <span><i class="fa fa-map-marker"></i> {{ adv.address }}</span>
                                 <span><i class="fa fa-money"></i> ۳۰۰ تومان/ساعت</span>
                             </div>
-                            <!-- <p>The SEO/SEM Specialist will work with industry leaders and top retailers to define and deliver best practices through innovative SEO methodologies.</p> -->
+                            <br>
+                            {{ adv.description }}
                         </div>
                     </a>
                         <div class="clearfix"></div>
                     </li>
                 {% endfor %}
-
-                {#			<li><a href="job-page.html">#}
-                {#				<img src="images/job-list-logo-02.png" alt="">#}
-                {#				<div class="job-list-content">#}
-                {#					<h4>توسعه‌دهنده PHP <span class="part-time">نیمه‌وقت</span></h4>#}
-                {#					<div class="job-icons">#}
-                {#						<span><i class="fa fa-briefcase"></i> دیجی‌کالا</span>#}
-                {#						<span><i class="fa fa-map-marker"></i> تهران</span>#}
-                {#						<span><i class="fa fa-money"></i> ۹۰ تومان/ساعت</span>#}
-                {#					</div>#}
-                {#					<!-- <p>Vivamus eleifend metus elit. Aenean facilisis placerat faucibus. Praesent commodo at mi nec imperdiet. Etiam at libero nec nunc iaculis ullamcorper.</p> -->#}
-                {#				</div>#}
-                {#			</a>#}
-                {#				<div class="clearfix"></div>#}
-                {#			</li>#}
             </ul>
 
             <h3 class="margin-bottom-15">نظرات کارکنان</h3>
@@ -120,7 +109,7 @@
                     <li><a href="job-seeker-profile.html">
                         <img src="images/resumes-list-avatar-01.png" alt="">
                         <div class="resumes-list-content">
-                            <h4> {{ comment.job_seeker.first_name }} <span>طراح گرافیکی</span></h4>
+                            <h4> {{ comment.job_seeker.first_name }} <span> {{ comment.job_seeker.title }}</span></h4>
                             <p> {{ comment.description }} </p>
                             <div class="clearfix"></div>
                         </div>
@@ -163,8 +152,8 @@
                         <form method="post" id="commentsForm"
                               action="{% url 'comment' %}?user_id={{ profile.user_id }}">
                             {% csrf_token %}
-                            {#                    <h5>موقعیت شغلی شما</h5>#}
-                            {#                    <input name="job_position" class="search-field" type="text" placeholder="موقعیت شغلی شما" value=""/>#}
+{#                            <h5>موقعیت شغلی شما</h5>#}
+{#                            <input name="job_position" class="search-field" type="text" placeholder="موقعیت شغلی شما" value=""/>#}
                             <h5>امتیاز شما</h5>
                             <div class="select-grid">
                                 <input name="rate" type="number" min="1" max="5" placeholder="امتیاز (از ۵)"

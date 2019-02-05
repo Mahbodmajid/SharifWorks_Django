@@ -58,7 +58,6 @@ def job_seeker_register(request):
             login(request, user)
             return redirect('home')
         else:
-
             return redirect('job-seeker-register')
     else:
         if request.user.is_authenticated:
@@ -167,16 +166,18 @@ def edit_resume(request):
         print(request.FILES)
         print(type(request.user))
         user_form = UpdateUserForm(request.POST, request.FILES, instance=request.user)
-        print(user_form)
         profile_form = JobSeekerProfileForm(request.POST, request.FILES, instance=request.user)
+        print(user_form)
+        print(profile_form)
+        print("-----------------------")
         if profile_form.is_valid() and user_form.is_valid():
-
-            # user = request.user  # user that is logged in
-            # user_form.save()
-            profile_form.save_m2m()
+            user = request.user  # user that is logged in
+            user_form.save()
+            profile_form.save()
             return redirect('employer-home')
         else:
-            # print(user_form.errors)
+            print("errors:")
+            print(user_form.errors)
             print(profile_form.errors)
             return redirect('login')
     else:
@@ -370,3 +371,6 @@ def job_requests_view(request):
     elif request.method == "GET":
         user_id = request.GET.get("user_id", "")
         return render(request, 'job-page.html', {'employer': EmployerProfile.objects.get(user_id)})
+
+
+

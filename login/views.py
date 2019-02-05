@@ -294,17 +294,26 @@ def login_view(request):
             return render(request, 'login.html')
 
 
+@login_required(login_url='login')
+@job_seeker_required()
 def browse_jobs(request):
     city = request.GET.get('city')
     skills = request.GET.getlist('skills')
     print("Ad Search. city: ", city, "skills: ", skills)
     search_form = AdvertiseSearchForm
     related_advs = []
-    for adv in Advertise.objects.all():  # TODO: search based on skills
+    for adv in Advertise.objects.all():
         if adv.city == city:
-            related_advs.append(adv)
+            adv_skills = [str(skill.id) for skill in adv.skills.all()]
+            if len(set.intersection(set(skills), set(adv_skills))) > 0:
+                related_advs.append(adv)
 
-    context = {'search_form': search_form, 'advs': related_advs}
+    context = {'search_form': search_form,
+               'advs': related_advs,
+               'before': {
+                   'city': city,
+                   'skills': [int(skill) for skill in skills]
+               }}
     return render(request, 'browse-jobs.html', context)
 
 
@@ -457,12 +466,12 @@ def employer_requests_view(request):
         if len(query_jobreq) == 0:
             return HttpResponse("failure", content_type="text/plain")
 
-        if len(query_jobreq) > 0:
+        if len(query_jobreq) > 1:
             return HttpResponse("failure", content_type="text/plain")
 
-        job_req = JobReq.objects.get(jobreq_id)
-        job_req.state = 2 if confirmed else 3
-        print(job_req)
-        print(job_req.state)
+        job_req = JobReq.objects.filter(id=jobreq_id)
+        if confirmed == '1':
+            job_req.update(state=2)
+        elif confirmed == '0':
+            job_req.update(state=3)
         return HttpResponse("success", content_type="text/plain")
-

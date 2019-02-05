@@ -19,6 +19,7 @@ class JobSeekerProfile(models.Model):
         verbose_name = _('Job Seeker Profile')
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="job_seeker_profile")
+    title = models.CharField(max_length=20, blank=True)
     skills = models.ManyToManyField(Skill, related_name='skills')
     bio = models.TextField(blank=True)
     homepage = models.URLField(blank=True)

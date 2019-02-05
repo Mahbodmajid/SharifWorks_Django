@@ -172,6 +172,9 @@ def edit_resume(request):
         print(request.POST.get('bio'))
         user_form = UpdateUserForm(request.POST, request.FILES, instance=request.user)
         profile_form = JobSeekerProfileForm(request.POST, request.FILES, instance=request.user)
+        print(user_form)
+        print(profile_form)
+        print("-----------------------")
         if profile_form.is_valid() and user_form.is_valid():
             profile = profile_form.save(commit=False)
             profile.save()
@@ -205,7 +208,7 @@ def add_job(request):
         add_job_form = AdvertiseForm(request.POST)
         print("Add Advertisement Request")
         if add_job_form.is_valid():
-            employer = EmployerProfile.objects.get(request.user.id)
+            employer = EmployerProfile.objects.get(user_id=request.user.id)
             advertise = add_job_form.save(commit=False)
             advertise.employer_id = employer.id
             advertise.save()
@@ -377,3 +380,6 @@ def job_requests_view(request):
     elif request.method == "GET":
         user_id = request.GET.get("user_id", "")
         return render(request, 'job-page.html', {'employer': EmployerProfile.objects.get(user_id)})
+
+
+

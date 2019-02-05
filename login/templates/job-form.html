@@ -24,15 +24,17 @@
 
 {#                <!-- Notice -->#}
                 {% if success is not None %}
-                    <div class="notification success closeable">
+                    <div id='successNotification' class="notification success closeable">
                         <p><span>موفقیت!</span> {{ success }}</p>
-                        <a class="close" href="#"></a>
+                        <a class="close"
+                   onclick="document.getElementById('successNotification').style.display='none';">&times;</a>
                     </div>
                 {% endif %}
                 {% if errors is not None %}
-                    <div class="notification error closeable">
+                    <div id='errorNotification' class="notification error closeable">
                         <p><span>خطا!</span> {{ errors }}</p>
-                        <a class="close" href="#"></a>
+                        <a class="close"
+                   onclick="document.getElementById('errorNotification').style.display='none';">&times;</a>
                     </div>
                 {% endif %}
 
@@ -54,7 +56,7 @@
 
                     <div class="form">
                         <h5>شهر</h5>
-                        <input class="search-field" name="city" type="text" placeholder="شهر" value="{{ before.title }}"/>
+                        <input class="search-field" name="city" type="text" placeholder="شهر" value="{{ before.city }}"/>
                     </div>
 
                     <!-- Location -->
@@ -99,7 +101,11 @@
                             <select data-placeholder="انتخاب مهارت‌ها" name="skills" class="multiselect" style="width: 100%"
                                     multiple="multiple">
                                 {% for choice in all_skills %}
-                                    {% if choice not in your_skills %}
+                                    {% if before is None %}
+                                        <option value="{{ choice.name }}">{{ choice.name }}</option>
+                                    {% elif before.skills is None %}
+                                        <option value="{{ choice.name }}">{{ choice.name }}</option>
+                                    {% elif choice.name not in before.skills %}
                                         <option value="{{ choice.name }}">{{ choice.name }}</option>
                                     {% else%}
                                         <option selected="selected" value="{{ choice.name }}">{{ choice.name }}</option>
@@ -125,20 +131,20 @@
                         </div>
                     </div>
 
-                    <!-- Tags -->
-                    <div class="form">
-                        <h5>تگ‌ها <span>(اختیاری)</span></h5>
-                        <input class="search-field" type="text" placeholder="،مثال: مدیریت، آموزش Django" value=""/>
-                        <p class="note">تگ‌ها را با علامت کاما جدا نمایید. مانند مهارت‌های مورد نیاز و یا تکنولوژی‌های
-                            لازم برای این کار.</p>
-                    </div>
+{#                    <!-- Tags -->#}
+{#                    <div class="form">#}
+{#                        <h5>تگ‌ها <span>(اختیاری)</span></h5>#}
+{#                        <input class="search-field" type="text" placeholder="،مثال: مدیریت، آموزش Django" value=""/>#}
+{#                        <p class="note">تگ‌ها را با علامت کاما جدا نمایید. مانند مهارت‌های مورد نیاز و یا تکنولوژی‌های#}
+{#                            لازم برای این کار.</p>#}
+{#                    </div>#}
 
 
                     <!-- Description -->
                     <div class="form">
                         <h5>توضیحات</h5>
                         <textarea name="description" class="WYSIWYG" name="summary" cols="40" rows="3" id="summary"
-                                  spellcheck="true"></textarea>
+                                  spellcheck="true">{{ before.description }}</textarea>
                     </div>
 
                     <!-- Application email/url -->
@@ -150,7 +156,7 @@
                     <!-- TClosing Date -->
                     <div class="form">
                         <h5>تاریخ اتمام <span>(اختیاری)</span></h5>
-                        <input name="deadline" data-role="date" type="text" placeholder="yyyy-mm-dd">
+                        <input name="deadline" data-role="date" type="text" placeholder="yyyy-mm-dd", value="{{ before.deadline }}">
                         <p class="note">ددلاین اقدام برای این شفل</p>
                     </div>
 

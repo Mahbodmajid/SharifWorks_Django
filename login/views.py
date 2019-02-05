@@ -297,7 +297,7 @@ def login_view(request):
 @login_required(login_url='login')
 @job_seeker_required()
 def browse_jobs(request):
-    city = request.GET.get('city')
+    city = request.GET.get('city', "")
     skills = request.GET.getlist('skills')
     print("Ad Search. city: ", city, "skills: ", skills)
     search_form = AdvertiseSearchForm

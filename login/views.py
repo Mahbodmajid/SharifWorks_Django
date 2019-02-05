@@ -502,12 +502,18 @@ def download_resume_view(request):
         if request.user.is_employer:
             has_right = True
         elif request.user.is_jobseeker:
+            print(job_seeker_id, request.user.job_seeker_profile.id)
+            job_seeker_id = int(job_seeker_id)
             if request.user.job_seeker_profile.id == job_seeker_id:
                 has_right = True
         if has_right:
             candidates = JobSeekerProfile.objects.filter(id=job_seeker_id)
             if len(candidates) > 0:
                 resume_file = candidates[0].cv
+                if resume_file == "" or resume_file is None:
+                    return render(request, 'error_page.html', {
+                        'error': 'این کارجو رزومه ندارد.'
+                    })
                 response = HttpResponse(resume_file, content_type='application/pdf')
                 response['Content-Disposition'] = 'attachment; filename="resume.pdf"'
                 return response

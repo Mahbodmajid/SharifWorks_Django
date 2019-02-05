@@ -177,7 +177,7 @@
                 'jobreq_id': jobreq_id,
                 'confirmed': 1,
                 'csrfmiddlewaretoken': '{{ csrf_token }}'
-            }, function (data) {});
+            }, function (data) {console.log(data)});
             button_state = false;
             {#button = document.getElementById("confirm")#}
             {#button.innerText = "در حال بررسی درخواست"#}

@@ -125,10 +125,10 @@
                     <div class="form">
                         <h5>رزومه </h5>
                         <label class="upload-btn">
-                            <input type="file" name="cv"/>
+                            <input type="file" name="cv" id="cv_input"/>
                             <i class="fa fa-upload" dir="rtl"></i> انتخاب فایل
                         </label>
-                        <span class="fake-input" dir="rtl">هیچ فایلی انتخاب نشده‌است</span>
+                        <span class="fake-input" dir="rtl" id="cv_filename">هیچ فایلی انتخاب نشده‌است</span>
                     </div>
 
 
@@ -230,5 +230,11 @@
         $(document).ready(function () {
             $('.multiselect').select2({tags: true, width: 'resolve'});
         });
+
+        $('#cv_input').change(function() {
+            var filename = $('#cv_input')[0].files[0].name;
+            $('#cv_filename').html(filename);
+        });
     </script>
+
 {% endblock %}

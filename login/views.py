@@ -385,7 +385,21 @@ def job_view(request):
 @login_required(login_url='login')
 def job_requests_view(request):
     if request.method == "POST":
-        print(request.POST.get('advertiese_id'))
+        adv_id = request.POST.get('advertiese_id')
+        if adv_id == '':
+            return HttpResponse("failure", content_type="text/plain")
+        query_advertise = Advertise.objects.filter(id=adv_id)
+        if len(query_advertise) == 0:
+            return HttpResponse("failure", content_type="text/plain")
+
+        jobseekeer = JobSeekerProfile.objects.get(user_id=request.user.id)
+        js_id = jobseekeer.id
+
+        query_jobreq = JobReq.objects.filter(advertise_id=adv_id, job_seeker_id=js_id)
+        if len(query_jobreq) > 0:
+            return HttpResponse("failure", content_type="text/plain")
+
+        JobReq.objects.create(state=0, advertise_id=adv_id, job_seeker_id=js_id)
         return HttpResponse("success", content_type="text/plain")
     elif request.method == "GET":
         user_id = request.GET.get("user_id", "")

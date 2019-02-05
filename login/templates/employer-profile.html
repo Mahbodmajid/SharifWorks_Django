@@ -31,8 +31,10 @@
                         {% else %}
                             <h5><span>شرکت عمومی</span></h5>
                         {% endif %}
+                        {% if not profile.address == "" %}
+                            <span class="icons"><i class="fa fa-map-marker"></i> {{ profile.address }} </span>
+                        {% endif %}
 
-                        <span class="icons"><i class="fa fa-map-marker"></i> {{ profile.city }} </span>
                         <span class="icons"><a href="{{ profile.homepage }}"><i
                                 class="fa fa-link"></i> وب‌سایت</a></span>
                         <span class="icons"><a href="mailto:{{ profile.user.username }}"><i

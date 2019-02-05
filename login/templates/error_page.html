@@ -1,20 +1,22 @@
 {% extends 'index.html' %}
 
-    {% block title %}
-        شریف‌کار - خطا
-    {% endblock %}
+{% block title %}
+    شریف‌کار - خطا
+{% endblock %}
 
 
 {% block navbar %}
-{% include 'shared-urls.html' %}
+    {% include 'shared-urls.html' %}
 {% endblock %}
 
 
 {% block content %}
-<div class="notification error closeable">
-    <p><span>خطا!</span> {{ error }}</p>
-    <a class="close" href="#"></a>
-</div>
+    <div class="container">
+        <div class="notification error closeable">
+            <p><span>خطا!</span> {{ error }}</p>
+            <a class="close" href="#"></a>
+        </div>
+    </div>
 {% endblock %}
 
 

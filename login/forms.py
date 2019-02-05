@@ -99,8 +99,6 @@ class AdvertiseSearchForm(forms.ModelForm):
     city = forms.CharField()
 
 
-
-
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment

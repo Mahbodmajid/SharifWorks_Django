@@ -32,14 +32,18 @@
         <form action="{% url "browse-jobs" %}" method="get" id="job-search-form">
             <div class="form">
                 <h5>شهر</h5>
-                <input type="text" name="city" value=""/>
+                <input type="text" name="city" value="{{ before.city }}"/>
             </div>
             <div class="form">
                 <div class="select">
                     <h5>مهارت‌ها</h5>
                     <select data-placeholder="انتخاب مهارت‌ها"  name="skills" class="multiselect"  style="width: 100%" multiple="multiple">
                         {%  for choice in search_form.skills.field.queryset %}
-                            <option value="{{ choice.id }}">{{ choice.name }}</option>
+                            {% if choice.id in before.skills %}
+                                <option selected="selected" value="{{ choice.id }}">{{ choice.name }}</option>
+                            {% else %}
+                                <option value="{{ choice.id }}">{{ choice.name }}</option>
+                            {% endif %}
                         {%  endfor %}
                     </select>
                 </div>

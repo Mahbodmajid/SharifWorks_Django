@@ -3,7 +3,7 @@
 
 
 {% block styles %}
-    <link href="{%  static "css/select2.css" %}" rel="stylesheet" />
+    <link href="{% static "css/select2.css" %}" rel="stylesheet"/>
 {% endblock %}
 
 {% block navbar %}
@@ -42,9 +42,10 @@
         <!--</div>-->
 
         {% if success is not None %}
-            <div class="notification success closeable">
+            <div id='successNotification' class="notification success closeable">
                 <p><span>موفقیت!</span> {{ success }}</p>
-                <a class="close" href="#"></a>
+                <a class="close"
+                   onclick="document.getElementById('successNotification').style.display='none';">&times;</a>
             </div>
         {% endif %}
 
@@ -375,10 +376,10 @@
 
 
 {% block scripts %}
-<script src="{% static "scripts/select2.full.js" %}"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.multiselect').select2({tags: true, width: 'resolve'});
-    });
-</script>
-{%  endblock %}
+    <script src="{% static "scripts/select2.full.js" %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.multiselect').select2({tags: true, width: 'resolve'});
+        });
+    </script>
+{% endblock %}

@@ -199,7 +199,7 @@ def add_job(request):
         add_job_form = AdvertiseForm(request.POST)
         print("Add Advertisement Request")
         if add_job_form.is_valid():
-            employer = EmployerProfile.objects.get(request.user.id)
+            employer = EmployerProfile.objects.get(user_id=request.user.id)
             advertise = add_job_form.save(commit=False)
             advertise.employer_id = employer.id
             advertise.save()

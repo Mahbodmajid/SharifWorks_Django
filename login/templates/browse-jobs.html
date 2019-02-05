@@ -12,6 +12,11 @@
 <h2> <i class="fa fa-search"></i> جست‌وجوی کار</h2>
 {% endblock %}
 
+{% block styles %}
+    <link href="{% static "css/select2.css" %}" rel="stylesheet"/>
+{% endblock %}
+
+
 {% block content %}
 
 <!-- Content
@@ -191,4 +196,13 @@
 
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static "scripts/select2.full.js" %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.multiselect').select2({tags: true, width: 'resolve'});
+        });
+    </script>
 {% endblock %}

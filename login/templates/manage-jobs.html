@@ -114,7 +114,7 @@
 				<td>{{ job_req.deadline }}</td>
                 <td class="centered"><a href="{% url 'profile'  %}?user_id={{ job_req.job_seeker.user_id }}" class="button">نمایش پروفایل</a></td>
 				<td class="action">
-					<a onclick="confirm({{ job_req.id }}"><i class="fa  fa-check " id="confirm"></i> تایید</a>
+					<a onclick="confirm({{ job_req.id }})"><i class="fa  fa-check " id="confirm"></i> تایید</a>
                     <a href="#" class="delete"><i class="fa fa-remove" id="reject"></i> رد</a>
 				</td>
 			</tr>

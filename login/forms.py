@@ -3,7 +3,10 @@ from django.contrib.auth.models import User
 
 from login.models import JobSeekerProfile, EmployerProfile, Advertise, Choices, Skill, Comment, JobReq
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
+
+
 # Register forms -------------------------------------------------------------------------------------------------------
 
 
@@ -31,13 +34,14 @@ class JobSeekerRegisterForm(forms.ModelForm):
     class Meta:
         model = JobSeekerProfile
         # fields = ('bio', 'homepage', 'cv')
-        fields = ('bio', )
+        fields = ('bio',)
 
 
 class EmployerRegisterForm(forms.ModelForm):
     class Meta:
         model = EmployerProfile
         fields = ('company_name', 'company_disc', 'company_type')
+
 
 # Login forms ----------------------------------------------------------------------------------------------------------
 
@@ -65,6 +69,7 @@ class JobSeekerProfileForm(forms.ModelForm):
 
     skills = forms.ModelChoiceField(queryset=Skill.objects.all(), widget=forms.SelectMultiple)
 
+
 # Advertise forms -----------------------------------------------------------------------------------------------------
 
 
@@ -77,7 +82,7 @@ class AdvertiseForm(forms.ModelForm):
     city = forms.CharField(error_messages={'required': 'شهر کار را وارد کنید.'})
     type = forms.ChoiceField(choices=Choices.JOBTYPES,
                              error_messages={'required': 'نوع کار را وارد کنید.',
-                                            'invalid_choice': 'نوع کار معتبر نیست'})
+                                             'invalid_choice': 'نوع کار معتبر نیست'})
     category = forms.ChoiceField(choices=Choices.JOBCATS,
                                  error_messages={'required': 'دسته‌بندی کار را وارد کنید.',
                                                  'invalid_choice': 'دسته‌بندی کار معتبر نیست'}
@@ -99,10 +104,12 @@ class AdvertiseSearchForm(forms.ModelForm):
     city = forms.CharField()
 
 
-
-
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('description', 'rate',)
+
+    description = forms.CharField(error_messages={'required': 'لطفاً عنوان را وارد کنید.'})
+    rate = forms.IntegerField(required=False)
+
 

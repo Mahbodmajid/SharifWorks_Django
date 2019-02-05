@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.models import Session
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 
 from login.forms import RegisterForm, JobSeekerProfileForm, UpdateUserForm, EmployerRegisterForm, AdvertiseForm, \
     CommentForm, AdvertiseSearchForm
@@ -105,6 +105,7 @@ def employer_register(request):
             context = {'register_form': register_form,
                        'employer_register_form': employer_register_form}
             return render(request, 'my-account-employer.html', context)
+
 
 # login
 
@@ -319,17 +320,47 @@ def profile_view(request):
             return render(request, 'employer-profile.html', context)
 
 
+@require_POST
 @login_required(login_url='login')
+@job_seeker_required
 def comment_view(request):
-    return None
+    user_id = request.GET.get("user_id")
+    employers = EmployerProfile.objects.filter(user_id=user_id)
+    if len(employers) == 0:
+        context = {'error': 'کارفرمای مورد نظر یافت نشد.'}
+        return render(request, 'error_page.html', context)
+    employer = employers[0]
+    profile_contents = EmployerProfile.objects.get(user_id=user_id)
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.employer = employer
+        comment.job_seeker = JobSeekerProfile.objects.get(user_id=request.user.id)
+        comment.save()
+        context = {
+            'profile': profile_contents,
+            'success': 'نظر با موفقیت ثبت شد.'
+        }
+        return render(request, "employer-profile.html", context)
+    else:
+        context = {'profile': profile_contents,
+                   'errors': comment_form.errors,
+                   'before': {
+                       'rate': request.POST.get('rate'),
+                       'description': request.POST.get('description')
+                   }}
+        return render(request, 'employer-profile.html', context)
+
 
 @login_required(login_url='login')
 def job_view(request):
-    if request.method == "POST":
-        adv_id = request.POST.get('advertise_id')
+    if request.method == "GET":
+        adv_id = request.GET.get('advertise_id')
         advertise = Advertise.objects.get(adv_id)
         job_req = JobReq.objects.create(advertise_id=adv_id, job_seeker_id=request.user.id)
-    return render(request, 'job-page.html', {'advertise': advertise})
+        return render(request, 'job-page.html', {'advertise': advertise})
+    else:
+        pass
 
 
 @login_required(login_url='login')

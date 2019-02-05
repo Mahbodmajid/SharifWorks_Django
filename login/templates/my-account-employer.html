@@ -28,25 +28,25 @@
 
     <!-- Container -->
 
-     <div class="container">
+    <div class="container">
 
         <div class="my-account">
-        {% if errors is not None %}
-            {% if errors.user is not None %}
-                <div class="notification error closeable">
+            {% if errors is not None %}
+                {% if errors.user is not None %}
+                    <div class="notification error closeable">
 
-                    <p><span>خطا!</span> {{ errors.user }}</p>
-                    <a class="close" href="#"></a>
-                </div>
-            {% endif %}
-             {% if errors.user is not None %}
-                <div class="notification error closeable">
+                        <p><span>خطا!</span> {{ errors.user }}</p>
+                        <a class="close" href="#"></a>
+                    </div>
+                {% endif %}
+                {% if errors.user is not None %}
+                    <div class="notification error closeable">
 
-                    <p><span>خطا!</span> {{ errors.profile }}</p>
-                    <a class="close" href="#"></a>
-                </div>
+                        <p><span>خطا!</span> {{ errors.profile }}</p>
+                        <a class="close" href="#"></a>
+                    </div>
+                {% endif %}
             {% endif %}
-             {% endif %}
 
             <h3 class="margin-bottom-10 margin-top-10">ثبت‌نام</h3>
 

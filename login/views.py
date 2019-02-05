@@ -167,29 +167,29 @@ def user_posts(request):
 @login_required(login_url='login')
 @job_seeker_required
 def edit_resume(request):
+    context = {}
     if request.method == 'POST':
-        print(request.POST)
-        print(request.user)
-        print(request.FILES)
-        print(type(request.user))
+        print(request.POST.get('bio'))
         user_form = UpdateUserForm(request.POST, request.FILES, instance=request.user)
-        print(user_form)
         profile_form = JobSeekerProfileForm(request.POST, request.FILES, instance=request.user)
         if profile_form.is_valid() and user_form.is_valid():
-
-            # user = request.user  # user that is logged in
-            # user_form.save()
-            profile_form.save_m2m()
-            return redirect('employer-home')
+            profile = profile_form.save(commit=False)
+            profile.save()
+            profile.job_seeker_profile.save()
+            ## TODO skills and cv are not working correctly
+            context['success'] = 'تغییرات شما با موفقیت ذخیره‌شد.'
         else:
-            # print(user_form.errors)
-            print(profile_form.errors)
-            return redirect('login')
-    else:
-        user_form = UpdateUserForm
-        profile_form = JobSeekerProfileForm
-        context = {'user_form': user_form, 'profile_form': profile_form}
-        return render(request, 'edit-resume.html', context)
+            context['errors'] = {
+                'user': user_form.errors,
+                'profile': profile_form.errors
+            }
+    user_form = UpdateUserForm
+    profile_form = JobSeekerProfileForm
+    job_seeker = JobSeekerProfile.objects.get(user_id=request.user.id)
+    context['user_form'] = user_form
+    context['profile_form'] = profile_form
+    context['job_seeker'] = job_seeker
+    return render(request, 'edit-resume.html', context)
 
 
 def logout_view(request):

@@ -67,7 +67,8 @@ class JobSeekerProfileForm(forms.ModelForm):
         model = JobSeekerProfile
         fields = ('bio', 'homepage', 'cv', 'skills')
 
-    skills = forms.ModelChoiceField(queryset=Skill.objects.all(), widget=forms.SelectMultiple)
+    skills = forms.ModelChoiceField(queryset=Skill.objects.all(), widget=forms.SelectMultiple, required=False)
+    bio = forms.Textarea()
 
 
 # Advertise forms -----------------------------------------------------------------------------------------------------

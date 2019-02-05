@@ -96,13 +96,18 @@
                     <!-- Choose Skill -->
                     {#			<div class="form">#}
                     <div class="select">
-                        <h5>مهارت‌ها</h5>
-                        <select data-placeholder="انتخاب مهارت‌ها" name="skills" class="multiselect" style="width: 100%"
-                                multiple="multiple">
-                            {% for choice in profile_form.skills.field.queryset %}
-                                <option value="{{ choice.id }}">{{ choice.name }}</option>
-                            {% endfor %}
-                        </select>
+                        <label>مهارت‌ها
+                            <select data-placeholder="انتخاب مهارت‌ها" name="skills" class="multiselect" style="width: 100%"
+                                    multiple="multiple">
+                                {% for choice in all_skills %}
+                                    {% if choice not in your_skills %}
+                                        <option value="{{ choice.name }}">{{ choice.name }}</option>
+                                    {% else%}
+                                        <option selected="selected" value="{{ choice.name }}">{{ choice.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </label>
                     </div>
                     {#			</div>#}
 
@@ -136,9 +141,8 @@
 
                     <!-- Description -->
                     <div class="form">
-                        <label for="summary">بیوگرافی</label><textarea class="WYSIWYG" name="bio" name="summary"
-                                                                       cols="40" rows="3" id="summary"
-                                                                       spellcheck="true">{{ job_seeker.bio }}</textarea>
+                        <label for="summary">بیوگرافی</label>
+                        <textarea class="WYSIWYG" name="bio" cols="40" rows="3" id="summary" spellcheck="true">{{ job_seeker.bio }}</textarea>
                     </div>
 
 

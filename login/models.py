@@ -98,6 +98,7 @@ class Advertise(models.Model):
     city = models.CharField(max_length=50, blank=True)
     address = models.CharField(max_length=100, blank=True)
     description = models.TextField(blank=True)
+    skills = models.ManyToManyField(Skill, related_name='ad_skills')
 
 
 class JobReq(models.Model):
@@ -106,4 +107,5 @@ class JobReq(models.Model):
     state = models.IntegerField(default=1)  # 1: applied         2: accepted        3: rejected
     created_date = models.DateTimeField(auto_now_add=True, null=True)
     deadline = models.DateTimeField(blank=True, null=True)
+
 

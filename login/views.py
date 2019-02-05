@@ -377,7 +377,8 @@ def job_view(request):
         advertise = query_advertise[0]
         return render(request, 'job-page.html', {'advertise': advertise})
     else:
-        pass
+        context = {'error': 'آگهی مورد نظر یافت نشد.'}
+        return render(request, 'error_page.html', context)
 
 
 @login_required(login_url='login')

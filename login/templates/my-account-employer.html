@@ -27,7 +27,11 @@
     ================================================== -->
 
     <!-- Container -->
-    {% if error is not None %}
+
+     <div class="container">
+
+        <div class="my-account">
+            {% if error is not None %}
                 <div class="notification error closeable">
                     <p><span>خطا!</span> {{ error }}</p>
                     <a class="close" href="#"></a>

@@ -104,3 +104,5 @@ class JobReq(models.Model):
     advertise = models.ForeignKey(Advertise, on_delete=models.CASCADE)
     job_seeker = models.ForeignKey(JobSeekerProfile, on_delete=models.CASCADE)
     state = models.IntegerField(default=1)  # 1: applied         2: accepted        3: rejected
+    created_date = models.DateTimeField(auto_now_add=True)
+    deadline = models.DateTimeField(blank=True)

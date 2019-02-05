@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -14,8 +15,8 @@
 
 <!-- CSS
 ================================================== -->
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/colors/green.css" id="colors">
+<link rel="stylesheet" href="{%  static "css/style.css" %}">
+<link rel="stylesheet" href="{%  static "css/colors/green.css" %}" id="colors">
 
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -40,16 +41,12 @@
 
 			<!-- Menu -->
 			<nav id="navigation" class="menu">
-				<ul id="responsive">
-					<li><a href="employer-home.html">خانه</a></li>
-					<li><a href="employer-profile.html">پروفایل</a></li>
-					<li><a href="add-job.html">افزودن آگهی</a></li>
-					<li><a href="manage-jobs.html">فهرست آگهی‌ها</a></li>
-					<li><a href="browse-resumes.html">جست‌وجوی کارجو</a></li>
-					<li><a href="employer-change-pass.html">  تغییر گذرواژه <i class="fa fa-key"></i></a> </li>
-					<li><a href="index.html">خروج <i class="fa fa-sign-out"></i> </a></li>
-				</ul>
-			</nav>
+                    {% block navbar %}
+                        <ul id="responsive">
+                            {% include 'employer-urls.html' %}
+                        </ul>
+                    {% endblock %}
+            </nav>
 
 			<!-- Navigation -->
 			<div id="mobile-navigation">
@@ -179,20 +176,19 @@
 
 <!-- Scripts
 ================================================== -->
-<script src="scripts/jquery-2.1.3.min.js"></script>
-<script src="scripts/custom.js"></script>
-<script src="scripts/jquery.superfish.js"></script>
-<script src="scripts/jquery.themepunch.tools.min.js"></script>
-<script src="scripts/jquery.themepunch.revolution.min.js"></script>
-<script src="scripts/jquery.themepunch.showbizpro.min.js"></script>
-<script src="scripts/jquery.flexslider-min.js"></script>
-<script src="scripts/chosen.jquery.min.js"></script>
-<script src="scripts/jquery.magnific-popup.min.js"></script>
-<script src="scripts/waypoints.min.js"></script>
-<script src="scripts/jquery.counterup.min.js"></script>
-<script src="scripts/jquery.jpanelmenu.js"></script>
-<script src="scripts/stacktable.js"></script>
-<script src="scripts/stacktable.js"></script>
+<script src="{%  static "scripts/jquery-2.1.3.min.js" %}"></script>
+<script src="{%  static "scripts/custom.js" %}"></script>
+<script src="{%  static "scripts/jquery.superfish.js" %}"></script>
+<script src="{%  static "scripts/jquery.themepunch.tools.min.js" %}"></script>
+<script src="{%  static "scripts/jquery.themepunch.revolution.min.js" %}"></script>
+<script src="{%  static "scripts/jquery.themepunch.showbizpro.min.js" %}"></script>
+<script src="{%  static "scripts/jquery.flexslider-min.js" %}"></script>
+<script src="{%  static "scripts/chosen.jquery.min.js"  %}"></script>
+<script src="{%  static "scripts/jquery.magnific-popup.min.js" %}"></script>
+<script src="{%  static "scripts/waypoints.min.js" %}"></script>
+<script src="{%  static "scripts/jquery.counterup.min.js" %}"></script>
+<script src="{%  static "scripts/jquery.jpanelmenu.js" %}"></script>
+<script src="{%  static "scripts/stacktable.js" %}"></script>
 
 
 

@@ -121,8 +121,15 @@
 					</li>
 				</ul>
 
-
-				<a onclick="send_request({{ advertise.id }});" class="button big margin-top-5" id="send_req_btn">درخواست برای این آگهی شعلی</a>
+                {% if state == 0 %}
+				    <a onclick="send_request({{ advertise.id }});" class="button big margin-top-5" id="send_req_btn">درخواست برای این آگهی شعلی</a>
+                {% elif state == 1 %}
+                    <a  class="disabled-button" id="send_req_btn">در حال بررسی درخواست</a>
+                {% elif state == 2 %}
+                    <a  class="disabled-button" id="send_req_btn">درخواست قبول شده</a>
+                {% elif state == 3 %}
+                    <a  class="disabled-button" id="send_req_btn">درخواست رد شده</a>
+                {% endif %}
                 {# TODO: add link to apply for job page                #}
 
 {#              TODO:  if agahi dar hale darkhast #}

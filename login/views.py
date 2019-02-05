@@ -367,6 +367,15 @@ def comment_view(request):
 def job_view(request):
     if request.method == "GET":
         adv_id = request.GET.get('advertise_id', '')
+        job_reqs = JobReq.objects.filter(advertise_id=adv_id, job_seeker__user_id=request.user.id)
+        state = 0
+        job_req = None
+        if len(job_reqs) == 1:
+            job_req = job_reqs[0]
+            state = job_req.state
+        elif len(job_reqs) > 1:
+            state = -1  # invalid
+
         if adv_id == '' or not str.isdigit(adv_id):
             context = {'error': 'آگهی مورد نظر یافت نشد.'}
             return render(request, 'error_page.html', context)
@@ -376,7 +385,8 @@ def job_view(request):
             context = {'error': 'آگهی مورد نظر یافت نشد.'}
             return render(request, 'error_page.html', context)
         advertise = query_advertise[0]
-        return render(request, 'job-page.html', {'advertise': advertise})
+
+        return render(request, 'job-page.html', {'advertise': advertise, 'state': state})
     else:
         context = {'error': 'آگهی مورد نظر یافت نشد.'}
         return render(request, 'error_page.html', context)
@@ -404,6 +414,5 @@ def job_requests_view(request):
     elif request.method == "GET":
         user_id = request.GET.get("user_id", "")
         return render(request, 'job-page.html', {'employer': EmployerProfile.objects.get(user_id)})
-
 
 

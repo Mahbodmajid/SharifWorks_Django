@@ -409,7 +409,7 @@ def job_requests_view(request):
         if len(query_jobreq) > 0:
             return HttpResponse("failure", content_type="text/plain")
 
-        JobReq.objects.create(state=0, advertise_id=adv_id, job_seeker_id=js_id)
+        JobReq.objects.create(state=1, advertise_id=adv_id, job_seeker_id=js_id)
         return HttpResponse("success", content_type="text/plain")
     elif request.method == "GET":
         user_id = request.GET.get("user_id", "")

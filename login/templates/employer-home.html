@@ -101,9 +101,9 @@
             <div class="container">
                 <!-- Plan #1 -->
                 {% if success is not None %}
-                    <div class="notification success closeable">
+                    <div id='successNotification' class="notification success closeable">
                         <p><span>موفقیت!</span> {{ success }}</p>
-                        <a class="close" href="#"></a>
+                        <a class="close" onclick="document.getElementById('successNotification').style.display='none';">&times;</a>
                     </div>
                 {% endif %}
                 <div class="plan color-1 one-third column">

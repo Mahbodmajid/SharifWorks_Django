@@ -58,7 +58,10 @@ def job_seeker_register(request):
             login(request, user)
             return redirect('home')
         else:
-            return redirect('job-seeker-register')
+            context = {'errors': {
+                'user': user_form.errors,
+            }}
+            return render(request, 'my-account-job-seeker.html', context)
     else:
         if request.user.is_authenticated:
             return redirect('home')
@@ -94,7 +97,11 @@ def employer_register(request):
             print("company_disc: ", user.employer_profile.company_disc)
             return redirect('home')
         else:
-            return redirect('employer-register')
+            context = {'errors': {
+                'user': user_form.errors,
+                'profile': profile_form.errors
+            }}
+            return render(request, 'my-account-employer.html', context)
     else:
         if request.user.is_authenticated:
             return redirect('home')
@@ -200,7 +207,7 @@ def add_job(request):
         add_job_form = AdvertiseForm(request.POST)
         print("Add Advertisement Request")
         if add_job_form.is_valid():
-            employer = EmployerProfile.objects.get(request.user.id)
+            employer = EmployerProfile.objects.get(user_id=request.user.id)
             advertise = add_job_form.save(commit=False)
             advertise.employer_id = employer.id
             advertise.save()
@@ -337,6 +344,7 @@ def comment_view(request):
         comment = comment_form.save(commit=False)
         comment.employer = employer
         comment.job_seeker = JobSeekerProfile.objects.get(user_id=request.user.id)
+        print(comment)
         comment.save()
         context = {
             'profile': profile_contents,

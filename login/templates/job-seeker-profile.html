@@ -29,7 +29,7 @@
 					<span class="icons"><a href="mailto:{{ profile.user.username }}"><i class="fa fa-envelope"></i> {{ profile.user.username }} </a></span>
 					<div class="skills">
                         {% for skill in profile.skills.all %}
-						<span> skill.name </span>
+						<span> {{ skill.name }} </span>
                         {% endfor %}
 {#						<span>PHP</span>#}
 {#						<span>WordPress</span>#}

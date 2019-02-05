@@ -4,101 +4,108 @@
     شریف‌کار - پروفایل
 {% endblock %}
 
-{% block titlebar%}
+{% block titlebar %}
 
 {% endblock %}
 
 {% block navbar %}
-{% include 'shared-urls.html' %}
+    {% include 'shared-urls.html' %}
 {% endblock %}
 
 {% block content %}
 
-<!-- Titlebar
-================================================== -->
-<div id="titlebar" class="resume">
-	<div class="container">
-		<div class="ten columns">
-			<div class="resume-titlebar">
-				<img src="images/resumes-list-avatar-01.png" alt="">
-				<div class="resumes-list-content">
-					<h4> {{ profile.user.first_name }} {{ profile.user.last_name }} <span> {{ profile.title }}</span></h4>
-					<span class="icons"><i class="fa fa-map-marker"></i> {{ profile.address }} </span>
-					<span class="icons"><i class="fa fa-money"></i>  ۱۰۰ تومان/ساعت </span>
-					<span class="icons"><a href="{{ profile.homepage }}"><i class="fa fa-link"></i> وب‌سایت</a></span>
-					<span class="icons"><a href="mailto:{{ profile.user.username }}"><i class="fa fa-envelope"></i> {{ profile.user.username }} </a></span>
-					<div class="skills">
-                        {% for skill in profile.skills.all %}
-						<span> {{ skill.name }} </span>
-                        {% endfor %}
-{#						<span>PHP</span>#}
-{#						<span>WordPress</span>#}
-					</div>
-					<div class="clearfix"></div>
-					<div class="show-transactions">
-						<span class="icons"><a href="job-seeker-transactions.html"><i class="fa fa-file-text"></i> نمایش تراکنش‌ها</a></span>
-					</div>
-				</div>
-			</div>
-		</div>
+    <!-- Titlebar
+    ================================================== -->
+    <div id="titlebar" class="resume">
+        <div class="container">
+            <div class="ten columns">
+                <div class="resume-titlebar">
+                    <img src="images/resumes-list-avatar-01.png" alt="">
+                    <div class="resumes-list-content">
+                        <h4> {{ profile.user.first_name }} {{ profile.user.last_name }}
+                            <span> {{ profile.title }}</span></h4>
+                        <span class="icons"><i class="fa fa-map-marker"></i> {{ profile.address }} </span>
+                        <span class="icons"><i class="fa fa-money"></i>  ۱۰۰ تومان/ساعت </span>
+                        <span class="icons"><a href="{{ profile.homepage }}"><i
+                                class="fa fa-link"></i> وب‌سایت</a></span>
+                        <span class="icons"><a href="mailto:{{ profile.user.username }}"><i
+                                class="fa fa-envelope"></i> {{ profile.user.username }} </a></span>
+                        <div class="skills">
+                            {% for skill in profile.skills.all %}
+                                <span> {{ skill.name }} </span>
+                            {% endfor %}
+                            {#						<span>PHP</span>#}
+                            {#						<span>WordPress</span>#}
+                        </div>
+                        <div class="clearfix"></div>
+                        {% if request.user.id == profile.user_id %}
+                            <div class="show-transactions">
+                                <span class="icons"><a href="job-seeker-transactions.html"><i
+                                        class="fa fa-file-text"></i> نمایش تراکنش‌ها</a></span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
 
-		<div class="six columns">
-			<!--<div class="two-buttons">-->
-{#            # TODO #}
-				<a href="#small-dialog" class="button"><i class="fa fa-file-text"></i> دانلود رزومه </a>
-
-				<!--<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup">-->
-					<!--<div class="small-dialog-headline">-->
-						<!--<h2>فرستادن پیام</h2>-->
-					<!--</div>-->
-
-					<!--<div class="small-dialog-content">-->
-						<!--<form action="#" method="get" >-->
-							<!--<input type="text" placeholder="Full Name" value=""/>-->
-							<!--<input type="text" placeholder="Email Address" value=""/>-->
-							<!--<textarea placeholder="Message"></textarea>-->
-
-							<!--<button class="send">Send Application</button>-->
-						<!--</form>-->
-					<!--</div>-->
-					<!---->
-				<!--</div>-->
-				<!--&lt;!&ndash; <a href="#" class="button dark"><i class="fa fa-star"></i> Bookmark This Resume</a> &ndash;&gt;-->
+            <div class="six columns">
+                <!--<div class="two-buttons">-->
+                {% if  request.user.is_employer or request.user.id == profile.user_id %}
+                    <a href="{% url 'resume' %}?job_seeker_id={{ profile.id }}" class="button"><i
+                            class="fa fa-file-text"></i> دانلود رزومه </a>
+                {% endif %}
 
 
-			<!--</div>-->
-		</div>
+                <!--<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup">-->
+                <!--<div class="small-dialog-headline">-->
+                <!--<h2>فرستادن پیام</h2>-->
+                <!--</div>-->
 
-	</div>
-</div>
+                <!--<div class="small-dialog-content">-->
+                <!--<form action="#" method="get" >-->
+                <!--<input type="text" placeholder="Full Name" value=""/>-->
+                <!--<input type="text" placeholder="Email Address" value=""/>-->
+                <!--<textarea placeholder="Message"></textarea>-->
 
-
-<!-- Content
-================================================== -->
-<div class="container">
-	<!-- Recent Jobs -->
-	<div class="eight columns">
-	<div class="padding-right">
-
-		<h3 class="margin-bottom-15">درباره من</h3>
-
-		<p class="margin-reset">
-			 بسیار علاقه‌مند به طراحی گرافیکی با با تجربه ۳ ساله در این زمینه.
-		</p>
-
-		<br>
-
-		<ul class="list-1">
-			<li></li>
-			<li></li>
-		</ul>
-
-	</div>
-	</div>
+                <!--<button class="send">Send Application</button>-->
+                <!--</form>-->
+                <!--</div>-->
+                <!---->
+                <!--</div>-->
+                <!--&lt;!&ndash; <a href="#" class="button dark"><i class="fa fa-star"></i> Bookmark This Resume</a> &ndash;&gt;-->
 
 
+                <!--</div>-->
+            </div>
+
+        </div>
+    </div>
 
 
-</div>
+    <!-- Content
+    ================================================== -->
+    <div class="container">
+        <!-- Recent Jobs -->
+        <div class="eight columns">
+            <div class="padding-right">
+
+                <h3 class="margin-bottom-15">درباره من</h3>
+
+                <p class="margin-reset">
+                    بسیار علاقه‌مند به طراحی گرافیکی با با تجربه ۳ ساله در این زمینه.
+                </p>
+
+                <br>
+
+                <ul class="list-1">
+                    <li></li>
+                    <li></li>
+                </ul>
+
+            </div>
+        </div>
+
+
+    </div>
 
 {% endblock %}

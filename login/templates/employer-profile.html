@@ -21,12 +21,17 @@
         <div class="container">
             <div class="ten columns">
                 <div class="resume-titlebar">
-{#                    <img src="images/resumes-list-avatar-01.png" alt="">#}
+                    {#                    <img src="images/resumes-list-avatar-01.png" alt="">#}
                     <div class="resumes-list-content">
-                        {#                    TODO: khosoosi ya omoomisho ba company_type okay konim #}
                         <h4> {{ profile.company_name }} </h4>
 
-                            <span>شرکت خصوصی</span></h4>
+
+                        {% if profile.company_type %}
+                            <h5><span>شرکت خصوصی</span></h5>
+                        {% else %}
+                            <h5><span>شرکت عمومی</span></h5>
+                        {% endif %}
+
                         <span class="icons"><i class="fa fa-map-marker"></i> {{ profile.city }} </span>
                         <span class="icons"><a href="{{ profile.homepage }}"><i
                                 class="fa fa-link"></i> وب‌سایت</a></span>
@@ -66,31 +71,30 @@
                 {#			  فروشگاه اینترنتی دیجیکالا از پیشروان تجارت الکتریک در ایران است. این شرکت با بیش از ۲ هزار نیرو روزانه به بیش از ۳۰ هزار سفارش پاسخ می‌دهد. ما در دیجیکالا منتظر شما دوستان مستعد شریفی هستیم :)#}
             </p>
 
-        <br>
-        <br>
+            <br>
+            <br>
 
             <h3 class="margin-bottom-15">موقعیت‌های شغلی</h3>
 
             <ul class="job-list full">
                 {% for adv in profile.advertise_set.all %}
-                    <li><a href="job-page.html">
-{#                        <img src="images/job-list-logo-01.png" alt="">#}
+                    <li><a href="{% url 'job' %}?advertise_id={{ adv.id }}">
+                        {#                        <img src="images/job-list-logo-01.png" alt="">#}
                         <div class="job-list-content">
-                            {#                        # TODO: #}
                             <h4> {{ adv.title }}
-                            {% if adv.type == 'F' %}
-                                        <span class="full-time">تمام‌وقت</span>
-                                    {% elif adv.type == 'L' %}
-                                        <span class="freelance">آزاد</span>
-                                    {% elif adv.type == 'P' %}
-                                        <span class="part-time">پاره‌وقت</span>
-                                    {% elif adv.type == 'I' %}
-                                        <span class="internship">کارآموزی</span>
-                                    {% endif %}
+                                {% if adv.type == 'F' %}
+                                    <span class="full-time">تمام‌وقت</span>
+                                {% elif adv.type == 'L' %}
+                                    <span class="freelance">آزاد</span>
+                                {% elif adv.type == 'P' %}
+                                    <span class="part-time">پاره‌وقت</span>
+                                {% elif adv.type == 'I' %}
+                                    <span class="internship">کارآموزی</span>
+                                {% endif %}
                             </h4>
                             <div class="job-icons">
                                 <span><i class="fa fa-briefcase"></i> {{ profile.company_name }}</span>
-                                <span><i class="fa fa-map-marker"></i> {{ adv.address }}</span>
+                                <span><i class="fa fa-map-marker"></i> {{ adv.city }}</span>
                                 <span><i class="fa fa-money"></i> ۳۰۰ تومان/ساعت</span>
                             </div>
                             <br>
@@ -152,8 +156,8 @@
                         <form method="post" id="commentsForm"
                               action="{% url 'comment' %}?user_id={{ profile.user_id }}">
                             {% csrf_token %}
-{#                            <h5>موقعیت شغلی شما</h5>#}
-{#                            <input name="job_position" class="search-field" type="text" placeholder="موقعیت شغلی شما" value=""/>#}
+                            {#                            <h5>موقعیت شغلی شما</h5>#}
+                            {#                            <input name="job_position" class="search-field" type="text" placeholder="موقعیت شغلی شما" value=""/>#}
                             <h5>امتیاز شما</h5>
                             <div class="select-grid">
                                 <input name="rate" type="number" min="1" max="5" placeholder="امتیاز (از ۵)"
@@ -174,23 +178,4 @@
 
 
     </div>
-
-
-    <!-- Footer
-    ================================================== -->
-    <div class="margin-top-45"></div>
-
-    <div id="footer">
-        <!-- Bottom -->
-        <div class="container">
-            <div class="footer-bottom">
-                <div class="sixteen columns">
-                    <div class="copyrights"> کلیه‌ی حقوق این سایت متعلق به سامانه‌ی <a href="#">شریف‌کار </a>است. © ۱۳۹۷
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
 {% endblock %}

@@ -296,20 +296,35 @@ def login_view(request):
 
 @login_required(login_url='login')
 @job_seeker_required()
+@require_GET
 def browse_jobs(request):
-    city = request.GET.get('city', "")
+    search_form = AdvertiseSearchForm
+    city = request.GET.getlist('city')
     skills = request.GET.getlist('skills')
     print("Ad Search. city: ", city, "skills: ", skills)
-    search_form = AdvertiseSearchForm
     related_advs = []
     for adv in Advertise.objects.all():
-        if adv.city == city:
+        if adv.city in city:
             adv_skills = [str(skill.id) for skill in adv.skills.all()]
+
             if len(set.intersection(set(skills), set(adv_skills))) > 0:
+                adv.score = len(set.intersection(set(skills), set(adv_skills)))
                 related_advs.append(adv)
+
+    def sort_function(e):
+        return e.score
+
+    related_advs.sort(key=sort_function)
+
+    no_result = False
+    if len(related_advs) == 0:
+        no_result = True
+    if (city == []) and (skills == []):
+        no_result = False
 
     context = {'search_form': search_form,
                'advs': related_advs,
+               'no_results': no_result,
                'before': {
                    'city': city,
                    'skills': [int(skill) for skill in skills]
@@ -498,7 +513,7 @@ def download_resume_view(request):
                 return response
             else:
                 return render(request, 'error_page.html', {
-                    'error':'کارجوی مورد نظر وجود ندارد.'
+                    'error': 'کارجوی مورد نظر وجود ندارد.'
                 })
         else:
             return render(request, 'error_page.html', {'error': 'شما مجاز به دیدن این صفحه نیستید.'})

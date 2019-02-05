@@ -102,7 +102,8 @@ class AdvertiseSearchForm(forms.ModelForm):
         fields = ('city', 'skills')
 
     skills = forms.ModelChoiceField(queryset=Skill.objects.all(), widget=forms.SelectMultiple)
-    city = forms.CharField()
+    city = forms.ModelChoiceField(queryset=Advertise.objects.values_list("city", flat=True).distinct(),
+                                  widget=forms.SelectMultiple)
 
 
 class CommentForm(forms.ModelForm):

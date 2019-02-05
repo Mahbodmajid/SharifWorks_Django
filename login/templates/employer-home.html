@@ -24,6 +24,7 @@
     ================================================== -->
     <link rel="stylesheet" href="{% static "css/style.css" %}">
     <link rel="stylesheet" href="{% static "css/colors/green.css" %}" id="colors">
+    <link href="{% static "css/select2.css" %}" rel="stylesheet"/>
 
     <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -245,6 +246,12 @@
 <script src="{%  static "scripts/jquery.counterup.min.js" %}"></script>
 <script src="{%  static "scripts/jquery.jpanelmenu.js" %}"></script>
 <script src="{%  static "scripts/stacktable.js" %}"></script>
+<script src="{% static "scripts/select2.full.js" %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.multiselect').select2({tags: true, width: 'resolve'});
+        });
+    </script>
 
 
 </body>

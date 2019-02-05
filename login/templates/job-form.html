@@ -94,6 +94,21 @@
                         </select>
                     </div>
 
+                    <div class="select">
+                        <label>مهارت‌ها
+                            <select data-placeholder="انتخاب مهارت‌ها" name="skills" class="multiselect" style="width: 100%"
+                                    multiple="multiple">
+                                {% for choice in all_skills %}
+                                    {% if choice not in your_skills %}
+                                        <option value="{{ choice.name }}">{{ choice.name }}</option>
+                                    {% else%}
+                                        <option selected="selected" value="{{ choice.name }}">{{ choice.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </label>
+                    </div>
+
 
                     <!-- Choose Category -->
                     <div class="form">

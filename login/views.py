@@ -364,9 +364,9 @@ def comment_view(request):
 @login_required(login_url='login')
 def job_view(request):
     if request.method == "GET":
-        adv_id = request.GET.get('advertise_id')
-        advertise = Advertise.objects.get(adv_id)
-        job_req = JobReq.objects.create(advertise_id=adv_id, job_seeker_id=request.user.id)
+        adv_id = request.GET.get('job_id')
+        advertise = Advertise.objects.get(pk=adv_id)
+        # job_req = JobReq.objects.get(advertise_id=adv_id, job_seeker_id=request.user.id)
         return render(request, 'job-page.html', {'advertise': advertise})
     else:
         pass
@@ -379,6 +379,5 @@ def job_requests_view(request):
     elif request.method == "GET":
         user_id = request.GET.get("user_id", "")
         return render(request, 'job-page.html', {'employer': EmployerProfile.objects.get(user_id)})
-
 
 

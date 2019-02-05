@@ -39,7 +39,7 @@
 		<!-- Company Info -->
 		<div class="company-info">
 			<div class="content">
-				<h4>شرکت گیمرهای حرفه‌ای </h4>
+				<h4> {{ advertise.title }} </h4>
 				<span><a href="{{ advertise.title }}"><i class="fa fa-link"></i> وب‌سایت</a></span>
 				<!-- TODO: fa-twitter : rtl -->
 				<span><a href="#"><i class="fa fa-twitter"></i> @ </a></span>
@@ -125,6 +125,8 @@
 				<a onclick="send_request(1234);" class="button big margin-top-5" id="send_req_btn">درخواست برای این آگهی شعلی</a>
                 {# TODO: add link to apply for job page                #}
 
+{#              TODO:  if agahi dar hale darkhast #}
+
 
 				<!--  TODOOOOOOO : ye TODO e gonde ke bade in bayad koja bere + hazfe in pop-up e -->
 
@@ -145,13 +147,12 @@
         button_state = true;
         function send_request(ad_id) {
             if (button_state) {
-                $.post('job/', {'advertiese_id': ad_id}, function (data) {});
+                $.post('job/', {'advertiese_id': adv_id}, function (data) {});
                 button_state = false;
                 button = document.getElementById("send_req_btn")
                 button.innerText = "در حال بررسی درخواست"
                 button.className = "disabled-button"
             }
-
         }
     </script>
 {% endblock %}

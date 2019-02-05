@@ -169,17 +169,31 @@ def user_posts(request):
 def edit_resume(request):
     context = {}
     if request.method == 'POST':
-        print(request.POST.get('bio'))
+        print(request.POST.getlist('skills'))
+        print("BIO", request.POST.get('bio'))
+
         user_form = UpdateUserForm(request.POST, request.FILES, instance=request.user)
         profile_form = JobSeekerProfileForm(request.POST, request.FILES, instance=request.user)
-        print(user_form)
-        print(profile_form)
-        print("-----------------------")
+
         if profile_form.is_valid() and user_form.is_valid():
             profile = profile_form.save(commit=False)
             profile.save()
+            profile.job_seeker_profile.bio = profile_form.cleaned_data['bio']
+            profile.job_seeker_profile.title = profile_form.cleaned_data['title']
+            profile.job_seeker_profile.address = profile_form.cleaned_data['address']
+            profile.job_seeker_profile.cv = profile_form.cleaned_data['cv']
             profile.job_seeker_profile.save()
-            ## TODO skills and cv are not working correctly
+
+            profile.job_seeker_profile.skills.clear()
+
+            new_skills = request.POST.getlist('skills')
+            for new_skill in new_skills:
+                if len(Skill.objects.filter(name=new_skill)) == 0:
+                    new_skill_object = Skill.objects.create(name=new_skill)
+                else:
+                    new_skill_object = Skill.objects.get(name=new_skill)
+                profile.job_seeker_profile.skills.add(new_skill_object)
+
             context['success'] = 'تغییرات شما با موفقیت ذخیره‌شد.'
         else:
             context['errors'] = {
@@ -189,9 +203,13 @@ def edit_resume(request):
     user_form = UpdateUserForm
     profile_form = JobSeekerProfileForm
     job_seeker = JobSeekerProfile.objects.get(user_id=request.user.id)
+    print(vars(job_seeker))
     context['user_form'] = user_form
     context['profile_form'] = profile_form
     context['job_seeker'] = job_seeker
+    context['all_skills'] = Skill.objects.all()
+    context['your_skills'] = request.user.job_seeker_profile.skills.all()
+    print(request.user.job_seeker_profile.skills)
     return render(request, 'edit-resume.html', context)
 
 

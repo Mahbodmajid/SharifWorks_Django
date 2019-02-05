@@ -65,10 +65,10 @@ class UpdateUserForm(forms.ModelForm):
 class JobSeekerProfileForm(forms.ModelForm):
     class Meta:
         model = JobSeekerProfile
-        fields = ('bio', 'homepage', 'cv', 'skills')
+        fields = ('bio', 'homepage', 'cv', 'title', 'address')
 
-    skills = forms.ModelChoiceField(queryset=Skill.objects.all(), widget=forms.SelectMultiple, required=False)
-    bio = forms.Textarea()
+    # skills = forms.MultipleChoiceField(queryset=Skill.objects.all(), widget=forms.SelectMultiple, required=False)
+    bio = forms.CharField()
 
 
 # Advertise forms -----------------------------------------------------------------------------------------------------

@@ -106,3 +106,4 @@ class JobReq(models.Model):
     state = models.IntegerField(default=1)  # 1: applied         2: accepted        3: rejected
     created_date = models.DateTimeField(auto_now_add=True)
     deadline = models.DateTimeField(blank=True)
+

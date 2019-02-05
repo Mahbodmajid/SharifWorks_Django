@@ -424,4 +424,3 @@ def employer_requests_view(request):
     elif request.method == "POST":
         pass
 
-

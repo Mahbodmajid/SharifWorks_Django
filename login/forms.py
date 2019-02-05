@@ -68,7 +68,7 @@ class JobSeekerProfileForm(forms.ModelForm):
         fields = ('bio', 'homepage', 'cv', 'title', 'address')
 
     # skills = forms.MultipleChoiceField(queryset=Skill.objects.all(), widget=forms.SelectMultiple, required=False)
-    bio = forms.CharField()
+    bio = forms.CharField(required=False)
 
 
 # Advertise forms -----------------------------------------------------------------------------------------------------
@@ -111,5 +111,5 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('description', 'rate',)
 
-    description = forms.CharField(error_messages={'required': 'لطفاً عنوان را وارد کنید.'})
+    description = forms.CharField(error_messages={'required': 'لطفاً متن کامنت را وارد کنید.'})
     rate = forms.IntegerField(required=False)

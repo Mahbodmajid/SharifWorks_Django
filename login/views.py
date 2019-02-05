@@ -240,9 +240,10 @@ def add_job(request):
                     new_skill_object = Skill.objects.create(name=new_skill)
                 else:
                     new_skill_object = Skill.objects.get(name=new_skill)
-                advertise.job_seeker_profile.skills.add(new_skill_object)
+                advertise.skills.add(new_skill_object)
 
             context['success'] = 'آگهی با موفقیت ثبت شد.'
+            context['all_skills'] = Skill.objects.all()
             return render(request, "job-form.html", context)
         else:
             context['all_skills'] = Skill.objects.all()

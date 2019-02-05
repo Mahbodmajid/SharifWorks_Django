@@ -88,8 +88,8 @@ class AdvertiseForm(forms.ModelForm):
                                  error_messages={'required': 'دسته‌بندی کار را وارد کنید.',
                                                  'invalid_choice': 'دسته‌بندی کار معتبر نیست'}
                                  )
-    deadline = forms.DateField(error_messages={'required': 'تاریخ اتمام کار را وارد کنید.',
-                                               'invalid': 'تاریخ اتمام کار معتبر نیست'})
+    deadline = forms.DateField(required=False,
+                               error_messages={'invalid': 'تاریخ اتمام کار معتبر نیست'})
 
 
 # class JobReqForm(forms.ModelForm):
@@ -112,5 +112,3 @@ class CommentForm(forms.ModelForm):
 
     description = forms.CharField(error_messages={'required': 'لطفاً عنوان را وارد کنید.'})
     rate = forms.IntegerField(required=False)
-
-

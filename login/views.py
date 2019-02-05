@@ -223,6 +223,8 @@ def logout_view(request):
 @login_required(login_url='login')
 @employer_required
 def add_job(request):
+    advertise_form = AdvertiseForm
+    context = {'advertise_form': advertise_form}
     if request.method == 'POST':
         add_job_form = AdvertiseForm(request.POST)
         print("Add Advertisement Request")
@@ -231,32 +233,34 @@ def add_job(request):
             advertise = add_job_form.save(commit=False)
             advertise.employer_id = employer.id
             advertise.save()
-            print("title: ", advertise.title)
-            print("type: ", advertise.type)
-            print("category: ", advertise.category)
-            print("deadline: ", advertise.deadline)
-            print("description: ", advertise.description)
-            print("address: ", advertise.address)
-            context = {
-                'success': 'آگهی با موفقیت ثبت شد.'
-            }
+
+            new_skills = request.POST.getlist('skills')
+            for new_skill in new_skills:
+                if len(Skill.objects.filter(name=new_skill)) == 0:
+                    new_skill_object = Skill.objects.create(name=new_skill)
+                else:
+                    new_skill_object = Skill.objects.get(name=new_skill)
+                advertise.job_seeker_profile.skills.add(new_skill_object)
+
+            context['success'] = 'آگهی با موفقیت ثبت شد.'
             return render(request, "job-form.html", context)
-        context = {
-            'errors': add_job_form.errors,
-            'before': {
+        else:
+            context['all_skills'] = Skill.objects.all()
+            context['errors'] = add_job_form.errors
+            context['before'] = {
                 'title': request.POST.get("title"),
+                'city': request.POST.get("city"),
                 'type': request.POST.get("type"),
                 'category': request.POST.get("category"),
                 'deadline': request.POST.get("deadline"),
                 'description': request.POST.get("description"),
-                'address': request.POST.get("address")
+                'address': request.POST.get("address"),
+                'skills': request.POST.getlist("skills")
             }
-        }
-        print("Form Not Valid", add_job_form.errors)
-        return render(request, "job-form.html", context)
+            return render(request, "job-form.html", context)
     elif request.method == 'GET':
-        advertise_form = AdvertiseForm
-        return render(request, 'job-form.html', {'advertise_form': advertise_form})
+        context['all_skills'] = Skill.objects.all()
+        return render(request, 'job-form.html', context)
 
 
 @login_required(login_url='login')

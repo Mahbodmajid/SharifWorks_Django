@@ -34,17 +34,19 @@
             {% endif %}
             {% if errors is not None %}
                 {% if errors.user is not None %}
-                    <div class="notification error closeable">
+                    <div id='errorNotification1' class="notification error closeable">
 
                         <p><span>خطا!</span> {{ errors.user }}</p>
-                        <a class="close" href="#"></a>
+                        <a class="close"
+                       onclick="document.getElementById('errorNotification1').style.display='none';">&times;</a>
                     </div>
                 {% endif %}
-                {% if errors.user is not None %}
-                    <div class="notification error closeable">
+                {% if errors.profile is not None %}
+                    <div id='errorNotification2' class="notification error closeable">
 
                         <p><span>خطا!</span> {{ errors.profile }}</p>
-                        <a class="close" href="#"></a>
+                        <a class="close"
+                       onclick="document.getElementById('errorNotification2').style.display='none';">&times;</a>
                     </div>
                 {% endif %}
             {% endif %}

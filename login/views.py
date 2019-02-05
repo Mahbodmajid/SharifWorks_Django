@@ -452,7 +452,7 @@ def job_requests_view(request):
 def employer_requests_view(request):
     if request.method == "GET":
         employer = EmployerProfile.objects.get(user_id=request.user.id)
-        job_reqs = JobReq.objects.filter(advertise__employer_id=employer.id)
+        job_reqs = JobReq.objects.filter(advertise__employer_id=employer.id, state=1)
         print(job_reqs)
         return render(request, 'manage-jobs.html', {'job_reqs': job_reqs})
     elif request.method == "POST":

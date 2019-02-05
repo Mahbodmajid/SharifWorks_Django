@@ -91,7 +91,8 @@
 		<table class="manage-table responsive-table">
 
 			<tr>
-				<th><i class="fa fa-file-text"></i> عنوان آگهی</th>
+                <th><i class="fa fa-file-text"></i> عنوان آگهی</th>
+                <th><i class="fa fa-file-text"></i>درخواست‌دهنده</th>
 				<th><i class="fa fa-check-square-o"></i>  انتخاب‌شده </th>
 				<th><i class="fa fa-calendar"></i> تاریخ درج</th>
 				<th><i class="fa fa-calendar"></i> تاریخ اتمام مهلت</th>
@@ -101,7 +102,8 @@
 
             {% for job_req in job_reqs %}
 			<tr>
-				<td class="title"><a href="{% url 'job'  %}?advertise_id={{ job_req.advertise.id }}"> {{ job_req.job_seeker.user.first_name }} {{ job_req.job_seeker.user.last_name }}
+                <td class="title"><a href="{% url 'job'  %}?advertise_id={{ job_req.advertise.id }}"> </a> {{ job_req.advertise.title }} </td>
+                <td>{{ job_req.job_seeker.user.first_name }} {{ job_req.job_seeker.user.last_name }} </td>
 					<!-- <span class="pending">(Pending Approval)</span></a></td> -->
                 {% if job_req.state == 0 %}
                     <td class="centered"> × </td>
@@ -114,8 +116,8 @@
 				<td>{{ job_req.deadline }}</td>
                 <td class="centered"><a href="{% url 'profile'  %}?user_id={{ job_req.job_seeker.user_id }}" class="button">نمایش پروفایل</a></td>
 				<td class="action">
-					<a onclick="confirm({{ job_req.id }})" style="cursor: pointer"><i class="fa  fa-check " id="confirm"></i> تایید</a>
-                    <a class="delete" style="cursor: pointer"><i class="fa fa-remove" id="reject"></i> رد</a>
+					<a onclick="confirm({{ job_req.id }})"><i class="fa  fa-check " id="confirm"></i> تایید</a>
+                    <a onclick="reject({{ job_req.id }})"><i class="fa fa-remove" id="reject"></i> رد</a>
 				</td>
 			</tr>
             {% endfor %}
@@ -176,6 +178,23 @@
             $.post({% url 'manage-jobs' %}, {
                 'jobreq_id': jobreq_id,
                 'confirmed': 1,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            }, function (data) {});
+            button_state = false;
+            {#button = document.getElementById("confirm")#}
+            {#button.innerText = "در حال بررسی درخواست"#}
+            {#button.className = "disabled-button"#}
+        }
+    }
+</script>
+
+<script>
+    button_state = true;
+    function reject(jobreq_id) {
+        if (button_state) {
+            $.post({% url 'manage-jobs' %}, {
+                'jobreq_id': jobreq_id,
+                'confirmed': 0,
                 'csrfmiddlewaretoken': '{{ csrf_token }}'
             }, function (data) {});
             button_state = false;

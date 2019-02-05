@@ -466,11 +466,12 @@ def employer_requests_view(request):
         if len(query_jobreq) == 0:
             return HttpResponse("failure", content_type="text/plain")
 
-        if len(query_jobreq) > 0:
+        if len(query_jobreq) > 1:
             return HttpResponse("failure", content_type="text/plain")
 
-        job_req = JobReq.objects.get(jobreq_id)
-        job_req.state = 2 if confirmed else 3
-        print(job_req)
-        print(job_req.state)
+        job_req = JobReq.objects.filter(id=jobreq_id)
+        if confirmed == '1':
+            job_req.update(state=2)
+        elif confirmed == '0':
+            job_req.update(state=3)
         return HttpResponse("success", content_type="text/plain")

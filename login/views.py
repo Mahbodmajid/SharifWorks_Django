@@ -437,7 +437,9 @@ def job_requests_view(request):
 @login_required(login_url='login')
 def employer_requests_view(request):
     if request.method == "GET":
-        job_reqs = JobReq.objects.filter(advertise__employer_id=request.user.id)
+        employer = EmployerProfile.objects.get(user_id=request.user.id)
+        job_reqs = JobReq.objects.filter(advertise__employer_id=employer.id)
+        print(job_reqs)
         return render(request, 'manage-jobs.html', {'job_reqs': job_reqs})
     elif request.method == "POST":
         pass

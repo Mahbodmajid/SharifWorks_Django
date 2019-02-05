@@ -386,7 +386,7 @@ def job_view(request):
             return render(request, 'error_page.html', context)
         advertise = query_advertise[0]
 
-        return render(request, 'job-page.html', {'advertise': advertise, 'job_req': job_req})
+        return render(request, 'job-page.html', {'advertise': advertise, 'state': state})
     else:
         context = {'error': 'آگهی مورد نظر یافت نشد.'}
         return render(request, 'error_page.html', context)

@@ -130,40 +130,43 @@
                 {#			</li>#}
             </ul>
 
-            <h4 class="margin-bottom-15">نظر دهید:</h4>
-            {% if success is not None %}
-                <div id="successNotification" class="notification success closeable">
-                    <p><span>موفقیت!</span> {{ success }}</p>
-                    <a class="close" onclick="document.getElementById('successNotification').style.display='none';">&times;</a>
-                </div>
-            {% endif %}
+            {% if request.user.is_jobseeker %}
+                <h4 class="margin-bottom-15">نظر دهید:</h4>
+                {% if success is not None %}
+                    <div id="successNotification" class="notification success closeable">
+                        <p><span>موفقیت!</span> {{ success }}</p>
+                        <a class="close" onclick="document.getElementById('successNotification').style.display='none';">&times;</a>
+                    </div>
+                {% endif %}
 
-            {% if errors is not None %}
-                <div id="errorNotification"  class="notification error closeable">
-                    <p><span>خطا!</span> {{ errors }}</p>
-                    <a class="close" onclick="document.getElementById('errorNotification').style.display='none';">&times;</a>
+                {% if errors is not None %}
+                    <div id="errorNotification" class="notification error closeable">
+                        <p><span>خطا!</span> {{ errors }}</p>
+                        <a class="close" onclick="document.getElementById('errorNotification').style.display='none';">&times;</a>
+                    </div>
+                {% endif %}
+                <div class="submit-page">
+                    <div class="form">
+                        <form method="post" id="commentsForm"
+                              action="{% url 'comment' %}?user_id={{ profile.user_id }}">
+                            {% csrf_token %}
+                            {#                    <h5>موقعیت شغلی شما</h5>#}
+                            {#                    <input name="job_position" class="search-field" type="text" placeholder="موقعیت شغلی شما" value=""/>#}
+                            <h5>امتیاز شما</h5>
+                            <div class="select-grid">
+                                <input name="rate" type="number" min="1" max="5" placeholder="امتیاز (از ۵)"
+                                       value="{{ before.rate }}">
+                            </div>
+                            <label for="summary">نظر شما</label>
+                            <textarea class="WYSIWYG" name="description" cols="40" rows="3" id="summary"
+                                      spellcheck="true">{{ before.description }}</textarea>
+                            <a href="#" class="button big margin-top-5"
+                               onclick="document.getElementById('commentsForm').submit(); "> <i
+                                    class="fa fa-arrow-circle-left"></i>ارسال</a>
+                        </form>
+                    </div>
                 </div>
             {% endif %}
-            <div class="submit-page">
-                <div class="form">
-                    <form method="post" id="commentsForm" action="{% url 'comment' %}?user_id={{ profile.user_id }}">
-                        {% csrf_token %}
-                        {#                    <h5>موقعیت شغلی شما</h5>#}
-                        {#                    <input name="job_position" class="search-field" type="text" placeholder="موقعیت شغلی شما" value=""/>#}
-                        <h5>امتیاز شما</h5>
-                        <div class="select-grid">
-                            <input name="rate" type="number" min="1" max="5" placeholder="امتیاز (از ۵)"
-                                   value="{{ before.rate }}">
-                        </div>
-                        <label for="summary">نظر شما</label>
-                        <textarea class="WYSIWYG" name="description" cols="40" rows="3" id="summary"
-                                  spellcheck="true">{{ before.description }}</textarea>
-                        <a href="#" class="button big margin-top-5"
-                           onclick="document.getElementById('commentsForm').submit(); "> <i
-                                class="fa fa-arrow-circle-left"></i>ارسال</a>
-                    </form>
-                </div>
-            </div>
 
         </div>
 

@@ -362,9 +362,16 @@ def comment_view(request):
 @login_required(login_url='login')
 def job_view(request):
     if request.method == "GET":
-        adv_id = request.GET.get('advertise_id')
-        advertise = Advertise.objects.get(adv_id)
-        job_req = JobReq.objects.create(advertise_id=adv_id, job_seeker_id=request.user.id)
+        adv_id = request.GET.get('advertise_id', '')
+        if adv_id == '' or not str.isdigit(adv_id):
+            context = {'error': 'آگهی مورد نظر یافت نشد.'}
+            return render(request, 'error_page.html', context)
+
+        query_advertise = Advertise.objects.filter(id=adv_id)
+        if len(query_advertise) == 0:
+            context = {'error': 'آگهی مورد نظر یافت نشد.'}
+            return render(request, 'error_page.html', context)
+        advertise = query_advertise[0]
         return render(request, 'job-page.html', {'advertise': advertise})
     else:
         pass

@@ -104,5 +104,5 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('description', 'rate',)
 
-#     TODO: COMMENT FORM VALIDATION
-
+    description = forms.CharField(error_messages={'required': 'لطفاً عنوان را وارد کنید.'})
+    rate = forms.IntegerField(required=False)

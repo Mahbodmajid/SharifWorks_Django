@@ -1,16 +1,17 @@
 {% extends 'index.html' %}
 
-    {% block title %}
-        شریف‌کار - نمایش آگهی
-    {% endblock %}
+{% block title %}
+    شریف‌کار - نمایش آگهی
+{% endblock %}
 
 
 {% block navbar %}
-{% include 'shared-urls.html' %}
+    {% include 'shared-urls.html' %}
 {% endblock %}
 
 
 {% block content %}
+{#<<<<<<< HEAD#}
 <!-- Titlebar
 ================================================== -->
 <div id="titlebar">
@@ -101,70 +102,178 @@
 							<strong>مکان:</strong>
 							<span>
                                 {{ advertise.city }} ، {{ advertise.address }}
+{#======= CONFLICT #}
+{#    <!-- Titlebar#}
+{#    ================================================== -->#}
+{#    <div id="titlebar">#}
+{#        <div class="container">#}
+{#            <div class="ten columns">#}
+                {#			<span><a href="browse-jobs.html"></a>مدیریت / مدیر فرآیند</a></span>#}
+{#                <h2> {{ advertise.title }}#}
+{#                    {% if advertise.type == 'F' %}#}
+{#                        <span class="full-time">تمام‌وقت</span>#}
+{#                    {% elif advertise.type == 'L' %}#}
+{#                        <span class="freelance">آزاد</span>#}
+{#                    {% elif advertise.type == 'P' %}#}
+{#                        <span class="part-time">پاره‌وقت</span>#}
+{#                    {% elif advertise.type == 'I' %}#}
+{#                        <span class="internship">کارآموزی</span>#}
+{#                    {% endif %}#}
+{#                </h2>#}
+{##}
+{#            </div>#}
+{##}
+{#            <div class="six columns">#}
+{#                <a href="#" class="button dark"><i class="fa fa-star"></i> افزودن به علاقه‌مندی‌ها</a>#}
+{#            </div>#}
+{#            <div class="ten columns">#}
+{#                <div class="skills">#}
+{#                    {% for skill in advertise.skills.all %}#}
+{#                        <span> {{ skill.name }} </span>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#        </div>#}
+{#    </div>#}
+{##}
+{##}
+{#    <!-- Content#}
+{#    ================================================== -->#}
+{#    <div class="container">#}
+{##}
+{#        <!-- Recent Jobs -->#}
+{#        <div class="eleven columns">#}
+{#            <div class="padding-right">#}
+{##}
+{#                <!-- Company Info -->#}
+{#                <div class="company-info">#}
+{#                    <div class="content">#}
+{#                        <h4> {{ advertise.title }} </h4>#}
+{#                        <span>#}
+{#                            <a href="{% url 'profile' %}?user_id={{ advertise.employer.user_id }}">#}
+{#                                <i class="fa fa-briefcase"></i> {{ advertise.employer.company_name }}#}
+{#                            </a>#}
+{#                        </span>#}
+{#                    </div>#}
+{#                    <div class="clearfix"></div>#}
+{#                </div>#}
+{##}
+{#                <p class="margin-reset">#}
+                    {#			برای توسعه‌ی اپلیکیشن‌های بازی‌های اندرویدی در این شرکت به فردی با قابلیت‌های زیر نیاز است:#}
+{#                    {{ advertise.description }}#}
+{#                </p>#}
+{##}
+{#                <br>#}
+                {#		<ul class="list-1"> #}
+                {#			<li>  داشتن مدرک مرتبط با مدیریت#}
+                {#			</li> #}
+                {#			<li>  #}
+                {#				داشتن تجربه‌ی مدیریت فرآیند (حداقل ۳ ماه)#}
+                {#			</li>#}
+                {#			<li>#}
+                {#				حرفه‌ای بودن در گیم که یکی از خصوصیات تمام اعضای این شرکت است.#}
+                {#			</li>#}
+                {#		</ul>#}
+                {#		#}
+                {#		<br>#}
+                {##}
+                {#		<h4 class="margin-bottom-10">مسئولیت‌ها</h4>#}
+                {##}
+                {#		<ul class="list-1">#}
+                {#			#}
+                {#			<li> </li>#}
+                {#			<li> </li>#}
+                {#		</ul>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#        <!-- Widgets -->#}
+{#        <div class="five columns">#}
+{##}
+{#            <!-- Sort by -->#}
+{#            <div class="widget">#}
+{#                <h4>خلاصه</h4>#}
+{##}
+{#                <div class="job-overview">#}
+{##}
+{#                    <ul>#}
+{#                        <li>#}
+{#                            <i class="fa fa-map-marker"></i>#}
+{#                            <div>#}
+{#                                <strong>مکان:</strong>#}
+{#                                <span>#}
+{#                                {{ advertise.city }} - {{ advertise.address }}#}
+{#>>>>>>> 5296ecb9d77b3b2cd0a4363286a661b6b48ee394#}
                             </span>
-						</div>
-					</li>
-					<li>
-						<i class="fa fa-user"></i>
-						<div>
-							<strong>عنوان شغل:</strong>
-							<span>{{ advertise.title }}</span>
-						</div>
-					</li>
-					<li>
-						<i class="fa fa-clock-o"></i>
-						<div>
-							<strong>ساعت کاری:</strong>
-							<span>40ساعت / هفته</span>
-						</div>
-					</li>
-					<li>
-						<i class="fa fa-money"></i>
-						<div>
-							<strong>درآمد:</strong>
-							<span>۱۰۰ تا ۲۰۰ تومان / ساعت</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa fa-user"></i>
+                            <div>
+                                <strong>عنوان شغل:</strong>
+                                <span>{{ advertise.title }}</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa fa-clock-o"></i>
+                            <div>
+                                <strong>ساعت کاری:</strong>
+                                <span>40ساعت / هفته</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa fa-money"></i>
+                            <div>
+                                <strong>درآمد:</strong>
+                                <span>۱۰۰ تا ۲۰۰ تومان / ساعت</span>
 
-						</div>
-					</li>
-				</ul>
+                            </div>
+                        </li>
+                    </ul>
 
-                {% if state == 0 %}
-				    <a onclick="send_request({{ advertise.id }});" class="button big margin-top-5" id="send_req_btn">درخواست برای این آگهی شعلی</a>
-                {% elif state == 1 %}
-                    <a  class="disabled-button" id="send_req_btn">در حال بررسی درخواست</a>
-                {% elif state == 2 %}
-                    <a  class="disabled-button" id="send_req_btn">درخواست قبول شده</a>
-                {% elif state == 3 %}
-                    <a  class="disabled-button" id="send_req_btn">درخواست رد شده</a>
-                {% endif %}
-                {# TODO: add link to apply for job page                #}
+                    {% if state == 0 %}
+                        <a onclick="send_request({{ advertise.id }});" class="button big margin-top-5"
+                           id="send_req_btn">درخواست برای این آگهی شعلی</a>
+                    {% elif state == 1 %}
+                        <a class="disabled-button" id="send_req_btn">در حال بررسی درخواست</a>
+                    {% elif state == 2 %}
+                        <a class="disabled-button" id="send_req_btn">درخواست قبول شده</a>
+                    {% elif state == 3 %}
+                        <a class="disabled-button" id="send_req_btn">درخواست رد شده</a>
+                    {% endif %}
+                    {# TODO: add link to apply for job page                #}
 
-{#              TODO:  if agahi dar hale darkhast #}
-
-
-				<!--  TODOOOOOOO : ye TODO e gonde ke bade in bayad koja bere + hazfe in pop-up e -->
-
-			</div>
-
-		</div>
-
-	</div>
-	<!-- Widgets / End -->
+                    {#              TODO:  if agahi dar hale darkhast #}
 
 
-</div>
+                    <!--  TODOOOOOOO : ye TODO e gonde ke bade in bayad koja bere + hazfe in pop-up e -->
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- Widgets / End -->
+
+
+    </div>
 {% endblock %}
 
 {% block scripts %}
     {{ block.super }}
     <script>
         button_state = true;
+
         function send_request(ad_id) {
             if (button_state) {
                 $.post({% url 'request-job' %}, {
                     'advertiese_id': ad_id,
                     'csrfmiddlewaretoken': '{{ csrf_token }}'
-                }, function (data) {});
+                }, function (data) {
+                });
                 button_state = false;
                 button = document.getElementById("send_req_btn")
                 button.innerText = "در حال بررسی درخواست"

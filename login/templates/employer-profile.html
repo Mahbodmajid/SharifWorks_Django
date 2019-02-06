@@ -112,10 +112,42 @@
 
             <ul class="resumes-list">
                 {% for comment in profile.comment_set.all %}
-                    <li><a href="job-seeker-profile.html">
-                        <img src="images/resumes-list-avatar-01.png" alt="">
+                    <li><a href="{% url 'profile' %}?user_id={{ comment.job_seeker.user_id }}">
+                        {#                        <img src="images/resumes-list-avatar-01.png" alt="">#}
                         <div class="resumes-list-content">
-                            <h4> {{ comment.job_seeker.user.first_name }} <span> {{ comment.job_seeker.title }}</span></h4>
+                            <h4> {{ comment.job_seeker.user.first_name }} {{ comment.job_seeker.user.last_name }}
+                                {% if comment.rate == 5 %}
+                                <div class="rating five-stars">
+                                    <div class="star-rating"></div>
+                                    <div class="star-bg"></div>
+                                </div>
+                            {% elif comment.rate == 4 %}
+                                <div class="rating four-stars">
+                                    <div class="star-rating"></div>
+                                    <div class="star-bg"></div>
+                                </div>
+                            {% elif comment.rate == 3 %}
+                                <div class="rating three-stars">
+                                    <div class="star-rating"></div>
+                                    <div class="star-bg"></div>
+                                </div>
+                            {% elif comment.rate == 2 %}
+                                <div class="rating two-stars">
+                                    <div class="star-rating"></div>
+                                    <div class="star-bg"></div>
+                                </div>
+                            {% elif comment.rate == 1 %}
+                                <div class="rating one-stars">
+                                    <div class="star-rating"></div>
+                                    <div class="star-bg"></div>
+                                </div>
+                            {% elif comment.rate == 0 %}
+                                <div class="rating no-stars">
+                                    <div class="star-rating"></div>
+                                    <div class="star-bg"></div>
+                                </div>
+                            {% endif %}
+                                <span> {{ comment.job_seeker.title }}</span></h4>
                             <p> {{ comment.description }} </p>
                             <div class="clearfix"></div>
                         </div>

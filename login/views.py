@@ -182,7 +182,10 @@ def edit_resume(request):
             profile.job_seeker_profile.bio = profile_form.cleaned_data['bio']
             profile.job_seeker_profile.title = profile_form.cleaned_data['title']
             profile.job_seeker_profile.address = profile_form.cleaned_data['address']
-            profile.job_seeker_profile.cv = profile_form.cleaned_data['cv']
+            if profile_form.cleaned_data['cv'] is None:
+                profile.job_seeker_profile.cv = request.user.job_seeker_profile.cv
+            else:
+                profile.job_seeker_profile.cv = profile_form.cleaned_data['cv']
             profile.job_seeker_profile.save()
 
             profile.job_seeker_profile.skills.clear()
@@ -204,13 +207,11 @@ def edit_resume(request):
     user_form = UpdateUserForm
     profile_form = JobSeekerProfileForm
     job_seeker = JobSeekerProfile.objects.get(user_id=request.user.id)
-    print(vars(job_seeker))
     context['user_form'] = user_form
     context['profile_form'] = profile_form
     context['job_seeker'] = job_seeker
     context['all_skills'] = Skill.objects.all()
     context['your_skills'] = request.user.job_seeker_profile.skills.all()
-    print(request.user.job_seeker_profile.skills)
     return render(request, 'edit-resume.html', context)
 
 

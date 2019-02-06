@@ -69,6 +69,7 @@ class JobSeekerProfileForm(forms.ModelForm):
 
     # skills = forms.MultipleChoiceField(queryset=Skill.objects.all(), widget=forms.SelectMultiple, required=False)
     bio = forms.CharField(required=False)
+    cv = forms.FileField(widget=forms.FileInput(attrs={'accept': 'application/pdf'}), required=False)
 
 
 # Advertise forms -----------------------------------------------------------------------------------------------------

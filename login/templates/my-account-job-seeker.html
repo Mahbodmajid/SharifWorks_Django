@@ -30,11 +30,13 @@
 
         <div class="my-account">
 
-            {% if error is not None %}
-                <div class="notification error closeable">
-                    <p><span>خطا!</span> {{ error }}</p>
-                    <a class="close" href="#"></a>
-                </div>
+            {% if errors is not None %}
+                {% if errors.user is not None %}
+                    <div class="notification error closeable">
+                        <p><span>خطا!</span> {{ errors.user }}</p>
+                        <a class="close" href="#"></a>
+                    </div>
+                {% endif %}
             {% endif %}
             <h3 class="margin-bottom-10 margin-top-10">ثبت‌نام</h3>
 

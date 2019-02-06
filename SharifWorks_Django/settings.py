@@ -129,3 +129,4 @@ FILE_ROOT = os.path.join(BASE_DIR, 'files')
 
 LOGIN_URL = 'login'
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

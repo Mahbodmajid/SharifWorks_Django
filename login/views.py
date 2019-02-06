@@ -53,7 +53,12 @@ def job_seeker_register(request):
             user = user_form.save(commit=False)
             user.set_password(user_form.cleaned_data['password'])
             if not user_form.cleaned_data['password'] == user_form.cleaned_data['password2']:
-                return render(request, 'my-account-employer.html', {'errors': {'user': 'رمزها برابر نیستند.'}})
+                return render(request, 'my-account-job-seeker.html', {'errors': {'user': 'رمزها برابر نیستند.'}})
+            if user_form.cleaned_data['first_name'] == "" or user_form.cleaned_data['last_name'] is None:
+                return render(request, 'my-account-job-seeker.html', {'errors': {'user': 'نام خود را وارد کنید.'}})
+            if user_form.cleaned_data['last_name'] == "" or user_form.cleaned_data['last_name'] is None:
+                return render(request, 'my-account-job-seeker.html', {'errors': {'user': 'نام خود را وارد کنید.'}})
+
             user.is_jobseeker = True
             user.save()
             job_seeker = JobSeekerProfile.objects.create(user=user)

@@ -115,7 +115,11 @@
                     <li><a href="{% url 'profile' %}?user_id={{ comment.job_seeker.user_id }}">
                         {#                        <img src="images/resumes-list-avatar-01.png" alt="">#}
                         <div class="resumes-list-content">
-                            <h4> {{ comment.job_seeker.user.first_name }} {{ comment.job_seeker.user.last_name }}
+                        <div class="comment-userinfo">
+                            <h3> {{ comment.job_seeker.user.first_name }} {{ comment.job_seeker.user.last_name }}</h3>
+                            <h5><div class="comment-usertitle"> {{ comment.job_seeker.title }}</div></h5>
+                        </div>
+                        <div class="comment-rating">
                                 {% if comment.rate == 5 %}
                                 <div class="rating five-stars">
                                     <div class="star-rating"></div>
@@ -147,8 +151,8 @@
                                     <div class="star-bg"></div>
                                 </div>
                             {% endif %}
-                                <span> {{ comment.job_seeker.title }}</span></h4>
-                            <p> {{ comment.description }} </p>
+                        </div>
+                            <p class="comment-body"> {{ comment.description }} </p>
                             <div class="clearfix"></div>
                         </div>
                     </a>

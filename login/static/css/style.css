@@ -2837,7 +2837,7 @@ img.mfp-img {
 }
 
 .resume-titlebar .resumes-list-content { margin-left: 143px; }
-.resumes-list .resumes-list-content { margin-left: 160px; }
+.resumes-list .resumes-list-content { margin-left: 0px; }
 
 .resumes-list .resumes-list-content,
 .job-list .job-list-content,
@@ -2883,7 +2883,7 @@ img.mfp-img {
 	line-height: 30px;
 }
 
-.resumes-list li a p { margin-top: 18px; }
+.resumes-list li a p { margin-top: 40px; }
 
 
 /* Skills List */
@@ -4060,6 +4060,31 @@ a.post-img:hover:before {
 	text-align: left;
 
 }
+
+.comment-usertitle {
+    color: #888;
+    margin-top: -10px;
+}
+
+.comment-rating {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-height: 18px;
+    overflow: hidden;
+    margin-top: 40px;
+    margin-left: 40px;
+}
+
+.comment-userinfo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    padding-right: 40px;
+}
+
 
 /* Add Comment */
 .add-comment label span { color: #e24747; }
@@ -5734,7 +5759,7 @@ label.upload-btn input[type="file"] { display: none; }
 	}
 
 	.resumes-list .resumes-list-content {
-		margin-left: 130px;
+		margin-left: 30px;
 	}
 
 	.resume-titlebar .resumes-list-content { margin-left: 120px; }

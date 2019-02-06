@@ -15,19 +15,27 @@ class RegisterForm(forms.ModelForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'password', 'password2')
 
-    password = forms.CharField(label="گذرواژه", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="تکرار گذرواژه", widget=forms.PasswordInput)
+    username = forms.EmailField(label="نام کاربری", required=True,
+                                error_messages={'required': 'ایمیل را وارد کنید.'})
+    password = forms.CharField(label="گذرواژه", widget=forms.PasswordInput, required=True,
+                               error_messages={'required': 'گذرواژه را وارد کنید.'})
+    password2 = forms.CharField(label="تکرار گذرواژه", widget=forms.PasswordInput, required=True,
+                                error_messages={'required': 'تکرار گذرواژه را وارد کنید.'})
 
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs = {'readonly': 'readonly'}
 
-    def clean(self):
-        super(RegisterForm, self).clean()
-        password = self.cleaned_data['password']
-        password2 = self.cleaned_data['password2']
-        if password != password2:
-            raise forms.ValidationError('رمزها همخوانی ندارند.')
+    # def clean(self):
+    #     super(RegisterForm, self).clean()
+    #     password = self.cleaned_data['password']
+    #     if password is None:
+    #         raise forms.ValidationError('رمز اول وارد نشده.')
+    #     password2 = self.cleaned_data['password2']
+    #     if password2 is None:
+    #         raise forms.ValidationError('نکرار رمز اول وارد نشده.')
+    #     if password != password2:
+    #         raise forms.ValidationError('رمزها همخوانی ندارند.')
 
 
 class JobSeekerRegisterForm(forms.ModelForm):
@@ -41,6 +49,10 @@ class EmployerRegisterForm(forms.ModelForm):
     class Meta:
         model = EmployerProfile
         fields = ('company_name', 'company_disc', 'company_type')
+
+    company_name = forms.CharField(error_messages={'required': 'عنوان کارفرما را وارد کنید.'})
+    company_disc = forms.CharField(error_messages={'required': 'توضیحات کارفرما را وارد کنید.'})
+    company_type = forms.BooleanField(error_messages={'required': 'نوع کارفرما را وارد کنید.'})
 
 
 # Login forms ----------------------------------------------------------------------------------------------------------

@@ -52,6 +52,8 @@ def job_seeker_register(request):
         if user_form.is_valid():
             user = user_form.save(commit=False)
             user.set_password(user_form.cleaned_data['password'])
+            if not user_form.cleaned_data['password'] == user_form.cleaned_data['password2']:
+                return render(request, 'my-account-employer.html', {'errors': {'user': 'رمزها برابر نیستند.'}})
             user.is_jobseeker = True
             user.save()
             job_seeker = JobSeekerProfile.objects.create(user=user)
@@ -81,6 +83,8 @@ def employer_register(request):
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save(commit=False)
             user.set_password(user_form.cleaned_data['password'])
+            if not user_form.cleaned_data['password'] == user_form.cleaned_data['password2']:
+                return render(request, 'my-account-employer.html', {'errors': {'user': 'رمزها برابر نیستند.'}})
             user.is_employer = True
             user.save()
             employer = EmployerProfile.objects.create(user=user,
@@ -361,7 +365,10 @@ def profile_view(request):
 
         elif query_user[0].is_employer:
             profile_contents = EmployerProfile.objects.get(user_id=user_id)
-            rate = round(profile_contents.comment_set.aggregate(Avg('rate'))['rate__avg'])
+            rate_double = profile_contents.comment_set.aggregate(Avg('rate'))['rate__avg']
+            rate = None
+            if rate_double is not None:
+                rate = round(rate_double)
             count = profile_contents.comment_set.count() - \
                     profile_contents.comment_set.filter(rate=None).count()
             context = {'profile': profile_contents, 'rate': rate, 'count': count}

@@ -42,7 +42,7 @@ class EmployerProfile(models.Model):
         verbose_name = _('Employer Profile')
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="employer_profile")
-    company_name = models.CharField(max_length=10)
+    company_name = models.CharField(max_length=20)
     company_disc = models.TextField()
     company_type = models.BooleanField()  # False: public       True: private
     # founded_date = models.DateField(blank=True)

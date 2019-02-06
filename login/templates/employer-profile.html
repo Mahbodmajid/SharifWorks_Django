@@ -41,39 +41,40 @@
                                 class="fa fa-envelope"></i> {{ profile.user.username }} </a></span>
                         <span class="icons">
                     </span>
-                        {% if rate == 5%}
-                                <div class="rating five-stars">
-                                    <div class="star-rating"></div>
-                                    <div class="star-bg"></div>
-                                </div>
-                            {% elif rate == 4 %}
-                                <div class="rating four-stars">
-                                    <div class="star-rating"></div>
-                                    <div class="star-bg"></div>
-                                </div>
-                            {% elif rate == 3 %}
-                                <div class="rating three-stars">
-                                    <div class="star-rating"></div>
-                                    <div class="star-bg"></div>
-                                </div>
-                            {% elif rate == 2 %}
-                                <div class="rating two-stars">
-                                    <div class="star-rating"></div>
-                                    <div class="star-bg"></div>
-                                </div>
-                            {% elif rate == 1 %}
-                                <div class="rating one-stars">
-                                    <div class="star-rating"></div>
-                                    <div class="star-bg"></div>
-                                </div>
-                            {% elif rate == 0 %}
-                                <div class="rating no-stars">
-                                    <div class="star-rating"></div>
-                                    <div class="star-bg"></div>
-                                </div>
-                            {% endif %}
-
-                        ({{ count }} نفر)
+                        {% if rate == 5 %}
+                            <div class="rating five-stars">
+                                <div class="star-rating"></div>
+                                <div class="star-bg"></div>
+                            </div>
+                        {% elif rate == 4 %}
+                            <div class="rating four-stars">
+                                <div class="star-rating"></div>
+                                <div class="star-bg"></div>
+                            </div>
+                        {% elif rate == 3 %}
+                            <div class="rating three-stars">
+                                <div class="star-rating"></div>
+                                <div class="star-bg"></div>
+                            </div>
+                        {% elif rate == 2 %}
+                            <div class="rating two-stars">
+                                <div class="star-rating"></div>
+                                <div class="star-bg"></div>
+                            </div>
+                        {% elif rate == 1 %}
+                            <div class="rating one-stars">
+                                <div class="star-rating"></div>
+                                <div class="star-bg"></div>
+                            </div>
+                        {% elif rate == 0 %}
+                            <div class="rating no-stars">
+                                <div class="star-rating"></div>
+                                <div class="star-bg"></div>
+                            </div>
+                        {% endif %}
+                        {% if count > 0 %}
+                            ({{ count }} نفر)
+                        {% endif %}
 
                         {% if request.user.id == profile.user_id %}
                             <div class="show-transactions">
@@ -145,43 +146,45 @@
                     <li><a href="{% url 'profile' %}?user_id={{ comment.job_seeker.user_id }}">
                         {#                        <img src="images/resumes-list-avatar-01.png" alt="">#}
                         <div class="resumes-list-content">
-                        <div class="comment-userinfo">
-                            <h3> {{ comment.job_seeker.user.first_name }} {{ comment.job_seeker.user.last_name }}</h3>
-                            <h5><div class="comment-usertitle"> {{ comment.job_seeker.title }}</div></h5>
-                        </div>
-                        <div class="comment-rating">
+                            <div class="comment-userinfo">
+                                <h3> {{ comment.job_seeker.user.first_name }} {{ comment.job_seeker.user.last_name }}</h3>
+                                <h5>
+                                    <div class="comment-usertitle"> {{ comment.job_seeker.title }}</div>
+                                </h5>
+                            </div>
+                            <div class="comment-rating">
                                 {% if comment.rate == 5 %}
-                                <div class="rating five-stars">
-                                    <div class="star-rating"></div>
-                                    <div class="star-bg"></div>
-                                </div>
-                            {% elif comment.rate == 4 %}
-                                <div class="rating four-stars">
-                                    <div class="star-rating"></div>
-                                    <div class="star-bg"></div>
-                                </div>
-                            {% elif comment.rate == 3 %}
-                                <div class="rating three-stars">
-                                    <div class="star-rating"></div>
-                                    <div class="star-bg"></div>
-                                </div>
-                            {% elif comment.rate == 2 %}
-                                <div class="rating two-stars">
-                                    <div class="star-rating"></div>
-                                    <div class="star-bg"></div>
-                                </div>
-                            {% elif comment.rate == 1 %}
-                                <div class="rating one-stars">
-                                    <div class="star-rating"></div>
-                                    <div class="star-bg"></div>
-                                </div>
-                            {% elif comment.rate == 0 %}
-                                <div class="rating no-stars">
-                                    <div class="star-rating"></div>
-                                    <div class="star-bg"></div>
-                                </div>
-                            {% endif %}
-                        </div>
+                                    <div class="rating five-stars">
+                                        <div class="star-rating"></div>
+                                        <div class="star-bg"></div>
+                                    </div>
+                                {% elif comment.rate == 4 %}
+                                    <div class="rating four-stars">
+                                        <div class="star-rating"></div>
+                                        <div class="star-bg"></div>
+                                    </div>
+                                {% elif comment.rate == 3 %}
+                                    <div class="rating three-stars">
+                                        <div class="star-rating"></div>
+                                        <div class="star-bg"></div>
+                                    </div>
+                                {% elif comment.rate == 2 %}
+                                    <div class="rating two-stars">
+                                        <div class="star-rating"></div>
+                                        <div class="star-bg"></div>
+                                    </div>
+                                {% elif comment.rate == 1 %}
+                                    <div class="rating one-stars">
+                                        <div class="star-rating"></div>
+                                        <div class="star-bg"></div>
+                                    </div>
+                                {% elif comment.rate == 0 %}
+                                    <div class="rating no-stars">
+                                        <div class="star-rating"></div>
+                                        <div class="star-bg"></div>
+                                    </div>
+                                {% endif %}
+                            </div>
                             <p class="comment-body"> {{ comment.description }} </p>
                             <div class="clearfix"></div>
                         </div>

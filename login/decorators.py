@@ -2,7 +2,7 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.decorators import user_passes_test
 
 
-def job_seeker_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='my-account-job-seeker'):
+def job_seeker_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='login'):
     '''
     Decorator for views that checks that the logged in user is a job seeker,
     redirects to the log-in page if necessary.
@@ -19,7 +19,7 @@ def job_seeker_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, 
     return actual_decorator
 
 
-def employer_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='my-account-employer'):
+def employer_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='login'):
     '''
     Decorator for views that checks that the logged in user is an employer,
     redirects to the log-in page if necessary.

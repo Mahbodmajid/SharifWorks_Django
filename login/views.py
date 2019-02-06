@@ -239,8 +239,8 @@ def add_job(request):
             advertise = add_job_form.save(commit=False)
             advertise.employer_id = employer.id
             advertise.save()
-
             new_skills = request.POST.getlist('skills')
+            print(new_skills)
             for new_skill in new_skills:
                 if len(Skill.objects.filter(name=new_skill)) == 0:
                     new_skill_object = Skill.objects.create(name=new_skill)
@@ -450,22 +450,23 @@ def job_view(request):
 @login_required(login_url='login')
 def job_requests_view(request):
     if request.method == "POST":
-        adv_id = request.POST.get('advertiese_id')
-        if adv_id == '':
-            return HttpResponse("failure", content_type="text/plain")
-        query_advertise = Advertise.objects.filter(id=adv_id)
-        if len(query_advertise) == 0:
-            return HttpResponse("failure", content_type="text/plain")
+        if request.user.is_jobseeker:
+            adv_id = request.POST.get('advertiese_id')
+            if adv_id == '':
+                return HttpResponse("failure", content_type="text/plain")
+            query_advertise = Advertise.objects.filter(id=adv_id)
+            if len(query_advertise) == 0:
+                return HttpResponse("failure", content_type="text/plain")
 
-        jobseekeer = JobSeekerProfile.objects.get(user_id=request.user.id)
-        js_id = jobseekeer.id
+            jobseeker = JobSeekerProfile.objects.get(user_id=request.user.id)
+            js_id = jobseeker.id
 
-        query_jobreq = JobReq.objects.filter(advertise_id=adv_id, job_seeker_id=js_id)
-        if len(query_jobreq) > 0:
-            return HttpResponse("failure", content_type="text/plain")
+            query_jobreq = JobReq.objects.filter(advertise_id=adv_id, job_seeker_id=js_id)
+            if len(query_jobreq) > 0:
+                return HttpResponse("failure", content_type="text/plain")
 
-        JobReq.objects.create(state=1, advertise_id=adv_id, job_seeker_id=js_id)
-        return HttpResponse("success", content_type="text/plain")
+            JobReq.objects.create(state=1, advertise_id=adv_id, job_seeker_id=js_id)
+            return HttpResponse("success", content_type="text/plain")
     elif request.method == "GET":
         user_id = request.GET.get("user_id", "")
         return render(request, 'job-page.html', {'employer': EmployerProfile.objects.get(user_id)})

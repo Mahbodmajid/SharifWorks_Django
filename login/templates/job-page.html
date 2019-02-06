@@ -11,94 +11,110 @@
 
 
 {% block content %}
-{#<<<<<<< HEAD#}
-<!-- Titlebar
-================================================== -->
-<div id="titlebar">
-	<div class="container">
-		<div class="ten columns">
-{#			<span><a href="browse-jobs.html"></a>مدیریت / مدیر فرآیند</a></span>#}
-			<h2> {{ advertise.title }} <span class="full-time">تمام‌وقت</span></h2>
-		</div>
-
-		<div class="six columns">
-			<a href="#" class="button dark"><i class="fa fa-star"></i> افزودن به علاقه‌مندی‌ها</a>
-		</div>
-
-	</div>
-</div>
-
-
-<!-- Content
-================================================== -->
-<div class="container">
-	
-	<!-- Recent Jobs -->
-	<div class="eleven columns">
-	<div class="padding-right">
-		
-		<!-- Company Info -->
-		<div class="company-info">
-			<div class="content">
-				<h4> {{ advertise.title }} </h4>
-                <span><a href= "{% url 'profile' %}?user_id={{ advertise.employer.user_id }}"><i class="fa fa-briefcase"></i> کارفرما</a></span>
-{#				<span><a href="{{ advertise.title }}"><i class="fa fa-link"></i> وب‌سایت</a></span>#}
+    {#<<<<<<< HEAD#}
+    <!-- Titlebar
+    ================================================== -->
+    <div id="titlebar">
+        <div class="container">
+            <div class="ten columns">
+                {#			<span><a href="browse-jobs.html"></a>مدیریت / مدیر فرآیند</a></span>#}
+                <h2> {{ advertise.title }} <span class="full-time">تمام‌وقت</span></h2>
+            </div>
+            {% if request.user.is_jobseeker %}
+                <div class="six columns">
+                    <a href="#" class="button dark"><i class="fa fa-star"></i> افزودن به علاقه‌مندی‌ها</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
 
 
-			</div>
-			<div class="clearfix"></div>
-		</div>
+    <!-- Content
+    ================================================== -->
+    <div class="container">
 
-		<p class="margin-reset">
-{#			برای توسعه‌ی اپلیکیشن‌های بازی‌های اندرویدی در این شرکت به فردی با قابلیت‌های زیر نیاز است:#}
-            {{ advertise.description }}
-		</p>
+        <!-- Recent Jobs -->
+        <div class="eleven columns">
+            <div class="padding-right">
 
-		<br>
-{#		<ul class="list-1"> #}
-{#			<li>  داشتن مدرک مرتبط با مدیریت#}
-{#			</li> #}
-{#			<li>  #}
-{#				داشتن تجربه‌ی مدیریت فرآیند (حداقل ۳ ماه)#}
-{#			</li>#}
-{#			<li>#}
-{#				حرفه‌ای بودن در گیم که یکی از خصوصیات تمام اعضای این شرکت است.#}
-{#			</li>#}
-{#		</ul>#}
-{#		#}
-{#		<br>#}
-{##}
-{#		<h4 class="margin-bottom-10">مسئولیت‌ها</h4>#}
-{##}
-		<ul class="list-1">
+                <!-- Company Info -->
+                <div class="company-info">
+                    <div class="content">
+                        <h4> {{ advertise.title }} </h4>
+                        <span><a href="{% url 'profile' %}?user_id={{ advertise.employer.user_id }}"><i
+                                class="fa fa-briefcase"></i> {{ advertise.employer.company_name }}</a></span>
+                        {#				<span><a href="{{ advertise.title }}"><i class="fa fa-link"></i> وب‌سایت</a></span>#}
 
-			<li> دسته:
-            {{ advertise.category }}</li>
-			<li>  شرکت:
-            {{ advertise.employer.company_name }}</li>
-            <li>ددلاین:
-            {{ advertise.deadline }} </li>
-		</ul>
+                        <div class="skills">
+                            {% for skill in advertise.skills.all %}
+                                <span> {{ skill.name }} </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
 
-	</div>
-	</div>
+                <p class="margin-reset">
+                    {#			برای توسعه‌ی اپلیکیشن‌های بازی‌های اندرویدی در این شرکت به فردی با قابلیت‌های زیر نیاز است:#}
+                    {{ advertise.description }}
+                </p>
+
+                <br>
+                {#		<ul class="list-1"> #}
+                {#			<li>  داشتن مدرک مرتبط با مدیریت#}
+                {#			</li> #}
+                {#			<li>  #}
+                {#				داشتن تجربه‌ی مدیریت فرآیند (حداقل ۳ ماه)#}
+                {#			</li>#}
+                {#			<li>#}
+                {#				حرفه‌ای بودن در گیم که یکی از خصوصیات تمام اعضای این شرکت است.#}
+                {#			</li>#}
+                {#		</ul>#}
+                {#		#}
+                {#		<br>#}
+                {##}
+                {#		<h4 class="margin-bottom-10">مسئولیت‌ها</h4>#}
+                {##}
+                <ul class="list-1">
+
+                    <li> دسته:
+                        {% if advertise.category == "WEB_DEV" %}
+                            توسعه‌دهنده‌ی وب
+                        {% elif advertise.category == "MOBILE_DEV" %}
+                            توسعه‌دهنده‌ی موبایل
+                        {% elif advertise.category == "APP_DESIGN" %}
+                            طراحی اپلیکیشن
+                        {% elif advertise.category == "PROJECT_MANAGEMENT" %}
+                            مدیریت پروژه
+                        {% elif advertise.category == "MARKETING" %}
+                            بازاریابی
+                        {% endif %}
+                    </li>
+                    <li> شرکت:
+                        {{ advertise.employer.company_name }}</li>
+                    <li>ددلاین:
+                        {{ advertise.deadline }} </li>
+                </ul>
+
+            </div>
+        </div>
 
 
-	<!-- Widgets -->
-	<div class="five columns">
+        <!-- Widgets -->
+        <div class="five columns">
 
-		<!-- Sort by -->
-		<div class="widget">
-			<h4>خلاصه</h4>
+            <!-- Sort by -->
+            <div class="widget">
+                <h4>خلاصه</h4>
 
-			<div class="job-overview">
-				
-				<ul>
-					<li>
-						<i class="fa fa-map-marker"></i>
-						<div>
-							<strong>مکان:</strong>
-							<span>
+                <div class="job-overview">
+
+                    <ul>
+                        <li>
+                            <i class="fa fa-map-marker"></i>
+                            <div>
+                                <strong>مکان:</strong>
+                                <span>
                                 {{ advertise.city }} ، {{ advertise.address }}
 {#======= CONFLICT #}
 {#    <!-- Titlebar#}
@@ -232,23 +248,25 @@
                         </li>
                     </ul>
 
-                    {% if state == 0 %}
-                        <a onclick="send_request({{ advertise.id }});" class="button big margin-top-5"
-                           id="send_req_btn">درخواست برای این آگهی شعلی</a>
-                    {% elif state == 1 %}
-                        <a class="disabled-button" id="send_req_btn">در حال بررسی درخواست</a>
-                    {% elif state == 2 %}
-                        <a class="disabled-button" id="send_req_btn">درخواست قبول شده</a>
-                    {% elif state == 3 %}
-                        <a class="disabled-button" id="send_req_btn">درخواست رد شده</a>
+                    {% if request.user.is_jobseeker %}
+                        {% if state == 0 %}
+                            <a onclick="send_request({{ advertise.id }});" class="button big margin-top-5"
+                               id="send_req_btn">درخواست برای این آگهی شعلی</a>
+                        {% elif state == 1 %}
+                            <a class="disabled-button" id="send_req_btn">در حال بررسی درخواست</a>
+                        {% elif state == 2 %}
+                            <a class="disabled-button" id="send_req_btn">درخواست قبول شده</a>
+                        {% elif state == 3 %}
+                            <a class="disabled-button" id="send_req_btn">درخواست رد شده</a>
+                        {% endif %}
+                        {# TODO: add link to apply for job page                #}
+
+                        {#              TODO:  if agahi dar hale darkhast #}
+
+
+                        <!--  TODOOOOOOO : ye TODO e gonde ke bade in bayad koja bere + hazfe in pop-up e -->
+
                     {% endif %}
-                    {# TODO: add link to apply for job page                #}
-
-                    {#              TODO:  if agahi dar hale darkhast #}
-
-
-                    <!--  TODOOOOOOO : ye TODO e gonde ke bade in bayad koja bere + hazfe in pop-up e -->
-
                 </div>
 
             </div>

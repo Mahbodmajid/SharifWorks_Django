@@ -93,7 +93,12 @@
                     <li> شرکت:
                         {{ advertise.employer.company_name }}</li>
                     <li>ددلاین:
-                        {{ advertise.deadline }} </li>
+                        {% if advertise.deadline is not None %}
+                            {{ advertise.deadline }}
+                        {% else %}
+                            ندارد.
+                        {% endif %}
+                    </li>
                 </ul>
 
             </div>

@@ -19,5 +19,6 @@ urlpatterns = [
     path('browse-jobs/', views.browse_jobs, name="browse-jobs"),
     path('request-job/', views.job_requests_view, name="request-job"),
     path('manage-jobs/', views.employer_requests_view, name="manage-jobs"),
-    path('resume/', views.download_resume_view, name="resume")
+    path('resume/', views.download_resume_view, name="resume"),
+    path('result/', views.result_view, name="result")
 ]

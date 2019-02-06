@@ -532,3 +532,14 @@ def download_resume_view(request):
                 })
         else:
             return render(request, 'error_page.html', {'error': 'شما مجاز به دیدن این صفحه نیستید.'})
+
+
+@login_required()
+def result_view(request):
+    if request.method == "GET":
+        if request.user.is_jobseeker:
+            print("JS")
+            job_reqs = JobReq.objects.filter(job_seeker_id=request.user.job_seeker_profile.id)
+            return render(request, 'job-seeker-results.html', {'job_reqs': job_reqs})
+        else:
+            return None

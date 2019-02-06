@@ -1,6 +1,7 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.models import Session
+from django.db.models import Avg, Case, Count, When
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
@@ -333,7 +334,6 @@ def browse_jobs(request):
     return render(request, 'browse-jobs.html', context)
 
 
-
 @login_required(login_url='login')
 def resume_page(request):
     user_form = UpdateUserForm
@@ -361,7 +361,10 @@ def profile_view(request):
 
         elif query_user[0].is_employer:
             profile_contents = EmployerProfile.objects.get(user_id=user_id)
-            context = {'profile': profile_contents}
+            rate = round(profile_contents.comment_set.aggregate(Avg('rate'))['rate__avg'])
+            count = profile_contents.comment_set.count() - \
+                    profile_contents.comment_set.filter(rate=None).count()
+            context = {'profile': profile_contents, 'rate': rate, 'count': count}
             return render(request, 'employer-profile.html', context)
 
 
@@ -383,18 +386,28 @@ def comment_view(request):
         comment.job_seeker = JobSeekerProfile.objects.get(user_id=request.user.id)
         print(comment)
         comment.save()
+        rate = round(profile_contents.comment_set.aggregate(Avg('rate'))['rate__avg'])
+        count = profile_contents.comment_set.count() - \
+                profile_contents.comment_set.filter(rate=None).count()
         context = {
             'profile': profile_contents,
-            'success': 'نظر با موفقیت ثبت شد.'
-        }
+            'success': 'نظر با موفقیت ثبت شد.',
+            'rate': rate,
+            'count': count}
         return render(request, "employer-profile.html", context)
     else:
+        rate = round(profile_contents.comment_set.aggregate(Avg('rate'))['rate__avg'])
+        count = profile_contents.comment_set.count() - \
+                profile_contents.comment_set.filter(rate=None).count()
         context = {'profile': profile_contents,
                    'errors': comment_form.errors,
                    'before': {
                        'rate': request.POST.get('rate'),
-                       'description': request.POST.get('description')
-                   }}
+                       'description': request.POST.get('description'),
+                   },
+                   'rate': rate,
+                   'count': count}
+
         return render(request, 'employer-profile.html', context)
 
 

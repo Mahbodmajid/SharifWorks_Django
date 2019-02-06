@@ -41,10 +41,40 @@
                                 class="fa fa-envelope"></i> {{ profile.user.username }} </a></span>
                         <span class="icons">
                     </span>
-                        <div class="rating four-stars">
-                            <div class="star-rating"></div>
-                            <div class="star-bg"></div>
-                        </div>
+                        {% if rate == 5%}
+                                <div class="rating five-stars">
+                                    <div class="star-rating"></div>
+                                    <div class="star-bg"></div>
+                                </div>
+                            {% elif rate == 4 %}
+                                <div class="rating four-stars">
+                                    <div class="star-rating"></div>
+                                    <div class="star-bg"></div>
+                                </div>
+                            {% elif rate == 3 %}
+                                <div class="rating three-stars">
+                                    <div class="star-rating"></div>
+                                    <div class="star-bg"></div>
+                                </div>
+                            {% elif rate == 2 %}
+                                <div class="rating two-stars">
+                                    <div class="star-rating"></div>
+                                    <div class="star-bg"></div>
+                                </div>
+                            {% elif rate == 1 %}
+                                <div class="rating one-stars">
+                                    <div class="star-rating"></div>
+                                    <div class="star-bg"></div>
+                                </div>
+                            {% elif rate == 0 %}
+                                <div class="rating no-stars">
+                                    <div class="star-rating"></div>
+                                    <div class="star-bg"></div>
+                                </div>
+                            {% endif %}
+
+                        ({{ count }} نفر)
+
                         {% if request.user.id == profile.user_id %}
                             <div class="show-transactions">
                                 <span class="icons"><a href="employer-transactions.html"><i class="fa fa-file-text"></i> نمایش تراکنش‌ها</a></span>
